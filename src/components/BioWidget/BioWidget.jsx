@@ -1,36 +1,16 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import "./BioWidget.css";
-import useAuth from "../../hooks/useAuth";
 import { Row, Col } from "react-bootstrap";
+import useAxiosGet from "../../hooks/useAxiosGet";
 
 const BioWidget = ({ petId }) => {
-  const [pet, setPet] = useState({});
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [user, token] = useAuth();
-  const BASE_URL = "http://127.0.0.1:8000/api/pets/";
-
-  useEffect(() => {
-    setIsLoaded(false);
-    const fetchPet = async () => {
-      try {
-        let response = await axios.get(BASE_URL + petId + "/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setPet(response.data);
-        setIsLoaded(true);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-    fetchPet();
-  }, [token, petId]);
+  const [pet, isLoading] = useAxiosGet(
+    `http://127.0.0.1:8000/api/pets/${petId}/`
+  );
 
   return (
     <>
-      {isLoaded ? (
+      {!isLoading ? (
         <div className="widget">
           <h2 className="widget__title">Bio</h2>
           <div className="widget__body">

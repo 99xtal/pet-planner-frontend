@@ -1,5 +1,5 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
@@ -13,31 +13,13 @@ import PetsPage from "./pages/PetsPage/PetsPage";
 import PetPage from "./pages/PetPage/PetPage";
 
 // Hook Imports
-import useAuth from "./hooks/useAuth";
+import useAxiosGet from "./hooks/useAxiosGet";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
-import axios from "axios";
 
 function App() {
-  const [_, token] = useAuth();
-  const [pets, setPets] = useState([]);
-
-  useEffect(() => {
-    const fetchPets = async () => {
-      try {
-        let response = await axios.get("http://127.0.0.1:8000/api/pets/", {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        });
-        setPets(response.data);
-      } catch (error) {
-        console.log(error.response.data);
-      }
-    };
-    fetchPets();
-  }, [token]);
+  const [pets, isLoading] = useAxiosGet("http://127.0.0.1:8000/api/pets/");
 
   return (
     <div className="app">

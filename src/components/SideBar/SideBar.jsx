@@ -1,12 +1,13 @@
+// General Imports
 import React from "react";
-import { Link } from "react-router-dom";
-import SideBarLink from "../SideBarLink/SideBarLink";
-import { Container, Row, Col } from "react-bootstrap";
-import { BsHouseDoorFill, BsPersonFill } from "react-icons/bs";
-import { FaPaw } from "react-icons/fa";
 import "./SideBar.css";
+
+// Component Imports
+import SideBarLink from "../SideBarLink/SideBarLink";
 import SideBarDropdown from "../SideBarDropdown/SideBarDropdown";
 import SideBarSublink from "../SideBarSublink/SideBarSublink";
+import { BsHouseDoorFill, BsPersonFill } from "react-icons/bs";
+import { FaPaw } from "react-icons/fa";
 
 const SideBar = ({ pets }) => {
   return (
