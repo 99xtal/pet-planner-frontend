@@ -1,0 +1,12 @@
+.sidebar {
+  width: 328px;
+  height: 100vh;
+  background-color: #254d0d;
+  color: white;
+}
+
+.navigation {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}

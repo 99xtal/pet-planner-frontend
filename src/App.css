@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Varela+Round&display=swap");
 
 *,
 *::before,
@@ -10,7 +10,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "Varela Round", sans-serif;
 }
 
 p {
@@ -22,7 +22,7 @@ button {
   border: 2px solid steelblue;
   color: steelblue;
   font-size: 1rem;
-  font-family: inherit;
+  font-family: "Varela Round", sans-serif;
   max-width: 100px;
   padding: 0.5rem 0.5rem;
 }
@@ -31,6 +31,11 @@ button:hover {
   cursor: pointer;
   color: white;
   background-color: steelblue;
+}
+
+.app {
+  height: 100vh;
+  background-color: #389602;
 }
 
 .container {
