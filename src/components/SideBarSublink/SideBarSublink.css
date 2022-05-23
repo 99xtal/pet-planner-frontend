@@ -1,0 +1,11 @@
+.sublink {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 32px;
+  padding-left: 64px;
+}
+
+.sublink p {
+  font-size: 16px;
+}

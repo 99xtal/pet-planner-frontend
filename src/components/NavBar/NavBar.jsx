@@ -10,22 +10,20 @@ const Navbar = () => {
   const navigate = useNavigate();
   return (
     <div className="navBar">
-      <Container>
-        <ul>
-          <li className="brand">
-            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-              <b>petPal</b>
-            </Link>
-          </li>
-          <li>
-            {user ? (
-              <button onClick={logoutUser}>Logout</button>
-            ) : (
-              <button onClick={() => navigate("/login")}>Login</button>
-            )}
-          </li>
-        </ul>
-      </Container>
+      <ul>
+        <li className="brand">
+          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+            <b>petPal</b>
+          </Link>
+        </li>
+        <li>
+          {user ? (
+            <button onClick={logoutUser}>Logout</button>
+          ) : (
+            <button onClick={() => navigate("/login")}>Login</button>
+          )}
+        </li>
+      </ul>
     </div>
   );
 };

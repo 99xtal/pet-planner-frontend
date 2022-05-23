@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Container } from "react-bootstrap";
 
 // Hook Imports
 import useAuth from "../../hooks/useAuth";
 import { useParams } from "react-router-dom";
+
+import BioWidget from "../../components/BioWidget/BioWidget";
 
 const PetPage = (props) => {
   const [user, token] = useAuth();
@@ -32,7 +35,18 @@ const PetPage = (props) => {
     fetchPet();
   }, [token, petId]);
 
-  return <>{!isLoading ? <h1>{`${pet.name}'s Page`}</h1> : null}</>;
+  return (
+    <>
+      {!isLoading ? (
+        <div>
+          <Container>
+            <h1>{pet.name}</h1>
+            <BioWidget petId={pet.id} />
+          </Container>
+        </div>
+      ) : null}
+    </>
+  );
 };
 
 export default PetPage;

@@ -1,0 +1,21 @@
+.sidebardropdown {
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown__header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding-left: 48px;
+  gap: 32px;
+}
+
+.sublinks {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebardropdown p {
+  font-size: 24px;
+}

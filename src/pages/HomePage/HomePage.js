@@ -4,6 +4,7 @@ import Navbar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
 import { Outlet } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
+import "./HomePage.css";
 
 const HomePage = ({ pets }) => {
   return (
@@ -11,14 +12,11 @@ const HomePage = ({ pets }) => {
       <Row>
         <Navbar />
       </Row>
-      <Row>
-        <Col>
-          <SideBar pets={pets} />
-        </Col>
-        <Col>
-          <Outlet />
-        </Col>
-      </Row>
+      <div className="content">
+        <SideBar pets={pets} />
+
+        <Outlet />
+      </div>
 
       {/* <h1>Homepage</h1>
         <Link to="dashboard">dashboard</Link>
