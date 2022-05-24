@@ -6,14 +6,12 @@ import useAxiosGet from "../../hooks/useAxiosGet";
 
 // Component Imports
 import BioWidget from "../../components/BioWidget/BioWidget";
+import DietWidget from "../../components/DietWidget/DietWidget";
 
 const PetPage = (props) => {
   const { petId } = useParams();
   const [pet, petIsLoading] = useAxiosGet(
     `http://127.0.0.1:8000/api/pets/${petId}/`
-  );
-  const [dashboard, isLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/widgets/"
   );
 
   return (
@@ -21,7 +19,8 @@ const PetPage = (props) => {
       {!petIsLoading ? (
         <div>
           <h1>{pet.name}</h1>
-          <BioWidget petId={pet.id} dashboard={dashboard} />
+          <BioWidget petId={pet.id} />
+          <DietWidget petId={pet.id} />
         </div>
       ) : null}
     </>

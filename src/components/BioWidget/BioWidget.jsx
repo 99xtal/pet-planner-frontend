@@ -23,7 +23,9 @@ const BioWidget = ({ petId }) => {
         <div className="widget">
           <div className="widget__header">
             <h2 className="widget__title">Bio</h2>
-            <BioWidgetEditMenu petId={petId} setEditMode={setEditMode} />
+            {!editMode && (
+              <BioWidgetEditMenu petId={petId} setEditMode={setEditMode} />
+            )}
           </div>
           <div className="widget__body">
             {editMode ? (
