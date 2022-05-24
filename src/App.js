@@ -17,6 +17,7 @@ import useAxiosGet from "./hooks/useAxiosGet";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
+import { DashboardProvider } from "./context/DashboardContext";
 
 function App() {
   const [pets, isLoading] = useAxiosGet("http://127.0.0.1:8000/api/pets/");
@@ -28,7 +29,9 @@ function App() {
           path="/"
           element={
             <PrivateRoute>
-              <HomePage pets={pets} />
+              <DashboardProvider>
+                <HomePage pets={pets} />
+              </DashboardProvider>
             </PrivateRoute>
           }
         >
