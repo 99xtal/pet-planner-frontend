@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import useAuth from "../../hooks/useAuth";
+import useAxiosGet from "../../hooks/useAxiosGet";
 
 import Widget from "../Widget/Widget";
 import WidgetEditMenu from "../Widget/WidgetEditMenu";
-import DietInfoDisplay from "./DietInfoDisplay";
-import DietInfoEdit from "./DietInfoEdit";
-import useAxiosGet from "../../hooks/useAxiosGet";
+import HealthInfoDisplay from "./HealthInfoDisplay";
+import HealthInfoEdit from "./HealthInfoEdit";
 
-const DietWidget = ({ petId }) => {
-  const [meals, setMeals] = useState([]);
+const HealthWidget = ({ petId }) => {
+  const [medications, setMedications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
 
@@ -19,44 +19,44 @@ const DietWidget = ({ petId }) => {
   );
 
   useEffect(() => {
-    getMeals();
+    getMedications();
   }, []);
 
-  const getMeals = async () => {
+  async function getMedications() {
     setIsLoading(true);
     try {
       let response = await axios.get(
-        `http://127.0.0.1:8000/api/meals/?petId=${petId}`,
+        `http://127.0.0.1:8000/api/medications/?petId=${petId}`,
         {
           headers: {
             Authorization: "Bearer " + token,
           },
         }
       );
-      setMeals(response.data);
+      setMedications(response.data);
       setIsLoading(false);
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error.response);
     }
-  };
+  }
 
   const editMenu = (
-    <WidgetEditMenu type="diet" petId={petId} setEditMode={setEditMode} />
+    <WidgetEditMenu type="health" petId={petId} setEditMode={setEditMode} />
   );
 
   return (
     <>
       {!isLoading && !petLoading && (
-        <Widget title="Diet" menu={editMenu} editMode={editMode}>
+        <Widget title="Health" menu={editMenu} editMode={editMode}>
           {editMode ? (
-            <DietInfoEdit
+            <HealthInfoEdit
               pet={pet}
-              meals={meals}
+              medications={medications}
               setEditMode={setEditMode}
-              getMeals={getMeals}
+              getMedications={getMedications}
             />
           ) : (
-            <DietInfoDisplay meals={meals} />
+            <HealthInfoDisplay medications={medications} />
           )}
         </Widget>
       )}
@@ -64,4 +64,4 @@ const DietWidget = ({ petId }) => {
   );
 };
 
-export default DietWidget;
+export default HealthWidget;

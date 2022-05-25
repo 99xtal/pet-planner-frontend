@@ -4,11 +4,11 @@ import DashboardContext from "../../context/DashboardContext";
 import { Dropdown } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 
-const DietWidgetEditMenu = ({ petId, setEditMode }) => {
+const WidgetEditMenu = ({ type, petId, setEditMode }) => {
   const { addToDashboard, removeFromDashboard, findOnDashboard } =
     useContext(DashboardContext);
   const [isOnDashboard, setIsOnDashboard] = useState(
-    findOnDashboard("diet", petId) === undefined ? false : true
+    findOnDashboard(type, petId) === undefined ? false : true
   );
 
   const handleSelect = (key) => {
@@ -17,11 +17,11 @@ const DietWidgetEditMenu = ({ petId, setEditMode }) => {
         setEditMode((current) => !current);
         break;
       case "add":
-        addToDashboard("diet", petId);
+        addToDashboard(type, petId);
         setIsOnDashboard(true);
         break;
       case "remove":
-        removeFromDashboard("diet", petId);
+        removeFromDashboard(type, petId);
         setIsOnDashboard(false);
         break;
       default:
@@ -61,4 +61,4 @@ const DietWidgetEditMenu = ({ petId, setEditMode }) => {
   );
 };
 
-export default DietWidgetEditMenu;
+export default WidgetEditMenu;

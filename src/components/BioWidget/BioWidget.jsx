@@ -3,7 +3,8 @@ import React, { useState } from "react";
 import "./BioWidget.css";
 
 // Component Imports
-import BioWidgetEditMenu from "./BioWidgetEditMenu";
+import Widget from "../Widget/Widget";
+import WidgetEditMenu from "../Widget/WidgetEditMenu";
 import BioInfoDisplay from "./BioInfoDisplay";
 import BioInfoEdit from "./BioInfoEdit";
 
@@ -17,24 +18,20 @@ const BioWidget = ({ petId }) => {
     `http://127.0.0.1:8000/api/pets/${petId}/`
   );
 
+  const editMenu = (
+    <WidgetEditMenu type="bio" petId={petId} setEditMode={setEditMode} />
+  );
+
   return (
     <>
       {!petIsLoading && (
-        <div className="widget">
-          <div className="widget__header">
-            <h2 className="widget__title">Bio</h2>
-            {!editMode && (
-              <BioWidgetEditMenu petId={petId} setEditMode={setEditMode} />
-            )}
-          </div>
-          <div className="widget__body">
-            {editMode ? (
-              <BioInfoEdit pet={pet} setEditMode={setEditMode} />
-            ) : (
-              <BioInfoDisplay petId={petId} />
-            )}
-          </div>
-        </div>
+        <Widget title="Bio" menu={editMenu} editMode={editMode}>
+          {editMode ? (
+            <BioInfoEdit pet={pet} setEditMode={setEditMode} />
+          ) : (
+            <BioInfoDisplay petId={petId} />
+          )}
+        </Widget>
       )}
     </>
   );

@@ -30,9 +30,6 @@ const DietInfoDisplay = ({ meals }) => {
 
     let nearest = [null, 10000000000];
     mealTimes.forEach((mealTime) => {
-      console.log("Nearest: " + nearest[1]);
-      console.log(JSON.stringify(mealTime[0]));
-      console.log("Mealtime " + mealTime[1]);
       if (mealTime[1] < nearest[1]) {
         nearest = mealTime;
       }
