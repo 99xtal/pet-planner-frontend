@@ -14,13 +14,14 @@ const SideBar = ({ pets }) => {
     <div className="sidebar">
       <SideBarLink
         title="Dashboard"
-        path="/"
+        path="/dashboard"
         icon={<BsHouseDoorFill size={24} />}
       />
       <SideBarDropdown title="My Pets" icon={<FaPaw size={24} />}>
         {pets.map((pet) => {
           return (
             <SideBarSublink
+              key={pet.id}
               title={pet.name}
               path={`/pets/${pet.id}/`}
               icon={<FaPaw size={16} />}

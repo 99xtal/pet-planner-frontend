@@ -33,7 +33,7 @@ const EditMeal = ({ meal, getMeals }) => {
           },
         }
       );
-      getMeals();
+      await getMeals();
     } catch (error) {
       console.log(error);
     }
@@ -46,7 +46,7 @@ const EditMeal = ({ meal, getMeals }) => {
           Authorization: "Bearer " + token,
         },
       });
-      getMeals();
+      await getMeals();
     } catch (error) {
       console.log(error);
     }

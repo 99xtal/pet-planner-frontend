@@ -11,7 +11,7 @@ import BioInfoEdit from "./BioInfoEdit";
 // Hook Imports
 import useAxiosGet from "../../hooks/useAxiosGet";
 
-const BioWidget = ({ petId }) => {
+const BioWidget = ({ petId, onDashboard }) => {
   const [editMode, setEditMode] = useState(false);
 
   const [pet, petIsLoading] = useAxiosGet(
@@ -25,7 +25,11 @@ const BioWidget = ({ petId }) => {
   return (
     <>
       {!petIsLoading && (
-        <Widget title="Bio" menu={editMenu} editMode={editMode}>
+        <Widget
+          title={onDashboard ? `${pet.name}'s Bio` : "Bio"}
+          menu={editMenu}
+          editMode={editMode}
+        >
           {editMode ? (
             <BioInfoEdit pet={pet} setEditMode={setEditMode} />
           ) : (

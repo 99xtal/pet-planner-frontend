@@ -41,7 +41,7 @@ export const DashboardProvider = ({ children }) => {
           },
         }
       );
-      fetchDashboard();
+      await fetchDashboard();
     } catch (error) {
       console.log(error);
     }
@@ -58,6 +58,7 @@ export const DashboardProvider = ({ children }) => {
           Authorization: "Bearer " + token,
         },
       });
+      await fetchDashboard();
     } catch (error) {
       console.log("Remove error");
       console.log(error.response);

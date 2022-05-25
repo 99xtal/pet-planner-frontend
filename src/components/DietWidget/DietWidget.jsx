@@ -8,7 +8,7 @@ import DietInfoDisplay from "./DietInfoDisplay";
 import DietInfoEdit from "./DietInfoEdit";
 import useAxiosGet from "../../hooks/useAxiosGet";
 
-const DietWidget = ({ petId }) => {
+const DietWidget = ({ petId, onDashboard }) => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -47,7 +47,11 @@ const DietWidget = ({ petId }) => {
   return (
     <>
       {!isLoading && !petLoading && (
-        <Widget title="Diet" menu={editMenu} editMode={editMode}>
+        <Widget
+          title={onDashboard ? `${pet.name}'s Diet` : "Diet"}
+          menu={editMenu}
+          editMode={editMode}
+        >
           {editMode ? (
             <DietInfoEdit
               pet={pet}

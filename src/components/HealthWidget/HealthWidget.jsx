@@ -8,7 +8,7 @@ import WidgetEditMenu from "../Widget/WidgetEditMenu";
 import HealthInfoDisplay from "./HealthInfoDisplay";
 import HealthInfoEdit from "./HealthInfoEdit";
 
-const HealthWidget = ({ petId }) => {
+const HealthWidget = ({ petId, onDashboard }) => {
   const [medications, setMedications] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
@@ -47,7 +47,11 @@ const HealthWidget = ({ petId }) => {
   return (
     <>
       {!isLoading && !petLoading && (
-        <Widget title="Health" menu={editMenu} editMode={editMode}>
+        <Widget
+          title={onDashboard ? `${pet.name}'s Health` : "Health"}
+          menu={editMenu}
+          editMode={editMode}
+        >
           {editMode ? (
             <HealthInfoEdit
               pet={pet}
