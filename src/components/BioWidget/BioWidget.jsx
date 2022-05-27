@@ -1,6 +1,5 @@
 // General Imports
 import React, { useState } from "react";
-import "./BioWidget.css";
 
 // Component Imports
 import Widget from "../Widget/Widget";

@@ -1,3 +1,5 @@
 .eventcard {
   margin-bottom: 16px;
+  max-width: 95%;
+  overflow-wrap: break-word;
 }

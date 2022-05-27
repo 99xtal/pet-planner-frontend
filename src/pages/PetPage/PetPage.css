@@ -1,0 +1,16 @@
+.petpage {
+  padding-left: 5vw;
+  padding-right: 5vw;
+  padding-top: 64px;
+}
+
+.petpage__name {
+  color: white;
+  font-size: 96px;
+  font-weight: bold;
+}
+
+.petpage input {
+  background-color: transparent;
+  width: 80%;
+}

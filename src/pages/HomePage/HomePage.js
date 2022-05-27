@@ -1,28 +1,30 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import Navbar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
-import { Outlet } from "react-router-dom";
+import { Outlet, Redirect } from "react-router-dom";
 import { Container, Row, Col } from "react-bootstrap";
 import "./HomePage.css";
 
-const HomePage = ({ pets }) => {
+const HomePage = (props) => {
   return (
     <>
-      <Row>
-        <Navbar />
-      </Row>
-      <div className="content">
-        <SideBar pets={pets} />
-
-        <Outlet />
+      <div className="homepage">
+        <header>
+          <Row>
+            <Navbar />
+          </Row>
+        </header>
+        <div className="content">
+          <nav>
+            <SideBar />
+          </nav>
+          <main>
+            <div className="page">
+              <Outlet />
+            </div>
+          </main>
+        </div>
       </div>
-
-      {/* <h1>Homepage</h1>
-        <Link to="dashboard">dashboard</Link>
-        {pets.map((pet) => {
-          return <Link to={`pets/${pet.id}/`}>{pet.name}</Link>;
-        })} */}
     </>
   );
 };

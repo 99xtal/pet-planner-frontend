@@ -1,6 +1,7 @@
 // General Imports
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+import axios from "axios";
 import "./App.css";
 
 // Pages Imports
@@ -11,26 +12,26 @@ import HomePage from "./pages/HomePage/HomePage";
 import ProfilePage from "./pages/ProfilePage/ProfilePage";
 import PetsPage from "./pages/PetsPage/PetsPage";
 import PetPage from "./pages/PetPage/PetPage";
-
-// Hook Imports
-import useAxiosGet from "./hooks/useAxiosGet";
+import AddPetPage from "./pages/AddPetPage/AddPetPage";
 
 // Util Imports
 import PrivateRoute from "./utils/PrivateRoute";
 import { DashboardProvider } from "./context/DashboardContext";
+import { PetsProvider } from "./context/PetsContext";
 
 function App() {
-  const [pets, isLoading] = useAxiosGet("http://127.0.0.1:8000/api/pets/");
-
   return (
     <div className="app">
       <Routes>
         <Route
+          exact
           path="/"
           element={
             <PrivateRoute>
               <DashboardProvider>
-                <HomePage pets={pets} />
+                <PetsProvider>
+                  <HomePage />
+                </PetsProvider>
               </DashboardProvider>
             </PrivateRoute>
           }
@@ -43,6 +44,7 @@ function App() {
               key={window.location.pathname}
             />
           </Route>
+          <Route path="addpet" element={<AddPetPage />} />
           <Route path="profile" element={<ProfilePage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />

@@ -12,7 +12,7 @@ const BioInfoEdit = ({ pet, setEditMode }) => {
   const [birthday, setBirthday] = useState(pet.birthday);
 
   const [breedOptions, breedsAreLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/pets/breeds/?category=${pet.category.category}`
+    `http://127.0.0.1:8000/api/pets/breeds/?categoryId=${pet.category.id}`
   );
 
   const handleSubmit = (e) => {
