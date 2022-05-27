@@ -3,12 +3,9 @@ import React, { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
+import { deleteEvent } from "../../utils/api";
 
-const EventMenu = ({ eventId, setEditMode, getEvents }) => {
-  const [user, token] = useAuth();
-
+const EventMenu = ({ eventId, setEditMode, setNeedsRefresh }) => {
   const CustomToggle = React.forwardRef(({ onClick }, ref) => (
     <a
       href=""
@@ -23,21 +20,10 @@ const EventMenu = ({ eventId, setEditMode, getEvents }) => {
   ));
 
   const handleDelete = () => {
-    deleteEvent();
+    deleteEvent(eventId)
+      .then((res) => setNeedsRefresh(true))
+      .catch((err) => console.log(err));
   };
-
-  async function deleteEvent() {
-    try {
-      await axios.delete("http://127.0.0.1:8000/api/events/" + eventId + "/", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      getEvents();
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   const handleSelect = (key) => {
     switch (key) {

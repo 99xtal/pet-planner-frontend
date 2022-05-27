@@ -4,7 +4,7 @@ import { Row, Col } from "react-bootstrap";
 import EventMenu from "./EventMenu";
 import EventEditForm from "./EventEditForm";
 
-const EventCard = ({ event, getEvents, petId }) => {
+const EventCard = ({ event, setNeedsRefresh }) => {
   const [editMode, setEditMode] = useState(false);
 
   return (
@@ -12,7 +12,7 @@ const EventCard = ({ event, getEvents, petId }) => {
       {editMode ? (
         <EventEditForm
           event={event}
-          getEvents={getEvents}
+          setNeedsRefresh={setNeedsRefresh}
           setEditMode={setEditMode}
         />
       ) : (
@@ -25,7 +25,7 @@ const EventCard = ({ event, getEvents, petId }) => {
               <EventMenu
                 eventId={event.id}
                 setEditMode={setEditMode}
-                getEvents={getEvents}
+                setNeedsRefresh={setNeedsRefresh}
               />
             </Col>
           </Row>

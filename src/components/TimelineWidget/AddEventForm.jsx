@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import "./AddEventForm.css";
 import { Container, Row, Col } from "react-bootstrap";
 
-import axios from "axios";
 import useAuth from "../../hooks/useAuth";
 import useAxiosGet from "../../hooks/useAxiosGet";
 
-const AddEventForm = ({ petId, getEvents, setAddToggled }) => {
+import { postEvent } from "../../utils/api";
+
+const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(null);
   const [date, setDate] = useState(getInitialDate());
   const [time, setTime] = useState(getInitialTime());
@@ -37,11 +38,6 @@ const AddEventForm = ({ petId, getEvents, setAddToggled }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    postEvent();
-    setAddToggled(false);
-  }
-
-  async function postEvent() {
     const newEvent = {
       date: date,
       time: time,
@@ -50,16 +46,12 @@ const AddEventForm = ({ petId, getEvents, setAddToggled }) => {
       pet_id: pId,
       user_id: user.id,
     };
-    try {
-      await axios.post("http://127.0.0.1:8000/api/events/", newEvent, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      await getEvents();
-    } catch (error) {
-      console.log(error.response.data);
-    }
+    postEvent(newEvent)
+      .then((res) => {
+        setAddToggled(false);
+        setNeedsRefresh(true);
+      })
+      .catch((err) => console.log(err));
   }
 
   return (

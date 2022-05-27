@@ -5,52 +5,37 @@ import "./TimelineWidget.css";
 // Component Imports
 import Widget from "../Widget/Widget";
 import AddEventForm from "./AddEventForm";
+import EventCard from "./EventCard";
 import { BsPlus } from "react-icons/bs";
 
-// Hook Imports
-import useAuth from "../../hooks/useAuth";
-import axios from "axios";
-import EventCard from "./EventCard";
+// Util Imports
+import { getEvents, getEventsByPet } from "../../utils/api";
 
 const TimelineWidget = ({ petId }) => {
-  const [user, token] = useAuth();
   const [events, setEvents] = useState([]);
   const [addToggled, setAddToggled] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [needsRefresh, setNeedsRefresh] = useState(false);
 
-  useEffect(() => getEvents(), []);
-
-  async function getEvents() {
-    let BASE_URL = "http://127.0.0.1:8000/api/events/";
+  useEffect(() => {
     if (petId) {
-      BASE_URL = BASE_URL + `?petId=${petId}`;
+      getEventsByPet(petId).then((res) => setEvents(res.data));
+    } else {
+      getEvents().then((res) => setEvents(res.data));
     }
 
-    setIsLoading(true);
-    try {
-      let response = await axios.get(BASE_URL, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      setEvents(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
+    return setNeedsRefresh(false);
+  }, [petId, needsRefresh]);
 
   return (
     <Widget title="Timeline">
       <div className="eventwindow">
-        {events.length > 0 ? (
+        {events.length ? (
           events.map((e) => {
             return (
               <EventCard
                 key={e.id}
                 event={e}
-                getEvents={getEvents}
-                petId={petId}
+                setNeedsRefresh={setNeedsRefresh}
               />
             );
           })
@@ -61,8 +46,8 @@ const TimelineWidget = ({ petId }) => {
       {addToggled ? (
         <AddEventForm
           petId={petId}
-          getEvents={getEvents}
           setAddToggled={setAddToggled}
+          setNeedsRefresh={setNeedsRefresh}
         />
       ) : (
         <div className="posteventbutton">

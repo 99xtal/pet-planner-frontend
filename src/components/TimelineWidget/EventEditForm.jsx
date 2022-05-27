@@ -5,7 +5,9 @@ import axios from "axios";
 import useAxiosGet from "../../hooks/useAxiosGet";
 import useAuth from "../../hooks/useAuth";
 
-const EventEditForm = ({ event, getEvents, setEditMode }) => {
+import { patchEvent } from "../../utils/api";
+
+const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [user, token] = useAuth();
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
   const [date, setDate] = useState(event.date);
@@ -18,32 +20,19 @@ const EventEditForm = ({ event, getEvents, setEditMode }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    updateEvent();
-  };
-
-  async function updateEvent() {
     const updatedEvent = {
       date: date,
       time: time,
       description: description,
       event_category_id: eCategoryId,
     };
-    try {
-      await axios.patch(
-        "http://127.0.0.1:8000/api/events/" + event.id + "/",
-        updatedEvent,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      await getEvents();
-      setEditMode(false);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+    patchEvent(event.id, updatedEvent)
+      .then((res) => {
+        setNeedsRefresh(true);
+        setEditMode(false);
+      })
+      .catch((err) => console.log(err));
+  };
 
   return (
     <div>
