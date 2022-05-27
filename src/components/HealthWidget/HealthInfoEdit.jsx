@@ -1,11 +1,23 @@
-import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+// General Imports
+import React, { useState, useEffect } from "react";
 
+// Component Imports
 import EditMedication from "./EditMedication";
 import AddMedication from "./AddMedication";
+import { Row, Col } from "react-bootstrap";
 
-const HealthInfoEdit = ({ pet, medications, setEditMode, getMedications }) => {
+// Util Imports
+import { getMedicinesByCategory } from "../../utils/api";
+
+const HealthInfoEdit = ({ pet, medications, setEditMode, setNeedsUpdate }) => {
   const [addToggled, setAddToggled] = useState(false);
+  const [medicineOptions, setMedicineOptions] = useState([]);
+
+  useEffect(() => {
+    getMedicinesByCategory(pet.category.id)
+      .then((res) => setMedicineOptions(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <>
@@ -24,11 +36,16 @@ const HealthInfoEdit = ({ pet, medications, setEditMode, getMedications }) => {
           <EditMedication
             key={med.id}
             medication={med}
-            getMedications={getMedications}
+            setNeedsUpdate={setNeedsUpdate}
+            medicineOptions={medicineOptions}
           />
         ))}
         {addToggled && (
-          <AddMedication pet={pet} getMedications={getMedications} />
+          <AddMedication
+            pet={pet}
+            setNeedsUpdate={setNeedsUpdate}
+            medicineOptions={medicineOptions}
+          />
         )}
         <Row>
           {!addToggled && (

@@ -1,44 +1,34 @@
+// General Imports
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
+// Component Imports
 import Widget from "../Widget/Widget";
 import WidgetEditMenu from "../Widget/WidgetEditMenu";
 import HealthInfoDisplay from "./HealthInfoDisplay";
 import HealthInfoEdit from "./HealthInfoEdit";
 
+// Util Imports
+import { getPetById, getMedicationsByPet } from "../../utils/api";
+
 const HealthWidget = ({ petId, onDashboard }) => {
+  const [pet, setPet] = useState(undefined);
   const [medications, setMedications] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const [user, token] = useAuth();
-  const [pet, petLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/pets/" + petId + "/"
-  );
+  useEffect(() => {
+    getPetById(petId)
+      .then((res) => setPet(res.data))
+      .catch((err) => console.log(err));
+  }, [petId]);
 
   useEffect(() => {
-    getMedications();
-  }, []);
+    getMedicationsByPet(petId)
+      .then((res) => setMedications(res.data))
+      .catch((err) => console.log(err));
 
-  async function getMedications() {
-    setIsLoading(true);
-    try {
-      let response = await axios.get(
-        `http://127.0.0.1:8000/api/medications/?petId=${petId}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setMedications(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
+    return () => setNeedsUpdate(false);
+  }, [petId, needsUpdate]);
 
   const editMenu = (
     <WidgetEditMenu type="health" petId={petId} setEditMode={setEditMode} />
@@ -46,7 +36,7 @@ const HealthWidget = ({ petId, onDashboard }) => {
 
   return (
     <>
-      {!isLoading && !petLoading && (
+      {pet && (
         <Widget
           title={onDashboard ? `${pet.name}'s Health` : "Health"}
           menu={editMenu}
@@ -57,7 +47,7 @@ const HealthWidget = ({ petId, onDashboard }) => {
               pet={pet}
               medications={medications}
               setEditMode={setEditMode}
-              getMedications={getMedications}
+              setNeedsUpdate={setNeedsUpdate}
             />
           ) : (
             <HealthInfoDisplay medications={medications} />

@@ -1,19 +1,17 @@
-import axios from "axios";
+// General Imports
 import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
-const AddMedication = ({ pet, getMedications }) => {
-  const [user, token] = useAuth();
+// Component Imports
+import { Row, Col } from "react-bootstrap";
+
+// Util Imports
+import { postMedication } from "../../utils/api";
+
+const AddMedication = ({ pet, setNeedsUpdate, medicineOptions }) => {
   const [time, setTime] = useState(null);
   const [amount, setAmount] = useState(null);
   const [units, setUnits] = useState(null);
   const [medicineId, setMedicineId] = useState(null);
-
-  const [medicineOptions, medOptionsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/medications/medicines/?categoryId=${pet.category.id}`
-  );
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -24,21 +22,14 @@ const AddMedication = ({ pet, getMedications }) => {
       medicine_id: medicineId,
       pet_id: pet.id,
     };
-    try {
-      await axios.post("http://127.0.0.1:8000/api/medications/", newMed, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      getMedications();
-    } catch (error) {
-      console.log(error.response);
-    }
+    postMedication(newMed)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
   return (
     <>
-      {!medOptionsLoading && (
+      {medicineOptions && (
         <Row>
           <Col>
             <form id="addmed" onSubmit={handleSubmit}>

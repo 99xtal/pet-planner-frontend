@@ -36,7 +36,7 @@ const DietWidget = ({ petId, onDashboard }) => {
 
   return (
     <>
-      {meals.length && pet && (
+      {pet && (
         <Widget
           title={onDashboard ? `${pet.name}'s Diet` : "Diet"}
           menu={editMenu}

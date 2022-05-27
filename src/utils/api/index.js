@@ -17,6 +17,15 @@ import {
 
 import { getPets, getPetById } from "./services/pets";
 
+import {
+  getMedications,
+  getMedicationsByPet,
+  postMedication,
+  patchMedication,
+  deleteMedication,
+  getMedicinesByCategory,
+} from "./services/medications";
+
 export {
   getEvents,
   getEventsByPet,
@@ -31,4 +40,10 @@ export {
   getFoodsByCategory,
   getPets,
   getPetById,
+  getMedications,
+  getMedicationsByPet,
+  postMedication,
+  patchMedication,
+  deleteMedication,
+  getMedicinesByCategory,
 };

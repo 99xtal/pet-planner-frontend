@@ -1,21 +1,17 @@
-import axios from "axios";
+// General Imports
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
-const EditMedication = ({ medication, getMedications }) => {
-  const [user, token] = useAuth();
+// Util Imports
+import { patchMedication, deleteMedication } from "../../utils/api";
+
+const EditMedication = ({ medication, setNeedsUpdate, medicineOptions }) => {
   const [time, setTime] = useState(medication.time);
   const [amount, setAmount] = useState(medication.amount);
   const [units, setUnits] = useState(medication.amount_units);
   const [medicineId, setMedicineId] = useState(medication.medicine.id);
 
-  const [medicineOptions, medOptionsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/medications/medicines/?categoryId=${medication.pet.category}`
-  );
-
-  async function handleUpdate(e) {
+  function handleUpdate(e) {
     e.preventDefault();
     const updatedMed = {
       amount: amount,
@@ -23,40 +19,20 @@ const EditMedication = ({ medication, getMedications }) => {
       time: time,
       medicine_id: medicineId,
     };
-    try {
-      await axios.patch(
-        "http://127.0.0.1:8000/api/medications/" + medication.id + "/",
-        updatedMed,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      getMedications();
-    } catch (error) {
-      console.log(error);
-    }
+    patchMedication(medication.id, updatedMed)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
-  async function handleDelete() {
-    try {
-      await axios.delete(
-        "http://127.0.0.1:8000/api/medications/" + medication.id + "/",
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      getMedications();
-    } catch (error) {
-      console.log(error);
-    }
+  function handleDelete() {
+    deleteMedication(medication.id)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
+
   return (
     <>
-      {!medOptionsLoading && (
+      {medicineOptions.length && (
         <Row>
           <Col>
             <form id={medication.id} onSubmit={handleUpdate}>
