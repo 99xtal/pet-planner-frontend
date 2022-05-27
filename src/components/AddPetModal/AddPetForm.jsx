@@ -1,49 +1,43 @@
+// General Imports
 import React, { useEffect, useState, useContext } from "react";
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
+
+// Component Imports
 import { Container, Row, Col } from "react-bootstrap";
-import useAxiosGet from "../../hooks/useAxiosGet";
+
+// Hook Imports
+import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+
+// Context Imports
 import PetsContext from "../../context/PetsContext";
 
+// Util Imports
+import { getBreedsByCategory, getPetCategories } from "../../utils/api";
+
 const AddPetForm = (props) => {
+  const [categoryOptions, setCategoryOptions] = useState([]);
+  const [breedOptions, setBreedOptions] = useState([]);
+
   const [name, setName] = useState(null);
   const [categoryId, setCategoryId] = useState(null);
   const [breedId, setBreedId] = useState(null);
-  const [breedOptions, setBreedOptions] = useState([]);
   const [gender, setGender] = useState(null);
   const [birthday, setBirthday] = useState(null);
   const [weight, setWeight] = useState(null);
-  const [breedsLoading, setBreedsLoading] = useState(false);
 
-  const [user, token] = useAuth();
-  const [categoryOptions, categoryOptionsLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/pets/categories/"
-  );
   const navigate = useNavigate();
   const { addPet } = useContext(PetsContext);
+  const [user] = useAuth();
 
   useEffect(() => {
-    getBreeds();
-  }, [categoryId]);
+    getPetCategories()
+      .then((res) => setCategoryOptions(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
-  async function getBreeds() {
-    setBreedsLoading(true);
-    try {
-      let response = await axios.get(
-        `http://127.0.0.1:8000/api/pets/breeds/?categoryId=${categoryId}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setBreedOptions(response.data);
-      setBreedsLoading(false);
-    } catch (error) {
-      console.log(error.response);
-    }
-  }
+  useEffect(() => {
+    getBreedsByCategory(categoryId).then((res) => setBreedOptions(res.data));
+  }, [categoryId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -88,7 +82,7 @@ const AddPetForm = (props) => {
               </select>
             </Col>
           </Row>
-          {categoryId !== null && !breedsLoading && (
+          {categoryId !== null && (
             <Row>
               <Col className="d-flex justify-content-start">Breed:</Col>
               <Col>

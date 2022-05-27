@@ -1,50 +1,34 @@
 import { createContext, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import axios from "axios";
+
+import { getWidgets, postWidget, deleteWidget } from "../utils/api";
 
 const DashboardContext = createContext();
 
 export default DashboardContext;
 
 export const DashboardProvider = ({ children }) => {
-  const BASE_URL = "http://127.0.0.1:8000/api/widgets/";
-  const [dashboard, setDashboard] = useState();
+  const [dashboard, setDashboard] = useState([]);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
   const [user, token] = useAuth();
 
-  const fetchDashboard = async () => {
-    try {
-      let response = await axios.get(BASE_URL, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      setDashboard(response.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  useEffect(() => {
+    getWidgets()
+      .then((res) => setDashboard(res.data))
+      .catch((err) => console.log(err));
 
-  useEffect(() => fetchDashboard(), []);
+    return () => setNeedsUpdate(false);
+  }, [needsUpdate]);
 
-  async function addToDashboard(widgetType, petId) {
-    try {
-      await axios.post(
-        BASE_URL,
-        {
-          type: widgetType,
-          user_id: user.id,
-          pet_id: petId,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      await fetchDashboard();
-    } catch (error) {
-      console.log(error);
-    }
+  function addToDashboard(widgetType, petId) {
+    const newWidget = {
+      type: widgetType,
+      user_id: user.id,
+      pet_id: petId,
+    };
+    postWidget(newWidget)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
   async function removeFromDashboard(widgetType, petId) {
@@ -52,17 +36,9 @@ export const DashboardProvider = ({ children }) => {
       return widget.type === widgetType && widget.pet.id == petId;
     });
 
-    try {
-      await axios.delete(`http://127.0.0.1:8000/api/widgets/${widget.id}/`, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      await fetchDashboard();
-    } catch (error) {
-      console.log("Remove error");
-      console.log(error.response);
-    }
+    deleteWidget(widget.id)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
   function findOnDashboard(widgetType, petId) {
@@ -73,7 +49,6 @@ export const DashboardProvider = ({ children }) => {
 
   const contextData = {
     dashboard,
-    fetchDashboard,
     addToDashboard,
     removeFromDashboard,
     findOnDashboard,

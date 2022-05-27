@@ -1,46 +1,38 @@
-import axios from "axios";
+// General Imports
 import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
-const BioInfoEdit = ({ pet, setEditMode }) => {
-  const [user, token] = useAuth();
+// Util Imports
+import { getBreedsByCategory, patchPet } from "../../utils/api";
+
+const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
+  const [breedOptions, setBreedOptions] = useState([]);
   const [breedId, setBreedId] = useState(pet.breed.id);
   const [weight, setWeight] = useState(pet.weight);
   const [gender, setGender] = useState(pet.gender);
   const [birthday, setBirthday] = useState(pet.birthday);
 
-  const [breedOptions, breedsAreLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/pets/breeds/?categoryId=${pet.category.id}`
-  );
+  useEffect(() => {
+    getBreedsByCategory(pet.category.id)
+      .then((res) => setBreedOptions(res.data))
+      .catch((err) => console.log(err));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    patchPet();
-    setEditMode(false);
+    const updatedPet = {
+      breed_id: parseInt(breedId),
+      weight: weight,
+      gender: gender,
+      birthday: birthday,
+    };
+    patchPet(pet.id, updatedPet)
+      .then(() => {
+        setNeedsUpdate(true);
+        setEditMode(false);
+      })
+      .catch((err) => console.log(err));
   };
-
-  async function patchPet() {
-    try {
-      await axios.patch(
-        `http://127.0.0.1:8000/api/pets/${pet.id}/`,
-        {
-          breed_id: parseInt(breedId),
-          weight: weight,
-          gender: gender,
-          birthday: birthday,
-        },
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  }
 
   return (
     <form onSubmit={handleSubmit}>

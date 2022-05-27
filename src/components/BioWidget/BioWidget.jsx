@@ -1,5 +1,5 @@
 // General Imports
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 // Component Imports
 import Widget from "../Widget/Widget";
@@ -7,15 +7,20 @@ import WidgetEditMenu from "../Widget/WidgetEditMenu";
 import BioInfoDisplay from "./BioInfoDisplay";
 import BioInfoEdit from "./BioInfoEdit";
 
-// Hook Imports
-import useAxiosGet from "../../hooks/useAxiosGet";
+import { getPetById } from "../../utils/api";
 
 const BioWidget = ({ petId, onDashboard }) => {
+  const [pet, setPet] = useState(undefined);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
-  const [pet, petIsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/pets/${petId}/`
-  );
+  useEffect(() => {
+    getPetById(petId)
+      .then((res) => setPet(res.data))
+      .catch((err) => console.log(err));
+
+    return () => setNeedsUpdate(false);
+  }, [petId, needsUpdate]);
 
   const editMenu = (
     <WidgetEditMenu type="bio" petId={petId} setEditMode={setEditMode} />
@@ -23,16 +28,20 @@ const BioWidget = ({ petId, onDashboard }) => {
 
   return (
     <>
-      {!petIsLoading && (
+      {pet && (
         <Widget
           title={onDashboard ? `${pet.name}'s Bio` : "Bio"}
           menu={editMenu}
           editMode={editMode}
         >
           {editMode ? (
-            <BioInfoEdit pet={pet} setEditMode={setEditMode} />
+            <BioInfoEdit
+              pet={pet}
+              setEditMode={setEditMode}
+              setNeedsUpdate={setNeedsUpdate}
+            />
           ) : (
-            <BioInfoDisplay petId={petId} />
+            <BioInfoDisplay pet={pet} />
           )}
         </Widget>
       )}

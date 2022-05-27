@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import "./PetPage.css";
 
 // Hook Imports
 import { useParams } from "react-router-dom";
-import useAxiosGet from "../../hooks/useAxiosGet";
-import useAuth from "../../hooks/useAuth";
 
 // Component Imports
 import BioWidget from "../../components/BioWidget/BioWidget";
@@ -15,22 +13,32 @@ import PetPageEditMenu from "../../components/PetPageEditMenu/PetPageEditMenu";
 import { Container, Row, Col } from "react-bootstrap";
 import { FaDog, FaCat } from "react-icons/fa";
 import { GiSandSnake, GiGecko } from "react-icons/gi";
-import axios from "axios";
+
+// Context Imports
+import PetsContext from "../../context/PetsContext";
+
+// Util Imports
+import { getPetById } from "../../utils/api";
 
 const PetPage = (props) => {
+  const [pet, setPet] = useState(undefined);
+  const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [name, setRename] = useState("");
+  const [name, setName] = useState("");
   const { petId } = useParams();
+  const { updatePet } = useContext(PetsContext);
 
-  const [pet, petIsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/pets/${petId}/`
-  );
+  useEffect(() => {
+    getPetById(petId)
+      .then((res) => {
+        setPet(res.data);
+        setName(res.data.name);
+      })
+      .catch((err) => console.log(err));
 
-  // async function getPet() {
-  //   try {
-  //     let response = axios.get(`http://127.0.0.1:8000/api/pets/${petId}/`,)
-  //   }
-  // }
+    return () => setNeedsUpdate(false);
+  }, [petId, needsUpdate]);
+
   const getIcon = (category) => {
     switch (category.toLowerCase()) {
       case "dog":
@@ -47,16 +55,18 @@ const PetPage = (props) => {
     }
   };
 
-  async function updateName() {}
-
-  const handleRename = (e) => {
+  async function handleRename(e) {
     e.preventDefault();
+    await updatePet(petId, {
+      name: name,
+    });
     setEditMode(false);
-  };
+    setNeedsUpdate(true);
+  }
 
   return (
     <>
-      {!petIsLoading ? (
+      {pet && (
         <div className="petpage">
           <Row>
             <Col className="d-flex justify-content-start">
@@ -64,7 +74,11 @@ const PetPage = (props) => {
                 {getIcon(pet.category.category)}
                 {editMode ? (
                   <form onSubmit={handleRename}>
-                    <input className="petpage__name"></input>
+                    <input
+                      className="petpage__name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                    />
                     <input type="submit" style={{ display: "none" }} />
                   </form>
                 ) : (
@@ -91,7 +105,7 @@ const PetPage = (props) => {
             </Col>
           </Row>
         </div>
-      ) : null}
+      )}
     </>
   );
 };

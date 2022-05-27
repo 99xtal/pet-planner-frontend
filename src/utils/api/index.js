@@ -15,7 +15,15 @@ import {
   getFoodsByCategory,
 } from "./services/meals";
 
-import { getPets, getPetById } from "./services/pets";
+import {
+  getPets,
+  getPetById,
+  postPet,
+  patchPet,
+  deletePet,
+  getBreedsByCategory,
+  getPetCategories,
+} from "./services/pets";
 
 import {
   getMedications,
@@ -25,6 +33,8 @@ import {
   deleteMedication,
   getMedicinesByCategory,
 } from "./services/medications";
+
+import { getWidgets, postWidget, deleteWidget } from "./services/widgets";
 
 export {
   getEvents,
@@ -40,10 +50,18 @@ export {
   getFoodsByCategory,
   getPets,
   getPetById,
+  postPet,
+  patchPet,
+  deletePet,
+  getBreedsByCategory,
+  getPetCategories,
   getMedications,
   getMedicationsByPet,
   postMedication,
   patchMedication,
   deleteMedication,
   getMedicinesByCategory,
+  getWidgets,
+  postWidget,
+  deleteWidget,
 };

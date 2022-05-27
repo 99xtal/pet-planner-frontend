@@ -1,67 +1,55 @@
 import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import axios from "axios";
+
+import { getPets, postPet, patchPet, deletePet } from "../utils/api";
 
 const PetsContext = createContext();
 
 export default PetsContext;
 
 export const PetsProvider = ({ children }) => {
-  const BASE_URL = "http://127.0.0.1:8000/api/pets/";
   const [pets, setPets] = useState();
-  const [user, token] = useAuth();
+  const [needsUpdate, setNeedsUpdate] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => getPets(), []);
+  useEffect(() => {
+    getPets()
+      .then((res) => setPets(res.data))
+      .catch((err) => console.log(err));
 
-  async function getPets() {
-    try {
-      let response = await axios.get(BASE_URL, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      setPets(response.data);
-    } catch (error) {
-      console.log(error);
-    }
+    return () => setNeedsUpdate(false);
+  }, [needsUpdate]);
+
+  function addPet(newPet) {
+    postPet(newPet)
+      .then((res) => {
+        setNeedsUpdate(true);
+        navigate(`/pets/${res.data.id}/`);
+      })
+      .catch((err) => console.log(err));
   }
 
-  async function addPet(newPet) {
-    try {
-      let response = await axios.post(BASE_URL, newPet, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      const newPetId = response.data.id;
-      await getPets();
-      navigate(`/pets/${newPetId}/`);
-    } catch (error) {
-      console.log(error);
-    }
+  function updatePet(petId, updatedPet) {
+    patchPet(petId, updatedPet)
+      .then(() => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
-  async function deletePet(petId) {
-    try {
-      await axios.delete(BASE_URL + petId + "/", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      await getPets();
-      navigate("/dashboard");
-    } catch (error) {
-      console.log(error);
-    }
+  function removePet(petId) {
+    deletePet(petId)
+      .then(() => {
+        setNeedsUpdate(true);
+        navigate("/dashboard");
+      })
+      .catch((err) => console.log(err));
   }
 
   const contextData = {
     pets,
     getPets,
     addPet,
-    deletePet,
+    updatePet,
+    deletePet: removePet,
   };
 
   return (
