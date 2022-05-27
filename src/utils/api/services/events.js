@@ -1,21 +1,21 @@
 import { get, post, patch, destroy } from "../config";
 
-export async function getEvents() {
+export function getEvents() {
   return get("/events/");
 }
 
-export async function getEventsByPet(petId) {
+export function getEventsByPet(petId) {
   return get(`/events/?petId=${petId}`);
 }
 
-export async function postEvent(newEvent) {
+export function postEvent(newEvent) {
   return post("/events/", newEvent);
 }
 
-export async function patchEvent(eventId, updatedEvent) {
+export function patchEvent(eventId, updatedEvent) {
   return patch(`/events/${eventId}/`, updatedEvent);
 }
 
-export async function deleteEvent(eventId) {
+export function deleteEvent(eventId) {
   return destroy(`/events/${eventId}/`);
 }

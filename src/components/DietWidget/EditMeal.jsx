@@ -1,21 +1,17 @@
-import axios from "axios";
+// General Imports
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
-const EditMeal = ({ meal, getMeals }) => {
-  const [user, token] = useAuth();
+// Util Imports
+import { patchMeal, deleteMeal } from "../../utils/api";
+
+const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
   const [time, setTime] = useState(meal.time);
   const [amount, setAmount] = useState(meal.amount);
   const [units, setUnits] = useState(meal.amount_units);
   const [foodId, setFoodId] = useState(meal.food.id);
 
-  const [foodOptions, foodOptionsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/meals/foods/?categoryId=${meal.pet.category}`
-  );
-
-  async function handleUpdate(e) {
+  function handleUpdate(e) {
     e.preventDefault();
     const updatedMeal = {
       amount: amount,
@@ -23,38 +19,20 @@ const EditMeal = ({ meal, getMeals }) => {
       time: time,
       food_id: foodId,
     };
-    try {
-      await axios.patch(
-        "http://127.0.0.1:8000/api/meals/" + meal.id + "/",
-        updatedMeal,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      await getMeals();
-    } catch (error) {
-      console.log(error);
-    }
+    patchMeal(meal.id, updatedMeal)
+      .then((res) => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
-  async function handleDelete() {
-    try {
-      await axios.delete("http://127.0.0.1:8000/api/meals/" + meal.id + "/", {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      await getMeals();
-    } catch (error) {
-      console.log(error);
-    }
+  function handleDelete() {
+    deleteMeal(meal.id)
+      .then((res) => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
   return (
     <>
-      {!foodOptionsLoading && (
+      {foodOptions.length && (
         <Row>
           <Col>
             <form id={meal.id} onSubmit={handleUpdate}>

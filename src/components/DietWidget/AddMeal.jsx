@@ -1,21 +1,17 @@
-import axios from "axios";
+// General Imports
 import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
 
-const AddMeal = ({ pet, getMeals }) => {
-  const [user, token] = useAuth();
+// Util Imports
+import { postMeal } from "../../utils/api";
+
+const AddMeal = ({ pet, setNeedsUpdate, foodOptions }) => {
   const [time, setTime] = useState(null);
   const [amount, setAmount] = useState(null);
   const [units, setUnits] = useState(null);
   const [foodId, setFoodId] = useState(null);
 
-  const [foodOptions, foodOptionsLoading] = useAxiosGet(
-    `http://127.0.0.1:8000/api/meals/foods/?categoryId=${pet.category.id}`
-  );
-
-  async function handleSubmit(e) {
+  function handleSubmit(e) {
     e.preventDefault();
     const newMeal = {
       amount: amount,
@@ -24,23 +20,14 @@ const AddMeal = ({ pet, getMeals }) => {
       food_id: foodId,
       pet_id: pet.id,
     };
-    const foodObj = foodOptions.filter((f) => f.id == foodId)[0];
-    console.log(foodObj);
-    try {
-      await axios.post("http://127.0.0.1:8000/api/meals/", newMeal, {
-        headers: {
-          Authorization: "Bearer " + token,
-        },
-      });
-      getMeals();
-    } catch (error) {
-      console.log(error.response);
-    }
+    postMeal(newMeal)
+      .then((res) => setNeedsUpdate(true))
+      .catch((err) => console.log(err));
   }
 
   return (
     <>
-      {!foodOptionsLoading && (
+      {foodOptions.length && (
         <Row>
           <Col>
             <form id="addmeal" onSubmit={handleSubmit}>

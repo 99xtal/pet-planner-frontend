@@ -16,5 +16,4 @@ apiClient.interceptors.request.use(
 );
 
 const { get, post, patch, delete: destroy } = apiClient;
-
 export { get, post, patch, destroy };

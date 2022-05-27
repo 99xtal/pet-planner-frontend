@@ -1,6 +1,9 @@
+// General Imports
 import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+
+// Component Imports
 import MealCountdown from "./MealCountdown";
+import { Row, Col } from "react-bootstrap";
 
 const DietInfoDisplay = ({ meals }) => {
   const [nearestMeal, setNearestMeal] = useState(null);

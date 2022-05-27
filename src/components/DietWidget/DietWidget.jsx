@@ -1,44 +1,34 @@
+// General Imports
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import useAuth from "../../hooks/useAuth";
 
+// Component Imports
 import Widget from "../Widget/Widget";
 import WidgetEditMenu from "../Widget/WidgetEditMenu";
 import DietInfoDisplay from "./DietInfoDisplay";
 import DietInfoEdit from "./DietInfoEdit";
-import useAxiosGet from "../../hooks/useAxiosGet";
+
+// Util Imports
+import { getPetById, getMealsByPet } from "../../utils/api";
 
 const DietWidget = ({ petId, onDashboard }) => {
+  const [pet, setPet] = useState(undefined);
   const [meals, setMeals] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [editMode, setEditMode] = useState(false);
-
-  const [user, token] = useAuth();
-  const [pet, petLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/pets/" + petId + "/"
-  );
+  const [needsUpdate, setNeedsUpdate] = useState(false);
 
   useEffect(() => {
-    getMeals();
+    getPetById(petId)
+      .then((res) => setPet(res.data))
+      .catch((err) => console.log(err));
   }, []);
 
-  const getMeals = async () => {
-    setIsLoading(true);
-    try {
-      let response = await axios.get(
-        `http://127.0.0.1:8000/api/meals/?petId=${petId}`,
-        {
-          headers: {
-            Authorization: "Bearer " + token,
-          },
-        }
-      );
-      setMeals(response.data);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error.response.data);
-    }
-  };
+  useEffect(() => {
+    getMealsByPet(petId)
+      .then((res) => setMeals(res.data))
+      .catch((err) => console.log(err));
+
+    return () => setNeedsUpdate(false);
+  }, [petId, needsUpdate]);
 
   const editMenu = (
     <WidgetEditMenu type="diet" petId={petId} setEditMode={setEditMode} />
@@ -46,7 +36,7 @@ const DietWidget = ({ petId, onDashboard }) => {
 
   return (
     <>
-      {!isLoading && !petLoading && (
+      {meals.length && pet && (
         <Widget
           title={onDashboard ? `${pet.name}'s Diet` : "Diet"}
           menu={editMenu}
@@ -57,7 +47,7 @@ const DietWidget = ({ petId, onDashboard }) => {
               pet={pet}
               meals={meals}
               setEditMode={setEditMode}
-              getMeals={getMeals}
+              setNeedsUpdate={setNeedsUpdate}
             />
           ) : (
             <DietInfoDisplay meals={meals} />
