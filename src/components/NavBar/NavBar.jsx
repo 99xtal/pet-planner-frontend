@@ -12,7 +12,10 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+          <Link
+            to="/dashboard"
+            style={{ textDecoration: "none", color: "white" }}
+          >
             <b>petPal</b>
           </Link>
         </li>

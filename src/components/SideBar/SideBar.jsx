@@ -6,7 +6,12 @@ import "./SideBar.css";
 import SideBarLink from "../SideBarLink/SideBarLink";
 import SideBarDropdown from "../SideBarDropdown/SideBarDropdown";
 import SideBarSublink from "../SideBarSublink/SideBarSublink";
-import { BsHouseDoorFill, BsPersonFill, BsPlus } from "react-icons/bs";
+import {
+  BsHouseDoorFill,
+  BsPersonFill,
+  BsPlus,
+  BsGearWideConnected,
+} from "react-icons/bs";
 import { FaPaw } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
@@ -44,9 +49,9 @@ const SideBar = (props) => {
       </SideBarDropdown>
 
       <SideBarLink
-        title="Profile"
-        path="/profile"
-        icon={<BsPersonFill size={24} />}
+        title="Settings"
+        path="/settings"
+        icon={<BsGearWideConnected size={24} />}
       />
     </div>
   );

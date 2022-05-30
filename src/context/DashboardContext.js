@@ -21,11 +21,13 @@ export const DashboardProvider = ({ children }) => {
   }, [needsUpdate]);
 
   function addToDashboard(widgetType, petId) {
-    const newWidget = {
+    let newWidget = {
       type: widgetType,
       user_id: user.id,
-      pet_id: petId,
     };
+    if (petId) {
+      newWidget["pet_id"] = petId;
+    }
     postWidget(newWidget)
       .then(() => setNeedsUpdate(true))
       .catch((err) => console.log(err));

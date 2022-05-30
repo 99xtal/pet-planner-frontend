@@ -51,7 +51,11 @@ const TimelineWidget = ({ petId }) => {
         />
       ) : (
         <div className="posteventbutton">
-          <a href="#0" onClick={() => setAddToggled(true)}>
+          <a
+            href="#0"
+            aria-label="New Event"
+            onClick={() => setAddToggled(true)}
+          >
             <div className="addbutton">
               <BsPlus size={40} color={"white"} />
             </div>

@@ -36,6 +36,8 @@ import {
 
 import { getWidgets, postWidget, deleteWidget } from "./services/widgets";
 
+import { getProfile, patchProfile } from "./services/auth";
+
 export {
   getEvents,
   getEventsByPet,
@@ -64,4 +66,6 @@ export {
   getWidgets,
   postWidget,
   deleteWidget,
+  getProfile,
+  patchProfile,
 };

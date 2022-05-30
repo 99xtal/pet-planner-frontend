@@ -9,7 +9,7 @@ import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import DashboardPage from "./pages/DashboardPage/DashboardPage";
 import HomePage from "./pages/HomePage/HomePage";
-import ProfilePage from "./pages/ProfilePage/ProfilePage";
+import SettingsPage from "./pages/SettingsPage/SettingsPage";
 import PetsPage from "./pages/PetsPage/PetsPage";
 import PetPage from "./pages/PetPage/PetPage";
 import AddPetPage from "./pages/AddPetPage/AddPetPage";
@@ -45,7 +45,7 @@ function App() {
             />
           </Route>
           <Route path="addpet" element={<AddPetPage />} />
-          <Route path="profile" element={<ProfilePage />} />
+          <Route path="settings" element={<SettingsPage />} />
         </Route>
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
