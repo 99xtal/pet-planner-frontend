@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-import Widget from "../Widget/Widget";
-import AddPetForm from "./AddPetForm";
+import Widget from '../Widget/Widget';
+import AddPetForm from './AddPetForm';
 
 const AddPetModal = () => {
   return (

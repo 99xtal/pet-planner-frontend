@@ -1,11 +1,11 @@
 // General Imports
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 // Component Imports
-import { Row, Col } from "react-bootstrap";
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { patchProfile } from "../../utils/api";
+import { patchProfile } from '../../utils/api';
 
 const ProfileEdit = ({ profile, setEditMode, setNeedsUpdate }) => {
   const [firstName, setFirstName] = useState(profile.first_name);

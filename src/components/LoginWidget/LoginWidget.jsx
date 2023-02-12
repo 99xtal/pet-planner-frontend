@@ -1,15 +1,15 @@
-import React, { useEffect, useContext } from "react";
-import "./LoginWidget.css";
+import React, { useEffect, useContext } from 'react';
+import './LoginWidget.css';
 
-import AuthContext from "../../context/AuthContext";
-import useCustomForm from "../../hooks/useCustomForm";
+import AuthContext from '../../context/AuthContext';
+import useCustomForm from '../../hooks/useCustomForm';
 
-import { Link } from "react-router-dom";
-import Widget from "../Widget/Widget";
+import { Link } from 'react-router-dom';
+import Widget from '../Widget/Widget';
 
 const LoginWidget = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: "", password: "" };
+  const defaultValues = { username: '', password: '' };
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
     defaultValues,
     loginUser

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
-import useAxiosGet from "../../hooks/useAxiosGet";
+import useAxiosGet from '../../hooks/useAxiosGet';
 
-import { patchEvent } from "../../utils/api";
+import { patchEvent } from '../../utils/api';
 
 const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
@@ -12,7 +12,7 @@ const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [description, setDescription] = useState(event.description);
 
   const [eCategoryOptions] = useAxiosGet(
-    "http://127.0.0.1:8000/api/events/categories/"
+    'http://127.0.0.1:8000/api/events/categories/'
   );
 
   const handleSubmit = (e) => {

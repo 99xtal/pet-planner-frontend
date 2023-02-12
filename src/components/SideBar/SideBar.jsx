@@ -1,17 +1,17 @@
 // General Imports
-import React, { useContext } from "react";
-import "./SideBar.css";
+import React, { useContext } from 'react';
+import './SideBar.css';
 
 // Component Imports
-import SideBarLink from "../SideBarLink/SideBarLink";
-import SideBarDropdown from "../SideBarDropdown/SideBarDropdown";
-import SideBarSublink from "../SideBarSublink/SideBarSublink";
-import { BsHouseDoorFill, BsPlus, BsGearWideConnected } from "react-icons/bs";
-import { FaPaw } from "react-icons/fa";
+import SideBarLink from '../SideBarLink/SideBarLink';
+import SideBarDropdown from '../SideBarDropdown/SideBarDropdown';
+import SideBarSublink from '../SideBarSublink/SideBarSublink';
+import { BsHouseDoorFill, BsPlus, BsGearWideConnected } from 'react-icons/bs';
+import { FaPaw } from 'react-icons/fa';
 
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
-import PetsContext from "../../context/PetsContext";
+import PetsContext from '../../context/PetsContext';
 
 const SideBar = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const SideBar = () => {
           })}
         <SideBarSublink
           title="Add Pet"
-          onClick={() => navigate("/addpet")}
+          onClick={() => navigate('/addpet')}
           icon={<BsPlus size={24} />}
         />
       </SideBarDropdown>

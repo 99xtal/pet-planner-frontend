@@ -1,13 +1,13 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import AddMeal from "./AddMeal";
-import EditMeal from "./EditMeal";
-import { Row, Col } from "react-bootstrap";
+import AddMeal from './AddMeal';
+import EditMeal from './EditMeal';
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getFoodsByCategory } from "../../utils/api";
+import { getFoodsByCategory } from '../../utils/api';
 
 const DietInfoEdit = ({ pet, meals, setEditMode, setNeedsUpdate }) => {
   const [toggleAdd, setToggleAdd] = useState(false);

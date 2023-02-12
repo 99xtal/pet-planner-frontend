@@ -1,9 +1,9 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
 // import MedicationCountdown from "./MedicationCountdown";
-import { Row, Col } from "react-bootstrap";
+import { Row, Col } from 'react-bootstrap';
 
 const HealthInfoDisplay = ({ medications }) => {
   const [, setNearestMed] = useState(null);

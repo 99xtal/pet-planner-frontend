@@ -1,9 +1,9 @@
 // General Imports
-import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getBreedsByCategory, patchPet } from "../../utils/api";
+import { getBreedsByCategory, patchPet } from '../../utils/api';
 
 const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
   const [breedOptions, setBreedOptions] = useState([]);

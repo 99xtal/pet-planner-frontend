@@ -1,7 +1,7 @@
-import React, { createContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { createContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { getPets, postPet, patchPet, deletePet } from "../utils/api";
+import { getPets, postPet, patchPet, deletePet } from '../utils/api';
 
 const PetsContext = createContext();
 
@@ -39,7 +39,7 @@ export const PetsProvider = ({ children }) => {
     deletePet(petId)
       .then(() => {
         setNeedsUpdate(true);
-        navigate("/dashboard");
+        navigate('/dashboard');
       })
       .catch((err) => console.log(err));
   }

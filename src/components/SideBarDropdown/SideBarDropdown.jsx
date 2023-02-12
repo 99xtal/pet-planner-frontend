@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
-import "./SideBarDropdown.css";
+import './SideBarDropdown.css';
 
 const SideBarDropdown = ({ title, icon, children }) => {
   const [toggled, setToggled] = useState(false);

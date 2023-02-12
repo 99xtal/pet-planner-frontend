@@ -1,8 +1,8 @@
-import React from "react";
-import { useContext } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import AuthContext from "../../context/AuthContext";
-import "./NavBar.css";
+import React from 'react';
+import { useContext } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
+import AuthContext from '../../context/AuthContext';
+import './NavBar.css';
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);
@@ -13,7 +13,7 @@ const Navbar = () => {
         <li className="brand">
           <Link
             to="/dashboard"
-            style={{ textDecoration: "none", color: "white" }}
+            style={{ textDecoration: 'none', color: 'white' }}
           >
             <b>petPal</b>
           </Link>
@@ -22,7 +22,7 @@ const Navbar = () => {
           {user ? (
             <button onClick={logoutUser}>Logout</button>
           ) : (
-            <button onClick={() => navigate("/login")}>Login</button>
+            <button onClick={() => navigate('/login')}>Login</button>
           )}
         </li>
       </ul>

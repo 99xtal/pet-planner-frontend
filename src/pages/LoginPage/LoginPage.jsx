@@ -1,6 +1,6 @@
-import React from "react";
-import LoginWidget from "../../components/LoginWidget/LoginWidget";
-import "./LoginPage.css";
+import React from 'react';
+import LoginWidget from '../../components/LoginWidget/LoginWidget';
+import './LoginPage.css';
 
 const LoginPage = () => {
   return (

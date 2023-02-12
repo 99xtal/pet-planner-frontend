@@ -1,13 +1,13 @@
-import axios from "axios";
+import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: "http://127.0.0.1:8000/api",
+  baseURL: 'http://127.0.0.1:8000/api',
 });
 
-const TOKEN = localStorage.getItem("token");
+const TOKEN = localStorage.getItem('token');
 apiClient.interceptors.request.use(
   (config) => {
-    config.headers.Authorization = "Bearer " + JSON.parse(TOKEN);
+    config.headers.Authorization = 'Bearer ' + JSON.parse(TOKEN);
     return config;
   },
   (err) => {

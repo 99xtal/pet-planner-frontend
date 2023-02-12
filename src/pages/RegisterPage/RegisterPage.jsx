@@ -1,7 +1,7 @@
-import React from "react";
-import "./RegisterPage.css";
+import React from 'react';
+import './RegisterPage.css';
 
-import RegisterWidget from "../../components/RegisterWidget/RegisterWidget";
+import RegisterWidget from '../../components/RegisterWidget/RegisterWidget';
 
 const RegisterPage = () => {
   return (

@@ -1,14 +1,14 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import Widget from "../Widget/Widget";
-import WidgetEditMenu from "../Widget/WidgetEditMenu";
-import ProfileDisplay from "./ProfileDisplay";
+import Widget from '../Widget/Widget';
+import WidgetEditMenu from '../Widget/WidgetEditMenu';
+import ProfileDisplay from './ProfileDisplay';
 
 // Util Imports
-import { getProfile } from "../../utils/api";
-import ProfileEdit from "./ProfileEdit";
+import { getProfile } from '../../utils/api';
+import ProfileEdit from './ProfileEdit';
 
 const ProfileWidget = () => {
   const [profile, setProfile] = useState(undefined);

@@ -1,5 +1,5 @@
-import React from "react";
-import "./Widget.css";
+import React from 'react';
+import './Widget.css';
 
 const Widget = ({ title, menu, editMode, children }) => {
   return (

@@ -1,9 +1,9 @@
 // General Imports
-import React, { useState } from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { patchMeal, deleteMeal } from "../../utils/api";
+import { patchMeal, deleteMeal } from '../../utils/api';
 
 const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
   const [time, setTime] = useState(meal.time);
@@ -44,7 +44,7 @@ const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
               <Row>
                 <Col sm={8}>
                   <input
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -52,10 +52,10 @@ const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
                 </Col>
                 <Col sm={4}>
                   <select
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     onChange={(e) => setUnits(e.target.value)}
                   >
-                    {["g", "kg", "cups", "whole"].map((u) => (
+                    {['g', 'kg', 'cups', 'whole'].map((u) => (
                       <option key={u} value={u}>
                         {u}
                       </option>

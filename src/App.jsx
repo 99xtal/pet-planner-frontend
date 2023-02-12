@@ -1,22 +1,22 @@
 // General Imports
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import "./App.css";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import './App.css';
 
 // Pages Imports
-import LoginPage from "./pages/LoginPage/LoginPage";
-import RegisterPage from "./pages/RegisterPage/RegisterPage";
-import DashboardPage from "./pages/DashboardPage/DashboardPage";
-import HomePage from "./pages/HomePage/HomePage";
-import SettingsPage from "./pages/SettingsPage/SettingsPage";
-import PetsPage from "./pages/PetsPage/PetsPage";
-import PetPage from "./pages/PetPage/PetPage";
-import AddPetPage from "./pages/AddPetPage/AddPetPage";
+import LoginPage from './pages/LoginPage/LoginPage';
+import RegisterPage from './pages/RegisterPage/RegisterPage';
+import DashboardPage from './pages/DashboardPage/DashboardPage';
+import HomePage from './pages/HomePage/HomePage';
+import SettingsPage from './pages/SettingsPage/SettingsPage';
+import PetsPage from './pages/PetsPage/PetsPage';
+import PetPage from './pages/PetPage/PetPage';
+import AddPetPage from './pages/AddPetPage/AddPetPage';
 
 // Util Imports
-import PrivateRoute from "./utils/PrivateRoute";
-import { DashboardProvider } from "./context/DashboardContext";
-import { PetsProvider } from "./context/PetsContext";
+import PrivateRoute from './utils/PrivateRoute';
+import { DashboardProvider } from './context/DashboardContext';
+import { PetsProvider } from './context/PetsContext';
 
 function App() {
   return (

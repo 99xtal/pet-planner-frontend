@@ -1,8 +1,8 @@
-import React from "react";
+import React from 'react';
 
-import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
-import { Row, Col } from "react-bootstrap";
-import { BsGearWideConnected } from "react-icons/bs";
+import ProfileWidget from '../../components/ProfileWidget/ProfileWidget';
+import { Row, Col } from 'react-bootstrap';
+import { BsGearWideConnected } from 'react-icons/bs';
 
 const SettingsPage = () => {
   return (

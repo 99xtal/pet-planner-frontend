@@ -1,9 +1,9 @@
-import React from "react";
-import Navbar from "../../components/NavBar/NavBar";
-import SideBar from "../../components/SideBar/SideBar";
-import { Outlet } from "react-router-dom";
-import { Row } from "react-bootstrap";
-import "./HomePage.css";
+import React from 'react';
+import Navbar from '../../components/NavBar/NavBar';
+import SideBar from '../../components/SideBar/SideBar';
+import { Outlet } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
+import './HomePage.css';
 
 const HomePage = () => {
   return (

@@ -1,30 +1,30 @@
-import React, { useEffect, useState, useContext } from "react";
-import "./PetPage.css";
+import React, { useEffect, useState, useContext } from 'react';
+import './PetPage.css';
 
 // Hook Imports
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom';
 
 // Component Imports
-import BioWidget from "../../components/BioWidget/BioWidget";
-import DietWidget from "../../components/DietWidget/DietWidget";
-import HealthWidget from "../../components/HealthWidget/HealthWidget";
-import TimelineWidget from "../../components/TimelineWidget/TimelineWidget";
-import PetPageEditMenu from "../../components/PetPageEditMenu/PetPageEditMenu";
-import { Row, Col } from "react-bootstrap";
-import { FaDog, FaCat } from "react-icons/fa";
-import { GiSandSnake, GiGecko } from "react-icons/gi";
+import BioWidget from '../../components/BioWidget/BioWidget';
+import DietWidget from '../../components/DietWidget/DietWidget';
+import HealthWidget from '../../components/HealthWidget/HealthWidget';
+import TimelineWidget from '../../components/TimelineWidget/TimelineWidget';
+import PetPageEditMenu from '../../components/PetPageEditMenu/PetPageEditMenu';
+import { Row, Col } from 'react-bootstrap';
+import { FaDog, FaCat } from 'react-icons/fa';
+import { GiSandSnake, GiGecko } from 'react-icons/gi';
 
 // Context Imports
-import PetsContext from "../../context/PetsContext";
+import PetsContext from '../../context/PetsContext';
 
 // Util Imports
-import { getPetById } from "../../utils/api";
+import { getPetById } from '../../utils/api';
 
 const PetPage = () => {
   const [pet, setPet] = useState(undefined);
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
   const { petId } = useParams();
   const { updatePet } = useContext(PetsContext);
 
@@ -41,14 +41,14 @@ const PetPage = () => {
 
   const getIcon = (category) => {
     switch (category.toLowerCase()) {
-      case "dog":
+      case 'dog':
         return <FaDog size={96} color="white" />;
-      case "cat":
+      case 'cat':
         return <FaCat size={96} color="white" />;
-      case "snake":
+      case 'snake':
         return <GiSandSnake size={96} color="white" />;
-      case "gecko":
-      case "lizard":
+      case 'gecko':
+      case 'lizard':
         return <GiGecko size={96} color="white" />;
       default:
         return null;
@@ -79,7 +79,7 @@ const PetPage = () => {
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                     />
-                    <input type="submit" style={{ display: "none" }} />
+                    <input type="submit" style={{ display: 'none' }} />
                   </form>
                 ) : (
                   <h1 className="petpage__name">{pet.name}</h1>

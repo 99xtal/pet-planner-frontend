@@ -1,11 +1,11 @@
-import { useState } from "react";
+import { useState } from 'react';
 
 const useCustomForm = (initialValues = {}, onSubmit) => {
   const [formData, setFormValues] = useState(initialValues);
 
   const handleInputChange = (e) => {
     e.persist();
-    if (e.target.name === "isStudent") {
+    if (e.target.name === 'isStudent') {
       setFormValues({ ...formData, [e.target.name]: e.target.checked });
     } else {
       setFormValues({ ...formData, [e.target.name]: e.target.value });
