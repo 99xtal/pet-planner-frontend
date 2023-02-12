@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import useCountDown from "react-countdown-hook";
 
 const MealCountdown = ({ nearestMeal }) => {
   const [timeLeft, { start }] = useCountDown(calculateTimeLeft(), 1000);
