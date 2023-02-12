@@ -5,7 +5,8 @@
     },
     "extends": [
         "eslint:recommended",
-        "plugin:react/recommended"
+        "plugin:react/recommended",
+        "prettier"
     ],
     "overrides": [
         {
@@ -21,8 +22,10 @@
         "sourceType": "module"
     },
     "plugins": [
+        "prettier",
         "react"
     ],
     "rules": {
+        "prettier/prettier": "error"
     }
 }

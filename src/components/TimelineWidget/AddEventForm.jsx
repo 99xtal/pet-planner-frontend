@@ -15,9 +15,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [pId, setPId] = useState(petId);
 
   const [user] = useAuth();
-  const [petOptions] = useAxiosGet(
-    "http://127.0.0.1:8000/api/pets/"
-  );
+  const [petOptions] = useAxiosGet("http://127.0.0.1:8000/api/pets/");
   const [eCategoryOptions] = useAxiosGet(
     "http://127.0.0.1:8000/api/events/categories/"
   );

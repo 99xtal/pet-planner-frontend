@@ -6,11 +6,7 @@ import "./SideBar.css";
 import SideBarLink from "../SideBarLink/SideBarLink";
 import SideBarDropdown from "../SideBarDropdown/SideBarDropdown";
 import SideBarSublink from "../SideBarSublink/SideBarSublink";
-import {
-  BsHouseDoorFill,
-  BsPlus,
-  BsGearWideConnected,
-} from "react-icons/bs";
+import { BsHouseDoorFill, BsPlus, BsGearWideConnected } from "react-icons/bs";
 import { FaPaw } from "react-icons/fa";
 
 import { useNavigate } from "react-router-dom";
