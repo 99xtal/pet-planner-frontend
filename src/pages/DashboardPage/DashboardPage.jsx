@@ -1,15 +1,13 @@
-import React, { useState, useEffect, useContext } from "react";
-import BioWidget from "../../components/BioWidget/BioWidget";
-import DietWidget from "../../components/DietWidget/DietWidget";
-import HealthWidget from "../../components/HealthWidget/HealthWidget";
-import TimelineWidget from "../../components/TimelineWidget/TimelineWidget";
+import React, { useContext } from 'react';
+import BioWidget from '../../components/BioWidget/BioWidget';
+import DietWidget from '../../components/DietWidget/DietWidget';
+import HealthWidget from '../../components/HealthWidget/HealthWidget';
+import TimelineWidget from '../../components/TimelineWidget/TimelineWidget';
 
-import DashboardContext from "../../context/DashboardContext";
+import DashboardContext from '../../context/DashboardContext';
 
-const DashboardPage = (props) => {
-  const { dashboard, fetchDashboard } = useContext(DashboardContext);
-
-  // useEffect(() => fetchDashboard(), []);
+const DashboardPage = () => {
+  const { dashboard } = useContext(DashboardContext);
 
   return (
     <>
@@ -20,19 +18,19 @@ const DashboardPage = (props) => {
       {dashboard &&
         dashboard.map((widget) => {
           switch (widget.type) {
-            case "bio":
+            case 'bio':
               return (
                 <div key={widget.id}>
                   <BioWidget petId={widget.pet.id} onDashboard={true} />
                 </div>
               );
-            case "diet":
+            case 'diet':
               return (
                 <div key={widget.id}>
                   <DietWidget petId={widget.pet.id} onDashboard={true} />
                 </div>
               );
-            case "health":
+            case 'health':
               return (
                 <div key={widget.id}>
                   <HealthWidget petId={widget.pet.id} onDashboard={true} />

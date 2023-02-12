@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
-import Navbar from "../../components/NavBar/NavBar";
-import SideBar from "../../components/SideBar/SideBar";
-import { Outlet, Redirect } from "react-router-dom";
-import { Container, Row, Col } from "react-bootstrap";
-import "./HomePage.css";
+import React from 'react';
+import Navbar from '../../components/NavBar/NavBar';
+import SideBar from '../../components/SideBar/SideBar';
+import { Outlet } from 'react-router-dom';
+import { Row } from 'react-bootstrap';
+import './HomePage.css';
 
-const HomePage = (props) => {
+const HomePage = () => {
   return (
     <>
       <div className="homepage">

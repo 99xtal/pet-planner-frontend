@@ -1,6 +1,6 @@
 // General Imports
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React from 'react';
+import { Row, Col } from 'react-bootstrap';
 
 const ProfileDisplay = ({ profile }) => {
   return (

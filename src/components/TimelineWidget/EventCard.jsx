@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import "./EventCard.css";
-import { Row, Col } from "react-bootstrap";
-import EventMenu from "./EventMenu";
-import EventEditForm from "./EventEditForm";
+import React, { useState } from 'react';
+import './EventCard.css';
+import { Row, Col } from 'react-bootstrap';
+import EventMenu from './EventMenu';
+import EventEditForm from './EventEditForm';
 
 const EventCard = ({ event, setNeedsRefresh }) => {
   const [editMode, setEditMode] = useState(false);

@@ -1,7 +1,7 @@
-import { get, post, patch, destroy } from "../config";
+import { get, post, patch, destroy } from '../config';
 
 export function getPets() {
-  return get("/pets/");
+  return get('/pets/');
 }
 
 export function getPetById(petId) {
@@ -9,7 +9,7 @@ export function getPetById(petId) {
 }
 
 export function postPet(newPet) {
-  return post("/pets/", newPet);
+  return post('/pets/', newPet);
 }
 
 export function patchPet(petId, updatedPet) {
@@ -25,5 +25,5 @@ export function getBreedsByCategory(categoryId) {
 }
 
 export function getPetCategories() {
-  return get("/pets/categories/");
+  return get('/pets/categories/');
 }

@@ -1,11 +1,11 @@
 // General Imports
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 // Component Imports
-import { Row, Col } from "react-bootstrap";
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { postMedication } from "../../utils/api";
+import { postMedication } from '../../utils/api';
 
 const AddMedication = ({ pet, setNeedsUpdate, medicineOptions }) => {
   const [time, setTime] = useState(null);
@@ -41,7 +41,7 @@ const AddMedication = ({ pet, setNeedsUpdate, medicineOptions }) => {
               <Row>
                 <Col sm={8}>
                   <input
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     type="number"
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
@@ -49,10 +49,10 @@ const AddMedication = ({ pet, setNeedsUpdate, medicineOptions }) => {
                 </Col>
                 <Col sm={4}>
                   <select
-                    style={{ width: "100%" }}
+                    style={{ width: '100%' }}
                     onChange={(e) => setUnits(e.target.value)}
                   >
-                    {["pills", "ccs", "drops"].map((u) => (
+                    {['pills', 'ccs', 'drops'].map((u) => (
                       <option key={u} value={u}>
                         {u}
                       </option>

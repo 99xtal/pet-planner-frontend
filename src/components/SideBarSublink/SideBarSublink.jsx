@@ -1,5 +1,5 @@
-import React from "react";
-import "./SideBarSublink.css";
+import React from 'react';
+import './SideBarSublink.css';
 
 const SideBarSublink = ({ title, onClick, icon }) => {
   return (

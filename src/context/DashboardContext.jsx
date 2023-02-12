@@ -1,7 +1,7 @@
-import { createContext, useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
+import React, { createContext, useState, useEffect } from 'react';
+import useAuth from '../hooks/useAuth';
 
-import { getWidgets, postWidget, deleteWidget } from "../utils/api";
+import { getWidgets, postWidget, deleteWidget } from '../utils/api';
 
 const DashboardContext = createContext();
 
@@ -10,7 +10,7 @@ export default DashboardContext;
 export const DashboardProvider = ({ children }) => {
   const [dashboard, setDashboard] = useState([]);
   const [needsUpdate, setNeedsUpdate] = useState(false);
-  const [user, token] = useAuth();
+  const [user] = useAuth();
 
   useEffect(() => {
     getWidgets()
@@ -26,7 +26,7 @@ export const DashboardProvider = ({ children }) => {
       user_id: user.id,
     };
     if (petId) {
-      newWidget["pet_id"] = petId;
+      newWidget['pet_id'] = petId;
     }
     postWidget(newWidget)
       .then(() => setNeedsUpdate(true))

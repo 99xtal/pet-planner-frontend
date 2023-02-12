@@ -1,21 +1,18 @@
-import React, { useState, useEffect } from "react";
-import { Row, Col } from "react-bootstrap";
-import axios from "axios";
+import React, { useState } from 'react';
+import { Row, Col } from 'react-bootstrap';
 
-import useAxiosGet from "../../hooks/useAxiosGet";
-import useAuth from "../../hooks/useAuth";
+import useAxiosGet from '../../hooks/useAxiosGet';
 
-import { patchEvent } from "../../utils/api";
+import { patchEvent } from '../../utils/api';
 
 const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
-  const [user, token] = useAuth();
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
   const [date, setDate] = useState(event.date);
   const [time, setTime] = useState(event.time);
   const [description, setDescription] = useState(event.description);
 
-  const [eCategoryOptions, optionsLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/events/categories/"
+  const [eCategoryOptions] = useAxiosGet(
+    'http://127.0.0.1:8000/api/events/categories/'
   );
 
   const handleSubmit = (e) => {
@@ -27,7 +24,7 @@ const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
       event_category_id: eCategoryId,
     };
     patchEvent(event.id, updatedEvent)
-      .then((res) => {
+      .then(() => {
         setNeedsRefresh(true);
         setEditMode(false);
       })

@@ -1,7 +1,7 @@
-import { get, post, patch, destroy } from "../config";
+import { get, post, patch, destroy } from '../config';
 
 export function getEvents() {
-  return get("/events/");
+  return get('/events/');
 }
 
 export function getEventsByPet(petId) {
@@ -9,7 +9,7 @@ export function getEventsByPet(petId) {
 }
 
 export function postEvent(newEvent) {
-  return post("/events/", newEvent);
+  return post('/events/', newEvent);
 }
 
 export function patchEvent(eventId, updatedEvent) {

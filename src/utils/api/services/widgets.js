@@ -1,11 +1,11 @@
-import { get, post, destroy } from "../config";
+import { get, post, destroy } from '../config';
 
 export function getWidgets() {
-  return get("/widgets/");
+  return get('/widgets/');
 }
 
 export function postWidget(newWidget) {
-  return post("/widgets/", newWidget);
+  return post('/widgets/', newWidget);
 }
 
 export function deleteWidget(widgetId) {

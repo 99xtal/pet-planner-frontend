@@ -1,7 +1,7 @@
-import { get, post, patch, destroy } from "../config";
+import { get, post, patch, destroy } from '../config';
 
 export function getMeals() {
-  return get("/meals/");
+  return get('/meals/');
 }
 
 export function getMealsByPet(petId) {
@@ -9,7 +9,7 @@ export function getMealsByPet(petId) {
 }
 
 export function postMeal(newMeal) {
-  return post("/meals/", newMeal);
+  return post('/meals/', newMeal);
 }
 
 export function patchMeal(mealId, updatedMeal) {

@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import "./AddEventForm.css";
-import { Container, Row, Col } from "react-bootstrap";
+import React, { useState } from 'react';
+import './AddEventForm.css';
+import { Container, Row, Col } from 'react-bootstrap';
 
-import useAuth from "../../hooks/useAuth";
-import useAxiosGet from "../../hooks/useAxiosGet";
+import useAuth from '../../hooks/useAuth';
+import useAxiosGet from '../../hooks/useAxiosGet';
 
-import { postEvent } from "../../utils/api";
+import { postEvent } from '../../utils/api';
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(null);
@@ -14,12 +14,10 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [description, setDescription] = useState(null);
   const [pId, setPId] = useState(petId);
 
-  const [user, token] = useAuth();
-  const [petOptions, petOptionsLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/pets/"
-  );
-  const [eCategoryOptions, optionsLoading] = useAxiosGet(
-    "http://127.0.0.1:8000/api/events/categories/"
+  const [user] = useAuth();
+  const [petOptions] = useAxiosGet('http://127.0.0.1:8000/api/pets/');
+  const [eCategoryOptions] = useAxiosGet(
+    'http://127.0.0.1:8000/api/events/categories/'
   );
 
   function getInitialTime() {
@@ -29,11 +27,11 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
 
   function getInitialDate() {
     const d = new Date();
-    const day = d.getDate().toString().padStart(2, "0");
+    const day = d.getDate().toString().padStart(2, '0');
     const year = d.getFullYear();
     let month = d.getMonth() + 1;
-    month = month.toString().padStart(2, "0");
-    return [year, month, day].join("-");
+    month = month.toString().padStart(2, '0');
+    return [year, month, day].join('-');
   }
 
   function handleSubmit(e) {
@@ -47,7 +45,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
       user_id: user.id,
     };
     postEvent(newEvent)
-      .then((res) => {
+      .then(() => {
         setAddToggled(false);
         setNeedsRefresh(true);
       })

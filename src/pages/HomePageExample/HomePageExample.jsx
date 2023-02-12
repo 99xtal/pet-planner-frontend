@@ -1,8 +1,8 @@
-import React from "react";
-import { useEffect, useState } from "react";
-import useAuth from "../../hooks/useAuth";
+import React from 'react';
+import { useEffect, useState } from 'react';
+import useAuth from '../../hooks/useAuth';
 
-import axios from "axios";
+import axios from 'axios';
 
 const HomePageExample = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -14,9 +14,9 @@ const HomePageExample = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        let response = await axios.get("http://127.0.0.1:8000/api/cars/", {
+        let response = await axios.get('http://127.0.0.1:8000/api/cars/', {
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: 'Bearer ' + token,
           },
         });
         setCars(response.data);

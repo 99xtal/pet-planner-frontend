@@ -1,22 +1,21 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext } from "react";
-import { Dropdown } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
-import PetsContext from "../../context/PetsContext";
+import React, { useContext } from 'react';
+import { Dropdown } from 'react-bootstrap';
+import { BsThreeDots } from 'react-icons/bs';
+import PetsContext from '../../context/PetsContext';
 
 const PetPageEditMenu = ({ petId, setEditMode }) => {
   const { deletePet } = useContext(PetsContext);
 
   const handleSelect = (key) => {
     switch (key) {
-      case "rename":
+      case 'rename':
         setEditMode(true);
         break;
-      case "delete":
+      case 'delete':
         deletePet(petId);
         break;
       default:
-        console.log("Invalid select event");
+        console.log('Invalid select event');
     }
   };
 
@@ -38,8 +37,8 @@ const PetPageEditMenu = ({ petId, setEditMode }) => {
       <Dropdown onSelect={handleSelect}>
         <Dropdown.Toggle as={CustomToggle} />
         <Dropdown.Menu>
-          <Dropdown.Item eventKey={"rename"}>Rename</Dropdown.Item>
-          <Dropdown.Item eventKey={"delete"}>Delete</Dropdown.Item>
+          <Dropdown.Item eventKey={'rename'}>Rename</Dropdown.Item>
+          <Dropdown.Item eventKey={'delete'}>Delete</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
     </>

@@ -1,20 +1,20 @@
 // General Imports
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 
 // Component Imports
-import { Container, Row, Col } from "react-bootstrap";
+import { Container, Row, Col } from 'react-bootstrap';
 
 // Hook Imports
-import useAuth from "../../hooks/useAuth";
-import { useNavigate } from "react-router-dom";
+import useAuth from '../../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 // Context Imports
-import PetsContext from "../../context/PetsContext";
+import PetsContext from '../../context/PetsContext';
 
 // Util Imports
-import { getBreedsByCategory, getPetCategories } from "../../utils/api";
+import { getBreedsByCategory, getPetCategories } from '../../utils/api';
 
-const AddPetForm = (props) => {
+const AddPetForm = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [breedOptions, setBreedOptions] = useState([]);
 
@@ -104,7 +104,7 @@ const AddPetForm = (props) => {
             <Col>
               <select onChange={(e) => setGender(e.target.value)}>
                 <option value={null}>---</option>
-                {["Male", "Female", "Unknown"].map((g) => {
+                {['Male', 'Female', 'Unknown'].map((g) => {
                   return (
                     <option key={g} value={g.slice(0, 1)}>
                       {g}
@@ -137,7 +137,7 @@ const AddPetForm = (props) => {
           <Row>
             <Col>
               <button type="submit">Create Pet</button>
-              <button onClick={() => navigate("/dashboard")}>Cancel</button>
+              <button onClick={() => navigate('/dashboard')}>Cancel</button>
             </Col>
           </Row>
         </Container>

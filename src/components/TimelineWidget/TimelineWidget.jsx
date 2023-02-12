@@ -1,15 +1,15 @@
 // General Imports
-import React, { useEffect, useState } from "react";
-import "./TimelineWidget.css";
+import React, { useEffect, useState } from 'react';
+import './TimelineWidget.css';
 
 // Component Imports
-import Widget from "../Widget/Widget";
-import AddEventForm from "./AddEventForm";
-import EventCard from "./EventCard";
-import { BsPlus } from "react-icons/bs";
+import Widget from '../Widget/Widget';
+import AddEventForm from './AddEventForm';
+import EventCard from './EventCard';
+import { BsPlus } from 'react-icons/bs';
 
 // Util Imports
-import { getEvents, getEventsByPet } from "../../utils/api";
+import { getEvents, getEventsByPet } from '../../utils/api';
 
 const TimelineWidget = ({ petId }) => {
   const [events, setEvents] = useState([]);
@@ -57,7 +57,7 @@ const TimelineWidget = ({ petId }) => {
             onClick={() => setAddToggled(true)}
           >
             <div className="addbutton">
-              <BsPlus size={40} color={"white"} />
+              <BsPlus size={40} color={'white'} />
             </div>
           </a>
         </div>

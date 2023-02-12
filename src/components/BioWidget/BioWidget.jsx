@@ -1,13 +1,13 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import Widget from "../Widget/Widget";
-import WidgetEditMenu from "../Widget/WidgetEditMenu";
-import BioInfoDisplay from "./BioInfoDisplay";
-import BioInfoEdit from "./BioInfoEdit";
+import Widget from '../Widget/Widget';
+import WidgetEditMenu from '../Widget/WidgetEditMenu';
+import BioInfoDisplay from './BioInfoDisplay';
+import BioInfoEdit from './BioInfoEdit';
 
-import { getPetById } from "../../utils/api";
+import { getPetById } from '../../utils/api';
 
 const BioWidget = ({ petId, onDashboard }) => {
   const [pet, setPet] = useState(undefined);
@@ -30,7 +30,7 @@ const BioWidget = ({ petId, onDashboard }) => {
     <>
       {pet && (
         <Widget
-          title={onDashboard ? `${pet.name}'s Bio` : "Bio"}
+          title={onDashboard ? `${pet.name}'s Bio` : 'Bio'}
           menu={editMenu}
           editMode={editMode}
         >

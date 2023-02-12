@@ -1,13 +1,13 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import EditMedication from "./EditMedication";
-import AddMedication from "./AddMedication";
-import { Row, Col } from "react-bootstrap";
+import EditMedication from './EditMedication';
+import AddMedication from './AddMedication';
+import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getMedicinesByCategory } from "../../utils/api";
+import { getMedicinesByCategory } from '../../utils/api';
 
 const HealthInfoEdit = ({ pet, medications, setEditMode, setNeedsUpdate }) => {
   const [addToggled, setAddToggled] = useState(false);

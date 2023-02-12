@@ -1,12 +1,12 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import MedicationCountdown from "./MedicationCountdown";
-import { Row, Col } from "react-bootstrap";
+// import MedicationCountdown from "./MedicationCountdown";
+import { Row, Col } from 'react-bootstrap';
 
 const HealthInfoDisplay = ({ medications }) => {
-  const [nearestMed, setNearestMed] = useState(null);
+  const [, setNearestMed] = useState(null);
 
   useEffect(() => {
     const today = new Date();
@@ -50,9 +50,9 @@ const HealthInfoDisplay = ({ medications }) => {
       </Row>
       <Row>
         <Col>
-          {nearestMed !== null && (
+          {/* {nearestMed !== null && (
             <MedicationCountdown nearestMed={nearestMed} />
-          )}
+          )} */}
         </Col>
       </Row>
       <Row>

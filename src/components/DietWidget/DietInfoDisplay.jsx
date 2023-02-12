@@ -1,12 +1,12 @@
 // General Imports
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 
 // Component Imports
-import MealCountdown from "./MealCountdown";
-import { Row, Col } from "react-bootstrap";
+// import MealCountdown from "./MealCountdown";
+import { Row, Col } from 'react-bootstrap';
 
 const DietInfoDisplay = ({ meals }) => {
-  const [nearestMeal, setNearestMeal] = useState(null);
+  const [, setNearestMeal] = useState(null);
 
   useEffect(() => {
     const today = new Date();
@@ -50,7 +50,7 @@ const DietInfoDisplay = ({ meals }) => {
       </Row>
       <Row>
         <Col>
-          {nearestMeal !== null && <MealCountdown nearestMeal={nearestMeal} />}
+          {/* {nearestMeal !== null && <MealCountdown nearestMeal={nearestMeal} />} */}
         </Col>
       </Row>
       <Row>

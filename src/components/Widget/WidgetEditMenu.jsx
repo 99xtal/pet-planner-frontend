@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState, useContext } from "react";
-import DashboardContext from "../../context/DashboardContext";
-import { Dropdown } from "react-bootstrap";
-import { BsThreeDots } from "react-icons/bs";
+import React, { useState, useContext } from 'react';
+import DashboardContext from '../../context/DashboardContext';
+import { Dropdown } from 'react-bootstrap';
+import { BsThreeDots } from 'react-icons/bs';
 
 const WidgetEditMenu = ({ type, petId, setEditMode }) => {
   const { addToDashboard, removeFromDashboard, findOnDashboard } =
@@ -13,19 +12,19 @@ const WidgetEditMenu = ({ type, petId, setEditMode }) => {
 
   const handleSelect = (key) => {
     switch (key) {
-      case "edit":
+      case 'edit':
         setEditMode((current) => !current);
         break;
-      case "add":
+      case 'add':
         addToDashboard(type, petId);
         setIsOnDashboard(true);
         break;
-      case "remove":
+      case 'remove':
         removeFromDashboard(type, petId);
         setIsOnDashboard(false);
         break;
       default:
-        console.log("Invalid select event");
+        console.log('Invalid select event');
     }
   };
 
@@ -38,7 +37,7 @@ const WidgetEditMenu = ({ type, petId, setEditMode }) => {
         onClick(e);
       }}
     >
-      <BsThreeDots size={24} color={"#707070"} />
+      <BsThreeDots size={24} color={'#707070'} />
     </a>
   ));
 
@@ -47,13 +46,13 @@ const WidgetEditMenu = ({ type, petId, setEditMode }) => {
       <Dropdown onSelect={handleSelect}>
         <Dropdown.Toggle as={CustomToggle} />
         <Dropdown.Menu>
-          <Dropdown.Item eventKey={"edit"}>Edit</Dropdown.Item>
+          <Dropdown.Item eventKey={'edit'}>Edit</Dropdown.Item>
           {isOnDashboard ? (
-            <Dropdown.Item eventKey={"remove"}>
+            <Dropdown.Item eventKey={'remove'}>
               Remove From Dashboard
             </Dropdown.Item>
           ) : (
-            <Dropdown.Item eventKey={"add"}>Add to Dashboard</Dropdown.Item>
+            <Dropdown.Item eventKey={'add'}>Add to Dashboard</Dropdown.Item>
           )}
         </Dropdown.Menu>
       </Dropdown>

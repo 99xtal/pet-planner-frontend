@@ -1,14 +1,14 @@
 // General Imports
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 
 // Component Imports
-import Widget from "../Widget/Widget";
-import WidgetEditMenu from "../Widget/WidgetEditMenu";
-import DietInfoDisplay from "./DietInfoDisplay";
-import DietInfoEdit from "./DietInfoEdit";
+import Widget from '../Widget/Widget';
+import WidgetEditMenu from '../Widget/WidgetEditMenu';
+import DietInfoDisplay from './DietInfoDisplay';
+import DietInfoEdit from './DietInfoEdit';
 
 // Util Imports
-import { getPetById, getMealsByPet } from "../../utils/api";
+import { getPetById, getMealsByPet } from '../../utils/api';
 
 const DietWidget = ({ petId, onDashboard }) => {
   const [pet, setPet] = useState(undefined);
@@ -38,7 +38,7 @@ const DietWidget = ({ petId, onDashboard }) => {
     <>
       {pet && (
         <Widget
-          title={onDashboard ? `${pet.name}'s Diet` : "Diet"}
+          title={onDashboard ? `${pet.name}'s Diet` : 'Diet'}
           menu={editMenu}
           editMode={editMode}
         >
