@@ -1,3 +1,5 @@
+> ⚠️ NOTE: This app is not production ready at the moment. I'm currently working on the first release since developing v0.1.0 a few months ago. Follow [this issue](https://github.com/99xtal/pet-planner-frontend/issues/2) for updates
+
 # pet-planner-frontend 🐸
 Web application for petPal, a cross-platform application for managing your pets feeding and medication schedules. Originally part of devCodeCamp Capstone Project.
 Written in React, interfaces with [backend REST API](http://github.com/99xtal/pet-planner-api). 
