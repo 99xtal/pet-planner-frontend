@@ -50,9 +50,9 @@ const HealthInfoDisplay = ({ medications }) => {
       </Row>
       <Row>
         <Col>
-          {nearestMed !== null && (
+          {/* {nearestMed !== null && (
             <MedicationCountdown nearestMed={nearestMed} />
-          )}
+          )} */}
         </Col>
       </Row>
       <Row>

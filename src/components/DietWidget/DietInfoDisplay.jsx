@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 
 // Component Imports
-import MealCountdown from "./MealCountdown";
+// import MealCountdown from "./MealCountdown";
 import { Row, Col } from "react-bootstrap";
 
 const DietInfoDisplay = ({ meals }) => {
@@ -50,7 +50,7 @@ const DietInfoDisplay = ({ meals }) => {
       </Row>
       <Row>
         <Col>
-          {nearestMeal !== null && <MealCountdown nearestMeal={nearestMeal} />}
+          {/* {nearestMeal !== null && <MealCountdown nearestMeal={nearestMeal} />} */}
         </Col>
       </Row>
       <Row>
