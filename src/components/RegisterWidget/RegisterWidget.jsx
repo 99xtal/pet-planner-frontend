@@ -6,7 +6,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import Widget from "../Widget/Widget";
 import { Link } from "react-router-dom";
 
-const RegisterWidget = (props) => {
+const RegisterWidget = () => {
   const { registerUser } = useContext(AuthContext);
   const defaultValues = {
     username: "",

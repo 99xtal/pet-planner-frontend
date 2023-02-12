@@ -21,7 +21,7 @@ const AddMeal = ({ pet, setNeedsUpdate, foodOptions }) => {
       pet_id: pet.id,
     };
     postMeal(newMeal)
-      .then((res) => setNeedsUpdate(true))
+      .then(() => setNeedsUpdate(true))
       .catch((err) => console.log(err));
   }
 

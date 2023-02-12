@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import "./RegisterPage.css";
 
 import RegisterWidget from "../../components/RegisterWidget/RegisterWidget";

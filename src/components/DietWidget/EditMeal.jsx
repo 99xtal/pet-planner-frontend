@@ -20,13 +20,13 @@ const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
       food_id: foodId,
     };
     patchMeal(meal.id, updatedMeal)
-      .then((res) => setNeedsUpdate(true))
+      .then(() => setNeedsUpdate(true))
       .catch((err) => console.log(err));
   }
 
   function handleDelete() {
     deleteMeal(meal.id)
-      .then((res) => setNeedsUpdate(true))
+      .then(() => setNeedsUpdate(true))
       .catch((err) => console.log(err));
   }
 

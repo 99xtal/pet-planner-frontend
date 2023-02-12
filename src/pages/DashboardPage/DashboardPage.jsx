@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import BioWidget from "../../components/BioWidget/BioWidget";
 import DietWidget from "../../components/DietWidget/DietWidget";
 import HealthWidget from "../../components/HealthWidget/HealthWidget";
@@ -6,10 +6,8 @@ import TimelineWidget from "../../components/TimelineWidget/TimelineWidget";
 
 import DashboardContext from "../../context/DashboardContext";
 
-const DashboardPage = (props) => {
-  const { dashboard, fetchDashboard } = useContext(DashboardContext);
-
-  // useEffect(() => fetchDashboard(), []);
+const DashboardPage = () => {
+  const { dashboard } = useContext(DashboardContext);
 
   return (
     <>

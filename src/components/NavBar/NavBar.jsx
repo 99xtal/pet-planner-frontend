@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import AuthContext from "../../context/AuthContext";
 import "./NavBar.css";
-import { Container, Row, Col } from "react-bootstrap";
 
 const Navbar = () => {
   const { logoutUser, user } = useContext(AuthContext);

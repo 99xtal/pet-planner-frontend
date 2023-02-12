@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { Row, Col } from "react-bootstrap";
 import AddPetModal from "../../components/AddPetModal/AddPetModal";
 
-const AddPetPage = (props) => {
+const AddPetPage = () => {
   return (
     <>
       <Row>

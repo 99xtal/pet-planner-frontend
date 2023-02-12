@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import { Row, Col } from "react-bootstrap";
 
 const DietInfoDisplay = ({ meals }) => {
-  const [nearestMeal, setNearestMeal] = useState(null);
+  const [, setNearestMeal] = useState(null);
 
   useEffect(() => {
     const today = new Date();

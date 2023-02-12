@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import LoginWidget from "../../components/LoginWidget/LoginWidget";
 import "./LoginPage.css";
 

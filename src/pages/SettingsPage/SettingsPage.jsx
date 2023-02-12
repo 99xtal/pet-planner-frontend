@@ -1,10 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
 import ProfileWidget from "../../components/ProfileWidget/ProfileWidget";
 import { Row, Col } from "react-bootstrap";
 import { BsGearWideConnected } from "react-icons/bs";
 
-const SettingsPage = (props) => {
+const SettingsPage = () => {
   return (
     <>
       <div className="petpage">

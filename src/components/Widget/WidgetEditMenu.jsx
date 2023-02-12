@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState, useContext } from "react";
 import DashboardContext from "../../context/DashboardContext";
 import { Dropdown } from "react-bootstrap";

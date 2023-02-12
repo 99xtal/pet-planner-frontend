@@ -14,11 +14,11 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [description, setDescription] = useState(null);
   const [pId, setPId] = useState(petId);
 
-  const [user, token] = useAuth();
-  const [petOptions, petOptionsLoading] = useAxiosGet(
+  const [user] = useAuth();
+  const [petOptions] = useAxiosGet(
     "http://127.0.0.1:8000/api/pets/"
   );
-  const [eCategoryOptions, optionsLoading] = useAxiosGet(
+  const [eCategoryOptions] = useAxiosGet(
     "http://127.0.0.1:8000/api/events/categories/"
   );
 
@@ -47,7 +47,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
       user_id: user.id,
     };
     postEvent(newEvent)
-      .then((res) => {
+      .then(() => {
         setAddToggled(false);
         setNeedsRefresh(true);
       })

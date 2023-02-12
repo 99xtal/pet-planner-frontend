@@ -10,7 +10,7 @@ import DietWidget from "../../components/DietWidget/DietWidget";
 import HealthWidget from "../../components/HealthWidget/HealthWidget";
 import TimelineWidget from "../../components/TimelineWidget/TimelineWidget";
 import PetPageEditMenu from "../../components/PetPageEditMenu/PetPageEditMenu";
-import { Container, Row, Col } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { FaDog, FaCat } from "react-icons/fa";
 import { GiSandSnake, GiGecko } from "react-icons/gi";
 
@@ -20,7 +20,7 @@ import PetsContext from "../../context/PetsContext";
 // Util Imports
 import { getPetById } from "../../utils/api";
 
-const PetPage = (props) => {
+const PetPage = () => {
   const [pet, setPet] = useState(undefined);
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);

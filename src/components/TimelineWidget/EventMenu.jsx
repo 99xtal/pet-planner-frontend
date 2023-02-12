@@ -1,5 +1,4 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from "react";
+import React from "react";
 import { Dropdown } from "react-bootstrap";
 import { BsThreeDots } from "react-icons/bs";
 
@@ -21,7 +20,7 @@ const EventMenu = ({ eventId, setEditMode, setNeedsRefresh }) => {
 
   const handleDelete = () => {
     deleteEvent(eventId)
-      .then((res) => setNeedsRefresh(true))
+      .then(() => setNeedsRefresh(true))
       .catch((err) => console.log(err));
   };
 

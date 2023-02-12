@@ -1,9 +1,9 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import useAuth from "./useAuth";
 
 const useAxiosGet = (url) => {
-  const [user, token] = useAuth();
+  const [, token] = useAuth();
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

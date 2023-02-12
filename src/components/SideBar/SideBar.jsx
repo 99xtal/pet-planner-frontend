@@ -8,7 +8,6 @@ import SideBarDropdown from "../SideBarDropdown/SideBarDropdown";
 import SideBarSublink from "../SideBarSublink/SideBarSublink";
 import {
   BsHouseDoorFill,
-  BsPersonFill,
   BsPlus,
   BsGearWideConnected,
 } from "react-icons/bs";
@@ -18,7 +17,7 @@ import { useNavigate } from "react-router-dom";
 
 import PetsContext from "../../context/PetsContext";
 
-const SideBar = (props) => {
+const SideBar = () => {
   const navigate = useNavigate();
   const { pets } = useContext(PetsContext);
 

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 
 import Widget from "../Widget/Widget";
 import AddPetForm from "./AddPetForm";
 
-const AddPetModal = (props) => {
+const AddPetModal = () => {
   return (
     <div className="addpetmodal">
       <Widget title="Add Pet">

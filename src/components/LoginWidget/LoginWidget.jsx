@@ -7,7 +7,7 @@ import useCustomForm from "../../hooks/useCustomForm";
 import { Link } from "react-router-dom";
 import Widget from "../Widget/Widget";
 
-const LoginWidget = (props) => {
+const LoginWidget = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
   const defaultValues = { username: "", password: "" };
   const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(

@@ -14,7 +14,7 @@ import PetsContext from "../../context/PetsContext";
 // Util Imports
 import { getBreedsByCategory, getPetCategories } from "../../utils/api";
 
-const AddPetForm = (props) => {
+const AddPetForm = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
   const [breedOptions, setBreedOptions] = useState([]);
 

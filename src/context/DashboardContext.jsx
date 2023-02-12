@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
 
 import { getWidgets, postWidget, deleteWidget } from "../utils/api";
@@ -10,7 +10,7 @@ export default DashboardContext;
 export const DashboardProvider = ({ children }) => {
   const [dashboard, setDashboard] = useState([]);
   const [needsUpdate, setNeedsUpdate] = useState(false);
-  const [user, token] = useAuth();
+  const [user] = useAuth();
 
   useEffect(() => {
     getWidgets()
