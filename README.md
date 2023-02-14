@@ -1,4 +1,4 @@
-> ⚠️ NOTE: This app is not production ready at the moment. I'm currently working on the first release since developing v0.1.0 a few months ago. Follow [this issue](https://github.com/99xtal/pet-planner-frontend/issues/2) for updates
+> ⚠️ NOTE: This app is not production ready at the moment. I'm currently working on the first release since developing v0.1.0 a few months ago. You can track the progress of this effort [👉 here 👈](https://github.com/petpal-project/web/milestone/1).
 
 # pet-planner-frontend 🐸
 Web application for petPal, a cross-platform application for managing your pets feeding and medication schedules. Originally part of devCodeCamp Capstone Project.
