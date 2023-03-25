@@ -1,16 +1,21 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, AnchorHTMLAttributes } from 'react';
 import DashboardContext from '../../context/DashboardContext';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
 
-const BioWidgetEditMenu = ({ petId, setEditMode }) => {
+interface Props {
+  petId: number;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const BioWidgetEditMenu: React.FC<Props> = ({ petId, setEditMode }) => {
   const { addToDashboard, removeFromDashboard, findOnDashboard } =
     useContext(DashboardContext);
   const [isOnDashboard, setIsOnDashboard] = useState(
     findOnDashboard('bio', petId) === undefined ? false : true
   );
 
-  const handleSelect = (key) => {
+  const handleSelect = (key: string | null) => {
     switch (key) {
       case 'edit':
         setEditMode((current) => !current);
@@ -28,13 +33,13 @@ const BioWidgetEditMenu = ({ petId, setEditMode }) => {
     }
   };
 
-  const CustomToggle = React.forwardRef(({ onClick }, ref) => (
+  const CustomToggle = React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(({ onClick }, ref) => (
     <a
       href=""
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
-        onClick(e);
+        onClick?.(e);
       }}
     >
       <BsThreeDots size={24} color={'#707070'} />

@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 
 import { getPets, postPet, patchPet, deletePet } from '../utils/api';
 
-const PetsContext = createContext();
+import type { Pet } from '../utils/api/services/pets/types';
+
+const PetsContext = createContext({});
 
 export default PetsContext;
 
 export const PetsProvider = ({ children }) => {
-  const [pets, setPets] = useState();
+  const [pets, setPets] = useState<Pet[]>();
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const navigate = useNavigate();
 
@@ -20,7 +22,7 @@ export const PetsProvider = ({ children }) => {
     return () => setNeedsUpdate(false);
   }, [needsUpdate]);
 
-  function addPet(newPet) {
+  function addPet(newPet: Pet) {
     postPet(newPet)
       .then((res) => {
         setNeedsUpdate(true);
@@ -29,13 +31,13 @@ export const PetsProvider = ({ children }) => {
       .catch((err) => console.log(err));
   }
 
-  function updatePet(petId, updatedPet) {
+  function updatePet(petId: number, updatedPet: Partial<Pet>) {
     patchPet(petId, updatedPet)
       .then(() => setNeedsUpdate(true))
       .catch((err) => console.log(err));
   }
 
-  function removePet(petId) {
+  function removePet(petId: number) {
     deletePet(petId)
       .then(() => {
         setNeedsUpdate(true);

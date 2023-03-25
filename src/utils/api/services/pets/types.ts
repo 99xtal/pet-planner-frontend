@@ -1,4 +1,4 @@
-enum Gender {
+export enum Gender {
     MALE = "M",
     FEMALE = "F",
     UNKNOWN = "U",
@@ -14,7 +14,7 @@ interface Species {
     binomial_name: string;
 }
 
-interface Breed {
+export interface Breed {
     id: number;
     name: string;
     category: PetCategory;
