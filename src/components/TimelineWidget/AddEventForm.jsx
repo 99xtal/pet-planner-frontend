@@ -6,6 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { postEvent } from '../../utils/api';
+const baseUrl = process.env.API_BASE_URL;
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(null);
@@ -15,9 +16,9 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [pId, setPId] = useState(petId);
 
   const [user] = useAuth();
-  const [petOptions] = useAxiosGet('http://127.0.0.1:8000/api/pets/');
+  const [petOptions] = useAxiosGet(`http://${baseUrl}/api/pets/`);
   const [eCategoryOptions] = useAxiosGet(
-    'http://127.0.0.1:8000/api/events/categories/'
+    `http://${baseUrl}/api/events/categories/`
   );
 
   function getInitialTime() {

@@ -4,6 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { patchEvent } from '../../utils/api';
+const baseUrl = process.env.API_BASE_URL;
 
 const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
@@ -12,7 +13,7 @@ const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [description, setDescription] = useState(event.description);
 
   const [eCategoryOptions] = useAxiosGet(
-    'http://127.0.0.1:8000/api/events/categories/'
+    `http://${baseUrl}/api/events/categories/`
   );
 
   const handleSubmit = (e) => {
