@@ -7,7 +7,7 @@ import AddMedication from './AddMedication';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getMedicinesByCategory } from '../../utils/api';
+import { getMedicinesByCategory } from '../../api';
 
 const HealthInfoEdit = ({ pet, medications, setEditMode, setNeedsUpdate }) => {
   const [addToggled, setAddToggled] = useState(false);

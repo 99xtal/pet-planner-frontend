@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { patchMeal, deleteMeal } from '../../utils/api';
+import { patchMeal, deleteMeal } from '../../api';
 
 const EditMeal = ({ meal, setNeedsUpdate, foodOptions }) => {
   const [time, setTime] = useState(meal.time);

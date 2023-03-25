@@ -5,9 +5,9 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { patchProfile } from '../../utils/api';
+import { patchProfile } from '../../api';
 
-import type { User } from '../../utils/api/services/auth/types';
+import type { User } from '../../api/services/auth/types';
 
 interface Props {
   profile: User;

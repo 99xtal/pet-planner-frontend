@@ -2,7 +2,7 @@ import React from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
 
-import { deleteEvent } from '../../utils/api';
+import { deleteEvent } from '../../api';
 
 const EventMenu = ({ eventId, setEditMode, setNeedsRefresh }) => {
   const CustomToggle = React.forwardRef(({ onClick }, ref) => (

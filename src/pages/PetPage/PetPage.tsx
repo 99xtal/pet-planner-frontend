@@ -18,9 +18,9 @@ import { GiSandSnake, GiGecko } from 'react-icons/gi';
 import PetsContext from '../../context/PetsContext';
 
 // Util Imports
-import { getPetById } from '../../utils/api';
+import { getPetById } from '../../api';
 
-import type { Pet } from '../../utils/api/services/pets/types';
+import type { Pet } from '../../api/services/pets/types';
 
 const PetPage = () => {
   const [pet, setPet] = useState<Pet>();

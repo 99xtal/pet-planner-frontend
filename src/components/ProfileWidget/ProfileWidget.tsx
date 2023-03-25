@@ -7,10 +7,10 @@ import WidgetEditMenu from '../Widget/WidgetEditMenu';
 import ProfileDisplay from './ProfileDisplay';
 
 // Util Imports
-import { getProfile } from '../../utils/api';
+import { getProfile } from '../../api';
 import ProfileEdit from './ProfileEdit';
 
-import type { User } from '../../utils/api/services/auth/types'
+import type { User } from '../../api/services/auth/types'
 
 const ProfileWidget = () => {
   const [profile, setProfile] = useState<User>();

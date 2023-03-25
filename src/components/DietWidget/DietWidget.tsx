@@ -8,9 +8,9 @@ import DietInfoDisplay from './DietInfoDisplay';
 import DietInfoEdit from './DietInfoEdit';
 
 // Util Imports
-import { getPetById, getMealsByPet } from '../../utils/api';
+import { getPetById, getMealsByPet } from '../../api';
 
-import type { Pet } from '../../utils/api/services/pets/types';
+import type { Pet } from '../../api/services/pets/types';
 
 interface Props {
   petId: number;

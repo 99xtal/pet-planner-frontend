@@ -7,9 +7,9 @@ import WidgetEditMenu from '../Widget/WidgetEditMenu';
 import BioInfoDisplay from './BioInfoDisplay';
 import BioInfoEdit from './BioInfoEdit';
 
-import { getPetById } from '../../utils/api';
+import { getPetById } from '../../api';
 
-import type { Pet } from '../../utils/api/services/pets/types';
+import type { Pet } from '../../api/services/pets/types';
 
 interface Props {
   petId: number;

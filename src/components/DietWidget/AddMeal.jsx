@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { postMeal } from '../../utils/api';
+import { postMeal } from '../../api';
 
 const AddMeal = ({ pet, setNeedsUpdate, foodOptions }) => {
   const [time, setTime] = useState(null);

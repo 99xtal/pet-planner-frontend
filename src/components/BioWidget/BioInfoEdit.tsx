@@ -3,9 +3,9 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getBreedsByCategory, patchPet } from '../../utils/api';
+import { getBreedsByCategory, patchPet } from '../../api';
 
-import type { Breed, Gender, Pet } from '../../utils/api/services/pets/types';
+import type { Breed, Gender, Pet } from '../../api/services/pets/types';
 
 interface Props {
   pet: Pet;
