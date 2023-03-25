@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         last_name: registerData.lastName,
       };
       let response = await axios.post(
-        `http://${BASE_URL}/register/`,
+        `http://${BASE_URL}/api/register/`,
         finalData
       );
       if (response.status === 201) {
@@ -54,7 +54,10 @@ export const AuthProvider = ({ children }) => {
 
   const loginUser = async (loginData) => {
     try {
-      let response = await axios.post(`http://${BASE_URL}/login/`, loginData);
+      let response = await axios.post(
+        `http://${BASE_URL}/api/login/`,
+        loginData
+      );
       if (response.status === 200) {
         localStorage.setItem('token', JSON.stringify(response.data.access));
         setToken(JSON.parse(localStorage.getItem('token')));
