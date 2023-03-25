@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import PetsContext from '../../context/PetsContext';
 
 // Util Imports
-import { getBreedsByCategory, getPetCategories } from '../../utils/api';
+import { getBreedsByCategory, getPetCategories } from '../../api';
 
 const AddPetForm = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);

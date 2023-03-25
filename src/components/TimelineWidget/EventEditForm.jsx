@@ -3,7 +3,7 @@ import { Row, Col } from 'react-bootstrap';
 
 import useAxiosGet from '../../hooks/useAxiosGet';
 
-import { patchEvent } from '../../utils/api';
+import { patchEvent } from '../../api';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {

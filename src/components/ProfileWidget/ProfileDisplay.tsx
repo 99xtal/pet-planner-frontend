@@ -2,7 +2,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import type { User } from '../../utils/api/services/auth/types';
+import type { User } from '../../api/services/auth/types';
 
 interface Props {
   profile: User;

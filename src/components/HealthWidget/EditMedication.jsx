@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { patchMedication, deleteMedication } from '../../utils/api';
+import { patchMedication, deleteMedication } from '../../api';
 
 const EditMedication = ({ medication, setNeedsUpdate, medicineOptions }) => {
   const [time, setTime] = useState(medication.time);

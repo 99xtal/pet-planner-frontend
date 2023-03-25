@@ -5,7 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import useAuth from '../../hooks/useAuth';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
-import { postEvent } from '../../utils/api';
+import { postEvent } from '../../api';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {

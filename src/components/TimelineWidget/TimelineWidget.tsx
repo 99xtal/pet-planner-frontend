@@ -9,10 +9,11 @@ import EventCard from './EventCard';
 import { BsPlus } from 'react-icons/bs';
 
 // Util Imports
-import { getEvents, getEventsByPet } from '../../utils/api';
+import { getEvents, getEventsByPet } from '../../api';
+import type { Event } from '../../api/services/events/types';
 
 const TimelineWidget = ({ petId }) => {
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<Event[]>([]);
   const [addToggled, setAddToggled] = useState(false);
   const [needsRefresh, setNeedsRefresh] = useState(false);
 

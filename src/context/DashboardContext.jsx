@@ -1,7 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import useAuth from '../hooks/useAuth';
 
-import { getWidgets, postWidget, deleteWidget } from '../utils/api';
+import { getWidgets, postWidget, deleteWidget } from '../api';
 
 const DashboardContext = createContext();
 

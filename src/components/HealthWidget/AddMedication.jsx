@@ -5,7 +5,7 @@ import React, { useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { postMedication } from '../../utils/api';
+import { postMedication } from '../../api';
 
 const AddMedication = ({ pet, setNeedsUpdate, medicineOptions }) => {
   const [time, setTime] = useState(null);

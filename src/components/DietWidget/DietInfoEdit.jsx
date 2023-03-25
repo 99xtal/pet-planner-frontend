@@ -7,7 +7,7 @@ import EditMeal from './EditMeal';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getFoodsByCategory } from '../../utils/api';
+import { getFoodsByCategory } from '../../api';
 
 const DietInfoEdit = ({ pet, meals, setEditMode, setNeedsUpdate }) => {
   const [toggleAdd, setToggleAdd] = useState(false);

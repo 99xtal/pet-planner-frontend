@@ -2,9 +2,9 @@ import { AxiosResponse } from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { getPets, postPet, patchPet, deletePet } from '../utils/api';
+import { getPets, postPet, patchPet, deletePet } from '../api';
 
-import type { Pet } from '../utils/api/services/pets/types';
+import type { Pet } from '../api/services/pets/types';
 
 interface PetsContextValue {
   pets: Pet[];
