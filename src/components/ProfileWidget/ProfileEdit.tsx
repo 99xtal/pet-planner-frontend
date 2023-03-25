@@ -7,7 +7,15 @@ import { Row, Col } from 'react-bootstrap';
 // Util Imports
 import { patchProfile } from '../../utils/api';
 
-const ProfileEdit = ({ profile, setEditMode, setNeedsUpdate }) => {
+import type { User } from '../../utils/api/services/auth/types';
+
+interface Props {
+  profile: User;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setNeedsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const ProfileEdit: React.FC<Props> = ({ profile, setEditMode, setNeedsUpdate }) => {
   const [firstName, setFirstName] = useState(profile.first_name);
   const [lastName, setLastName] = useState(profile.last_name);
   const [username, setUsername] = useState(profile.username);
