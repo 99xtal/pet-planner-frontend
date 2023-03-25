@@ -14,7 +14,7 @@ const HomePageExample = () => {
   useEffect(() => {
     const fetchCars = async () => {
       try {
-        const baseUrl = process.env.API_BASE_URL;
+        const baseUrl = process.env.VITE_API_BASE_URL;
         let response = await axios.get(`http://${baseUrl}/api/cars/`, {
           headers: {
             Authorization: 'Bearer ' + token,

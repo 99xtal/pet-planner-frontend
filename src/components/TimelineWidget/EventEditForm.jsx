@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { patchEvent } from '../../utils/api';
-const baseUrl = process.env.API_BASE_URL;
+const baseUrl = process.env.VITE_API_BASE_URL;
 
 const EventEditForm = ({ event, setEditMode, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
