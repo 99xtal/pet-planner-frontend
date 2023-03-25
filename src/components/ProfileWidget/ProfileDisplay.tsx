@@ -2,7 +2,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-const ProfileDisplay = ({ profile }) => {
+import type { User } from '../../utils/api/services/auth/types';
+
+interface Props {
+  profile: User;
+}
+
+const ProfileDisplay: React.FC<Props> = ({ profile }) => {
   return (
     <Row>
       <Col>
