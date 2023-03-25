@@ -13,7 +13,7 @@ import type { Pet } from '../../utils/api/services/pets/types';
 
 interface Props {
   petId: number;
-  onDashboard: boolean;
+  onDashboard?: boolean;
 }
 
 const BioWidget: React.FC<Props> = ({ petId, onDashboard }) => {

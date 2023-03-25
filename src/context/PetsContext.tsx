@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -5,12 +6,26 @@ import { getPets, postPet, patchPet, deletePet } from '../utils/api';
 
 import type { Pet } from '../utils/api/services/pets/types';
 
-const PetsContext = createContext({});
+interface PetsContextValue {
+  pets: Pet[];
+  getPets: () => void;
+  addPet: (pet: Pet) => void;
+  updatePet: (petId: number, updatedPet: Partial<Pet>) => void;
+  deletePet: (petId: number) => void;
+}
+
+const PetsContext = createContext<PetsContextValue>({
+  pets: [],
+  getPets: () => null,
+  addPet: (pet: Pet) => null,
+  updatePet: () => null,
+  deletePet: () => null
+});
 
 export default PetsContext;
 
 export const PetsProvider = ({ children }) => {
-  const [pets, setPets] = useState<Pet[]>();
+  const [pets, setPets] = useState<Pet[]>([]);
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const navigate = useNavigate();
 

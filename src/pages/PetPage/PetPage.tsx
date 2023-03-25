@@ -20,8 +20,10 @@ import PetsContext from '../../context/PetsContext';
 // Util Imports
 import { getPetById } from '../../utils/api';
 
+import type { Pet } from '../../utils/api/services/pets/types';
+
 const PetPage = () => {
-  const [pet, setPet] = useState(undefined);
+  const [pet, setPet] = useState<Pet>();
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [name, setName] = useState('');
@@ -29,13 +31,15 @@ const PetPage = () => {
   const { updatePet } = useContext(PetsContext);
 
   useEffect(() => {
-    getPetById(petId)
+    if (petId) {
+      getPetById(parseInt(petId))
       .then((res) => {
         setPet(res.data);
         setName(res.data.name);
       })
       .catch((err) => console.log(err));
 
+    }
     return () => setNeedsUpdate(false);
   }, [petId, needsUpdate]);
 
@@ -57,7 +61,10 @@ const PetPage = () => {
 
   async function handleRename(e) {
     e.preventDefault();
-    await updatePet(petId, {
+    if (!petId) {
+      return;
+    }
+    await updatePet(parseInt(petId), {
       name: name,
     });
     setEditMode(false);
