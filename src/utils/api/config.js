@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const apiClient = axios.create({
-  baseURL: `http://${process.env.VITE_API_BASE_URL}/api`,
+  baseURL: `http://${import.meta.env.VITE_API_BASE_URL}/api`,
 });
 
 const TOKEN = localStorage.getItem('token');

@@ -6,7 +6,7 @@ import useAuth from '../../hooks/useAuth';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { postEvent } from '../../utils/api';
-const baseUrl = process.env.VITE_API_BASE_URL;
+const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(null);
