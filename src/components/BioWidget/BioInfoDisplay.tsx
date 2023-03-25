@@ -1,7 +1,9 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-const BioInfoDisplay = ({ pet }) => {
+import type { Pet } from '../../utils/api/services/pets/types';
+
+const BioInfoDisplay: React.FC<{ pet: Pet }> = ({ pet }) => {
   return (
     <Row>
       <Col>

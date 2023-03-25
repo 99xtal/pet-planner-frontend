@@ -5,8 +5,16 @@ import { Row, Col } from 'react-bootstrap';
 // Util Imports
 import { getBreedsByCategory, patchPet } from '../../utils/api';
 
-const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
-  const [breedOptions, setBreedOptions] = useState([]);
+import type { Breed, Gender, Pet } from '../../utils/api/services/pets/types';
+
+interface Props {
+  pet: Pet;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+  setNeedsUpdate: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const BioInfoEdit: React.FC<Props> = ({ pet, setEditMode, setNeedsUpdate }) => {
+  const [breedOptions, setBreedOptions] = useState<Breed[]>([]);
   const [breedId, setBreedId] = useState(pet.breed.id);
   const [weight, setWeight] = useState(pet.weight);
   const [gender, setGender] = useState(pet.gender);
@@ -21,7 +29,7 @@ const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const updatedPet = {
-      breed_id: parseInt(breedId),
+      breed_id: breedId,
       weight: weight,
       gender: gender,
       birthday: birthday,
@@ -41,7 +49,7 @@ const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
           <Row>
             <Col>Breed:</Col>
             <Col>
-              <select onChange={(e) => setBreedId(e.target.value)}>
+              <select onChange={(e) => setBreedId(parseInt(e.target.value))}>
                 {breedOptions.map((b) => {
                   return (
                     <option key={b.id} value={b.id}>
@@ -63,7 +71,7 @@ const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
             <Col>Weight:</Col>
             <Col>
               <input
-                onChange={(e) => setWeight(e.target.value)}
+                onChange={(e) => setWeight(parseInt(e.target.value))}
                 value={weight}
               />
             </Col>
@@ -72,7 +80,7 @@ const BioInfoEdit = ({ pet, setEditMode, setNeedsUpdate }) => {
             <Col>Gender:</Col>
             <Col>
               <input
-                onChange={(e) => setGender(e.target.value)}
+                onChange={(e) => setGender(e.target.value as Gender)}
                 value={gender}
               />
             </Col>

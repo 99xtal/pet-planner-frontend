@@ -23,7 +23,6 @@ function App() {
     <div className="app">
       <Routes>
         <Route
-          exact
           path="/"
           element={
             <PrivateRoute>

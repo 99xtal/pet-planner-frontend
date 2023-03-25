@@ -10,8 +10,15 @@ import HealthInfoEdit from './HealthInfoEdit';
 // Util Imports
 import { getPetById, getMedicationsByPet } from '../../utils/api';
 
-const HealthWidget = ({ petId, onDashboard }) => {
-  const [pet, setPet] = useState(undefined);
+import type { Pet } from '../../utils/api/services/pets/types';
+
+interface Props {
+  petId: number;
+  onDashboard?: boolean;
+}
+
+const HealthWidget: React.FC<Props> = ({ petId, onDashboard }) => {
+  const [pet, setPet] = useState<Pet>();
   const [medications, setMedications] = useState([]);
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);

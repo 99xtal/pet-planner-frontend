@@ -9,8 +9,15 @@ import BioInfoEdit from './BioInfoEdit';
 
 import { getPetById } from '../../utils/api';
 
-const BioWidget = ({ petId, onDashboard }) => {
-  const [pet, setPet] = useState(undefined);
+import type { Pet } from '../../utils/api/services/pets/types';
+
+interface Props {
+  petId: number;
+  onDashboard?: boolean;
+}
+
+const BioWidget: React.FC<Props> = ({ petId, onDashboard }) => {
+  const [pet, setPet] = useState<Pet>();
   const [needsUpdate, setNeedsUpdate] = useState(false);
   const [editMode, setEditMode] = useState(false);
 
