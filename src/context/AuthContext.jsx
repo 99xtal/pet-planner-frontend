@@ -37,7 +37,7 @@ export const AuthProvider = ({ children }) => {
         last_name: registerData.lastName,
       };
       let response = await axios.post(
-        `http://${BASE_URL}/api/register/`,
+        `http://${BASE_URL}/api/auth/register/`,
         finalData
       );
       if (response.status === 201) {
@@ -55,7 +55,7 @@ export const AuthProvider = ({ children }) => {
   const loginUser = async (loginData) => {
     try {
       let response = await axios.post(
-        `http://${BASE_URL}/api/login/`,
+        `http://${BASE_URL}/api/auth/login/`,
         loginData
       );
       if (response.status === 200) {
