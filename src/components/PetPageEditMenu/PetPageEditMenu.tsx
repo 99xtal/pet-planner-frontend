@@ -1,12 +1,17 @@
-import React, { useContext } from 'react';
+import React, { AnchorHTMLAttributes, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
 import PetsContext from '../../context/PetsContext';
 
-const PetPageEditMenu = ({ petId, setEditMode }) => {
+interface Props {
+  petId: number;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const PetPageEditMenu: React.FC<Props> = ({ petId, setEditMode }) => {
   const { deletePet } = useContext(PetsContext);
 
-  const handleSelect = (key) => {
+  const handleSelect = (key: string | null) => {
     switch (key) {
       case 'rename':
         setEditMode(true);
@@ -19,13 +24,13 @@ const PetPageEditMenu = ({ petId, setEditMode }) => {
     }
   };
 
-  const CustomToggle = React.forwardRef(({ onClick }, ref) => (
+  const CustomToggle = React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(({ onClick }, ref) => (
     <a
       href=""
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
-        onClick(e);
+        onClick?.(e);
       }}
     >
       <BsThreeDots size={64} color="white" />

@@ -1,6 +1,6 @@
 import { get, post, patch, destroy } from '../config';
 
-import type { Breed, Pet, PetCategory } from './types';
+import type { Breed, Pet, PetCategory, PetForm } from './types';
 
 export function getPets() {
   return get<Pet[]>('/pets/');
@@ -10,7 +10,7 @@ export function getPetById(petId: number) {
   return get<Pet>(`/pets/${petId}/`);
 }
 
-export function postPet(newPet: Pet) {
+export function postPet(newPet: PetForm) {
   return post<Pet>('/pets/', newPet);
 }
 

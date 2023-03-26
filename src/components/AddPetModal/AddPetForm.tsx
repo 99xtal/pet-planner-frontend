@@ -13,17 +13,18 @@ import PetsContext from '../../context/PetsContext';
 // Util Imports
 import { getBreedsByCategory, getPetCategories } from '../../api';
 import AuthContext from '../../context/AuthContext';
+import { Breed, Gender, PetCategory, PetForm } from '../../api/pets/types';
 
 const AddPetForm = () => {
-  const [categoryOptions, setCategoryOptions] = useState([]);
-  const [breedOptions, setBreedOptions] = useState([]);
+  const [categoryOptions, setCategoryOptions] = useState<PetCategory[]>([]);
+  const [breedOptions, setBreedOptions] = useState<Breed[]>([]);
 
-  const [name, setName] = useState(null);
-  const [categoryId, setCategoryId] = useState(null);
-  const [breedId, setBreedId] = useState(null);
-  const [gender, setGender] = useState(null);
-  const [birthday, setBirthday] = useState(null);
-  const [weight, setWeight] = useState(null);
+  const [name, setName] = useState<string>();
+  const [categoryId, setCategoryId] = useState<number>();
+  const [breedId, setBreedId] = useState<number>();
+  const [gender, setGender] = useState<Gender>();
+  const [birthday, setBirthday] = useState<string>();
+  const [weight, setWeight] = useState<number>();
 
   const navigate = useNavigate();
   const { addPet } = useContext(PetsContext);
@@ -36,19 +37,22 @@ const AddPetForm = () => {
   }, []);
 
   useEffect(() => {
-    getBreedsByCategory(categoryId).then((res) => setBreedOptions(res.data));
+    if (categoryId) {
+      getBreedsByCategory(categoryId).then((res) => setBreedOptions(res.data));
+    }
   }, [categoryId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const newPet = {
+    if (!name || !birthday || !gender || !weight || !categoryId || !breedId) { return; }
+    const newPet: PetForm = {
       name: name,
       birthday: birthday,
       gender: gender,
       weight: weight,
       category_id: categoryId,
       breed_id: breedId,
-      user_id: user.id,
+      user_id: user!.id,
     };
     addPet(newPet);
   };
@@ -70,8 +74,8 @@ const AddPetForm = () => {
           <Row>
             <Col className="d-flex justify-content-start">Category:</Col>
             <Col>
-              <select onChange={(e) => setCategoryId(e.target.value)}>
-                <option value={null}>---</option>
+              <select onChange={(e) => setCategoryId(parseInt(e.target.value))}>
+                <option value={undefined}>---</option>
                 {categoryOptions.map((c) => {
                   return (
                     <option key={c.id} value={c.id}>
@@ -86,8 +90,8 @@ const AddPetForm = () => {
             <Row>
               <Col className="d-flex justify-content-start">Breed:</Col>
               <Col>
-                <select onChange={(e) => setBreedId(e.target.value)}>
-                  <option value={null}>---</option>
+                <select onChange={(e) => setBreedId(parseInt(e.target.value))}>
+                  <option value={undefined}>---</option>
                   {breedOptions.map((b) => {
                     return (
                       <option key={b.id} value={b.id}>
@@ -102,8 +106,8 @@ const AddPetForm = () => {
           <Row>
             <Col className="d-flex justify-content-start">Gender:</Col>
             <Col>
-              <select onChange={(e) => setGender(e.target.value)}>
-                <option value={null}>---</option>
+              <select onChange={(e) => setGender(e.target.value as Gender)}>
+                <option value={undefined}>---</option>
                 {['Male', 'Female', 'Unknown'].map((g) => {
                   return (
                     <option key={g} value={g.slice(0, 1)}>
@@ -130,7 +134,7 @@ const AddPetForm = () => {
               <input
                 type="number"
                 value={weight}
-                onChange={(e) => setWeight(e.target.value)}
+                onChange={(e) => setWeight(parseInt(e.target.value))}
               />
             </Col>
           </Row>

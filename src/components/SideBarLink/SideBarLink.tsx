@@ -2,7 +2,13 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import './SideBarLink.css';
 
-const SideBarLink = ({ title, path, icon }) => {
+interface Props {
+  title: string;
+  path: string;
+  icon: React.ReactNode;
+}
+
+const SideBarLink: React.FC<Props> = ({ title, path, icon }) => {
   const navigate = useNavigate();
 
   return (

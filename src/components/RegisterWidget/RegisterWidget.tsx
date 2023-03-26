@@ -12,10 +12,10 @@ const RegisterWidget = () => {
     username: '',
     email: '',
     password: '',
-    firstName: '',
-    lastName: '',
+    first_name: '',
+    last_name: '',
   };
-  const [formData, handleInputChange, handleSubmit] = useCustomForm(
+  const { formData, handleInputChange, handleSubmit } = useCustomForm(
     defaultValues,
     registerUser
   );
@@ -36,7 +36,7 @@ const RegisterWidget = () => {
             type="text"
             placeholder="First Name"
             name="firstName"
-            value={formData.firstName}
+            value={formData.first_name}
             onChange={handleInputChange}
           />
 
@@ -44,7 +44,7 @@ const RegisterWidget = () => {
             type="text"
             placeholder="Last Name"
             name="lastName"
-            value={formData.lastName}
+            value={formData.last_name}
             onChange={handleInputChange}
           />
 

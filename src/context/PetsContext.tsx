@@ -4,12 +4,12 @@ import { useNavigate } from 'react-router-dom';
 
 import { getPets, postPet, patchPet, deletePet } from '../api';
 
-import type { Pet } from '../api/pets/types';
+import type { Pet, PetForm } from '../api/pets/types';
 
 interface PetsContextValue {
   pets: Pet[];
   getPets: () => void;
-  addPet: (pet: Pet) => void;
+  addPet: (pet: PetForm) => void;
   updatePet: (petId: number, updatedPet: Partial<Pet>) => void;
   deletePet: (petId: number) => void;
 }
@@ -17,7 +17,7 @@ interface PetsContextValue {
 const PetsContext = createContext<PetsContextValue>({
   pets: [],
   getPets: () => null,
-  addPet: (pet: Pet) => null,
+  addPet: (pet: PetForm) => null,
   updatePet: () => null,
   deletePet: () => null
 });
@@ -37,7 +37,7 @@ export const PetsProvider = ({ children }) => {
     return () => setNeedsUpdate(false);
   }, [needsUpdate]);
 
-  function addPet(newPet: Pet) {
+  function addPet(newPet: PetForm) {
     postPet(newPet)
       .then((res) => {
         setNeedsUpdate(true);

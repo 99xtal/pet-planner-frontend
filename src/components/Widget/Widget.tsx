@@ -2,7 +2,7 @@ import React from 'react';
 import './Widget.css';
 
 interface WidgetProps {
-  title: string;
+  title?: string;
   menu?: unknown;
   editMode?: boolean;
   children: React.ReactNode;
