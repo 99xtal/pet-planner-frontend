@@ -18,5 +18,5 @@ export interface Widget {
 export interface WidgetForm {
     type: WidgetOptions;
     user_id: number;
-    pet_id: number;
+    pet_id?: number;
 }
