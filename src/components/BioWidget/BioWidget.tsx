@@ -9,7 +9,7 @@ import BioInfoEdit from './BioInfoEdit';
 
 import { getPetById } from '../../api';
 
-import type { Pet } from '../../api/services/pets/types';
+import type { Pet } from '../../api/pets/types';
 
 interface Props {
   petId: number;

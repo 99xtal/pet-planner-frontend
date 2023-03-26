@@ -1,4 +1,4 @@
-import { get, patch } from '../../config';
+import { get, patch } from '../config';
 import type { User } from './types';
 
 export function getProfile() {

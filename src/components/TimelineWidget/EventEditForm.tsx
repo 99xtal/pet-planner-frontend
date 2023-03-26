@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { patchEvent } from '../../api';
-import type { Event } from '../../api/services/events/types';
+import type { Event } from '../../api/events/types';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 interface Props {

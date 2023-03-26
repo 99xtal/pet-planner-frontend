@@ -1,4 +1,4 @@
-import { get, post, patch, destroy } from '../../config';
+import { get, post, patch, destroy } from '../config';
 import { Medication, MedicationForm, Medicine } from './types';
 
 export function getMedications() {

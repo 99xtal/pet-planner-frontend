@@ -4,7 +4,7 @@ import {
   postEvent,
   patchEvent,
   deleteEvent,
-} from './services/events';
+} from './events';
 
 import {
   getMeals,
@@ -13,7 +13,7 @@ import {
   patchMeal,
   deleteMeal,
   getFoodsByCategory,
-} from './services/meals';
+} from './meals';
 
 import {
   getPets,
@@ -23,7 +23,7 @@ import {
   deletePet,
   getBreedsByCategory,
   getPetCategories,
-} from './services/pets';
+} from './pets';
 
 import {
   getMedications,
@@ -32,11 +32,11 @@ import {
   patchMedication,
   deleteMedication,
   getMedicinesByCategory,
-} from './services/medications';
+} from './medications';
 
-import { getWidgets, postWidget, deleteWidget } from './services/widgets';
+import { getWidgets, postWidget, deleteWidget } from './widgets';
 
-import { getProfile, patchProfile } from './services/auth';
+import { getProfile, patchProfile } from './auth';
 
 export {
   getEvents,

@@ -1,4 +1,4 @@
-import { get, post, patch, destroy } from '../../config';
+import { get, post, patch, destroy } from '../config';
 import { Food, Meal, MealForm } from './types';
 
 export function getMeals() {

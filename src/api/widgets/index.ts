@@ -1,4 +1,4 @@
-import { get, post, destroy } from '../../config';
+import { get, post, destroy } from '../config';
 import type { Widget, WidgetForm } from './types';
 
 export function getWidgets() {

@@ -20,7 +20,7 @@ import PetsContext from '../../context/PetsContext';
 // Util Imports
 import { getPetById } from '../../api';
 
-import type { Pet } from '../../api/services/pets/types';
+import type { Pet } from '../../api/pets/types';
 
 const PetPage = () => {
   const [pet, setPet] = useState<Pet>();

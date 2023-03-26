@@ -7,7 +7,7 @@ import { Row, Col } from 'react-bootstrap';
 // Util Imports
 import { patchProfile } from '../../api';
 
-import type { User } from '../../api/services/auth/types';
+import type { User } from '../../api/auth/types';
 
 interface Props {
   profile: User;

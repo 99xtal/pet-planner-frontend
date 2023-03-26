@@ -10,8 +10,8 @@ import HealthInfoEdit from './HealthInfoEdit';
 // Util Imports
 import { getPetById, getMedicationsByPet } from '../../api';
 
-import type { Pet } from '../../api/services/pets/types';
-import type { Medication } from '../../api/services/medications/types';
+import type { Pet } from '../../api/pets/types';
+import type { Medication } from '../../api/medications/types';
 
 interface Props {
   petId: number;
