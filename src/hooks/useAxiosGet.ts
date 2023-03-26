@@ -1,9 +1,9 @@
 import axios from 'axios';
-import { useState, useEffect } from 'react';
-import useAuth from './useAuth';
+import { useState, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthContext';
 
-const useAxiosGet = (url) => {
-  const [, token] = useAuth();
+const useAxiosGet = (url: string) => {
+  const { token } = useContext(AuthContext);
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

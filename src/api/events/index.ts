@@ -1,4 +1,4 @@
-import { get, post, patch, destroy } from '../../config';
+import { get, post, patch, destroy } from '../config';
 import type { Event, EventForm } from './types'
 
 export function getEvents() {

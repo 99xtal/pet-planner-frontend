@@ -10,7 +10,8 @@ import DietInfoEdit from './DietInfoEdit';
 // Util Imports
 import { getPetById, getMealsByPet } from '../../api';
 
-import type { Pet } from '../../api/services/pets/types';
+import type { Pet } from '../../api/pets/types';
+import type { Meal } from '../../api/meals/types';
 
 interface Props {
   petId: number;
@@ -19,7 +20,7 @@ interface Props {
 
 const DietWidget: React.FC<Props> = ({ petId, onDashboard }) => {
   const [pet, setPet] = useState<Pet>();
-  const [meals, setMeals] = useState([]);
+  const [meals, setMeals] = useState<Meal[]>([]);
   const [editMode, setEditMode] = useState(false);
   const [needsUpdate, setNeedsUpdate] = useState(false);
 

@@ -5,7 +5,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 
 // Hook Imports
-import useAuth from '../../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
 
 // Context Imports
@@ -13,6 +12,7 @@ import PetsContext from '../../context/PetsContext';
 
 // Util Imports
 import { getBreedsByCategory, getPetCategories } from '../../api';
+import AuthContext from '../../context/AuthContext';
 
 const AddPetForm = () => {
   const [categoryOptions, setCategoryOptions] = useState([]);
@@ -27,7 +27,7 @@ const AddPetForm = () => {
 
   const navigate = useNavigate();
   const { addPet } = useContext(PetsContext);
-  const [user] = useAuth();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getPetCategories()

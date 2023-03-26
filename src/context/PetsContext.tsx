@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { getPets, postPet, patchPet, deletePet } from '../api';
 
-import type { Pet } from '../api/services/pets/types';
+import type { Pet } from '../api/pets/types';
 
 interface PetsContextValue {
   pets: Pet[];

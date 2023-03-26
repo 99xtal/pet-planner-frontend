@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap';
 // Util Imports
 import { getBreedsByCategory, patchPet } from '../../api';
 
-import type { Breed, Gender, Pet } from '../../api/services/pets/types';
+import type { Breed, Gender, Pet } from '../../api/pets/types';
 
 interface Props {
   pet: Pet;

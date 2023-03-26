@@ -10,7 +10,7 @@ import ProfileDisplay from './ProfileDisplay';
 import { getProfile } from '../../api';
 import ProfileEdit from './ProfileEdit';
 
-import type { User } from '../../api/services/auth/types'
+import type { User } from '../../api/auth/types'
 
 const ProfileWidget = () => {
   const [profile, setProfile] = useState<User>();
