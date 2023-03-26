@@ -2,7 +2,13 @@ import React, { useState } from 'react';
 
 import './SideBarDropdown.css';
 
-const SideBarDropdown = ({ title, icon, children }) => {
+interface Props {
+  title: string;
+  icon: React.ReactNode;
+  children: React.ReactNode;
+}
+
+const SideBarDropdown: React.FC<Props> = ({ title, icon, children }) => {
   const [toggled, setToggled] = useState(false);
 
   return (

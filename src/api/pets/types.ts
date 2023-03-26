@@ -30,3 +30,13 @@ export interface Pet {
     category: PetCategory;
     breed: Breed;
 }
+
+export interface PetForm {
+    name: string;
+    birthday: string;
+    gender: Gender;
+    weight: number;
+    category_id: number;
+    breed_id: number;
+    user_id: number;
+}

@@ -10,7 +10,7 @@ import Widget from '../Widget/Widget';
 const LoginWidget = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
   const defaultValues = { username: '', password: '' };
-  const [formData, handleInputChange, handleSubmit, reset] = useCustomForm(
+  const { formData, handleInputChange, handleSubmit, reset } = useCustomForm(
     defaultValues,
     loginUser
   );
