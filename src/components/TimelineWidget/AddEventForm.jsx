@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './AddEventForm.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import useAuth from '../../hooks/useAuth';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { postEvent } from '../../api';
+import AuthContext from '../../context/AuthContext';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
@@ -15,7 +15,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
   const [description, setDescription] = useState(null);
   const [pId, setPId] = useState(petId);
 
-  const [user] = useAuth();
+  const { user } = useContext(AuthContext);
   const [petOptions] = useAxiosGet(`http://${baseUrl}/api/pets/`);
   const [eCategoryOptions] = useAxiosGet(
     `http://${baseUrl}/api/events/categories/`

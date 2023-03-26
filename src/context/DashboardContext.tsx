@@ -1,8 +1,8 @@
-import React, { createContext, useState, useEffect } from 'react';
-import useAuth from '../hooks/useAuth';
+import React, { createContext, useState, useEffect, useContext } from 'react';
 
 import { getWidgets, postWidget, deleteWidget } from '../api';
 import type { Widget, WidgetForm, WidgetOptions } from '../api/widgets/types';
+import AuthContext from './AuthContext';
 
 interface DashboardContextValue {
   dashboard: Widget[];
@@ -13,9 +13,9 @@ interface DashboardContextValue {
 
 const DashboardContext = createContext<DashboardContextValue>({
   dashboard: [],
-  addToDashboard: (widgetType: WidgetOptions, petId: number) => null,
-  removeFromDashboard: (widgetType: WidgetOptions, petId: number) => new Promise((resolve) => null),
-  findOnDashboard: (widgetType: WidgetOptions, petId: number) => undefined,
+  addToDashboard: (_, __) => null,
+  removeFromDashboard: (_, __) => new Promise((resolve) => null),
+  findOnDashboard: (_, __) => undefined,
 });
 
 export default DashboardContext;
@@ -23,7 +23,7 @@ export default DashboardContext;
 export const DashboardProvider = ({ children }) => {
   const [dashboard, setDashboard] = useState<Widget[]>([]);
   const [needsUpdate, setNeedsUpdate] = useState(false);
-  const [user] = useAuth();
+  const { user } = useContext(AuthContext);
 
   useEffect(() => {
     getWidgets()
@@ -34,6 +34,7 @@ export const DashboardProvider = ({ children }) => {
   }, [needsUpdate]);
 
   function addToDashboard(widgetType: WidgetOptions, petId: number) {
+    if (!user) { return; }
     let newWidget: WidgetForm = {
       type: widgetType,
       user_id: user.id,

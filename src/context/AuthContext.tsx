@@ -1,13 +1,30 @@
 import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import { loginUser, registerUser } from '../api/auth';
+import { LoginForm, RegistrationForm, TokenData, User, UserBasic } from '../api/auth/types';
 
-const AuthContext = createContext();
+interface AuthContextValue {
+  user: UserBasic | null,
+  token: string | null,
+  loginUser: (loginForm: LoginForm) => Promise<void>,
+  logoutUser: () => void,
+  registerUser: (registerForm: RegistrationForm) => Promise<void>,
+  isServerError: boolean;
+}
+
+const AuthContext = createContext<AuthContextValue>({
+  user: null,
+  token: null,
+  loginUser: (loginForm: LoginForm) => new Promise(() => null),
+  logoutUser: () => null,
+  registerUser: (registerForm: RegistrationForm) => new Promise(() => null),
+  isServerError: false,
+});
 
 export default AuthContext;
 
-function setUserObject(user) {
+function setUserObject(user: TokenData | null) {
   if (!user) {
     return null;
   }
@@ -15,31 +32,27 @@ function setUserObject(user) {
     username: user.username,
     id: user.user_id,
     first_name: user.first_name,
-  };
+  } as UserBasic;
 }
 
 export const AuthProvider = ({ children }) => {
-  const BASE_URL = import.meta.env.VITE_API_BASE_URL;
-  const userToken = JSON.parse(localStorage.getItem('token'));
-  const decodedUser = userToken ? jwtDecode(userToken) : null;
+  const userToken = JSON.parse(localStorage.getItem('token') ?? '') || null;
+  const decodedUser: TokenData | null = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
   const [user, setUser] = useState(setUserObject(decodedUser));
   const [isServerError, setIsServerError] = useState(false);
   const navigate = useNavigate();
 
-  const registerUser = async (registerData) => {
+  const register = async (registerData: RegistrationForm) => {
     try {
       let finalData = {
         username: registerData.username,
         password: registerData.password,
         email: registerData.email,
-        first_name: registerData.firstName,
-        last_name: registerData.lastName,
+        first_name: registerData.first_name,
+        last_name: registerData.last_name,
       };
-      let response = await axios.post(
-        `http://${BASE_URL}/api/auth/register/`,
-        finalData
-      );
+      let response = await registerUser(finalData);
       if (response.status === 201) {
         console.log('Successful registration! Log in to access token');
         setIsServerError(false);
@@ -52,16 +65,13 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
-  const loginUser = async (loginData) => {
+  const login = async (loginData: LoginForm) => {
     try {
-      let response = await axios.post(
-        `http://${BASE_URL}/api/auth/login/`,
-        loginData
-      );
+      let response = await loginUser(loginData)
       if (response.status === 200) {
         localStorage.setItem('token', JSON.stringify(response.data.access));
-        setToken(JSON.parse(localStorage.getItem('token')));
-        let loggedInUser = jwtDecode(response.data.access);
+        setToken(JSON.parse(response.data.access));
+        let loggedInUser = jwtDecode<TokenData>(response.data.access)
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
         navigate('/dashboard');
@@ -87,9 +97,9 @@ export const AuthProvider = ({ children }) => {
   const contextData = {
     user,
     token,
-    loginUser,
+    loginUser: login,
     logoutUser,
-    registerUser,
+    registerUser: register,
     isServerError,
   };
 
