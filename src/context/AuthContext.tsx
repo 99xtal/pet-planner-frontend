@@ -36,7 +36,7 @@ function setUserObject(user: TokenData | null) {
 }
 
 export const AuthProvider = ({ children }) => {
-  const userToken = JSON.parse(localStorage.getItem('token') ?? '') || null;
+  const userToken = JSON.parse(localStorage.getItem('token')) || null;
   const decodedUser: TokenData | null = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
   const [user, setUser] = useState(setUserObject(decodedUser));
@@ -70,7 +70,7 @@ export const AuthProvider = ({ children }) => {
       let response = await loginUser(loginData)
       if (response.status === 200) {
         localStorage.setItem('token', JSON.stringify(response.data.access));
-        setToken(JSON.parse(response.data.access));
+        setToken(response.data.access);
         let loggedInUser = jwtDecode<TokenData>(response.data.access)
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
