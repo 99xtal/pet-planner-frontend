@@ -1,17 +1,17 @@
-import React from 'react';
+import React, { AnchorHTMLAttributes } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
 
 import { deleteEvent } from '../../api';
 
 const EventMenu = ({ eventId, setEditMode, setNeedsRefresh }) => {
-  const CustomToggle = React.forwardRef(({ onClick }, ref) => (
+  const CustomToggle = React.forwardRef<HTMLAnchorElement, AnchorHTMLAttributes<HTMLAnchorElement>>(({ onClick }, ref) => (
     <a
       href=""
       ref={ref}
       onClick={(e) => {
         e.preventDefault();
-        onClick(e);
+        onClick?.(e);
       }}
     >
       <BsThreeDots size={16} color={'#707070'} />

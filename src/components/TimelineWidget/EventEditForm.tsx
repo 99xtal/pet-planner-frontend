@@ -4,7 +4,7 @@ import { Row, Col } from 'react-bootstrap';
 import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { patchEvent } from '../../api';
-import type { Event } from '../../api/events/types';
+import { Event, EventCategory } from '../../api/events/types';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
 interface Props {
@@ -19,7 +19,7 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
   const [time, setTime] = useState(event.time);
   const [description, setDescription] = useState(event.description);
 
-  const [eCategoryOptions] = useAxiosGet(
+  const { data: eCategoryOptions } = useAxiosGet<EventCategory[]>(
     `http://${baseUrl}/api/events/categories/`
   );
 
@@ -41,11 +41,11 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
 
   return (
     <div>
-      <form id={event.id}>
+      <form id={event.id.toString()}>
         <Row>
           <Col>
-            <select onChange={(e) => setECategoryId(e.target.value)}>
-              {eCategoryOptions.map((ec) => (
+            <select onChange={(e) => setECategoryId(parseInt(e.target.value))}>
+              {eCategoryOptions?.map((ec) => (
                 <option key={ec.id} value={ec.id}>
                   {ec.title}
                 </option>
@@ -63,7 +63,7 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
             />
             <input
               type="time"
-              value={time}
+              value={time ?? undefined}
               onChange={(e) => setTime(e.target.value)}
             />
           </Col>
@@ -71,7 +71,7 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
         <Row>
           <input
             type="text"
-            value={description}
+            value={description ?? undefined}
             onChange={(e) => setDescription(e.target.value)}
           />
         </Row>

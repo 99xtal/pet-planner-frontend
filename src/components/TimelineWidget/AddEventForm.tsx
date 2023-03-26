@@ -6,18 +6,27 @@ import useAxiosGet from '../../hooks/useAxiosGet';
 
 import { postEvent } from '../../api';
 import AuthContext from '../../context/AuthContext';
+import { Pet } from '../../api/pets/types';
+import type { EventCategory, EventForm } from '../../api/events/types';
 const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
-  const [eCategoryId, setECategoryId] = useState(null);
+interface Props {
+  petId: number;
+  setAddToggled: React.Dispatch<React.SetStateAction<boolean>>;
+  setNeedsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+
+}
+
+const AddEventForm: React.FC<Props> = ({ petId, setAddToggled, setNeedsRefresh }) => {
+  const [eCategoryId, setECategoryId] = useState<number>();
   const [date, setDate] = useState(getInitialDate());
   const [time, setTime] = useState(getInitialTime());
-  const [description, setDescription] = useState(null);
+  const [description, setDescription] = useState<string>();
   const [pId, setPId] = useState(petId);
 
   const { user } = useContext(AuthContext);
-  const [petOptions] = useAxiosGet(`http://${baseUrl}/api/pets/`);
-  const [eCategoryOptions] = useAxiosGet(
+  const { data: petOptions } = useAxiosGet<Pet[]>(`http://${baseUrl}/api/pets/`);
+  const { data: eCategoryOptions } = useAxiosGet<EventCategory[]>(
     `http://${baseUrl}/api/events/categories/`
   );
 
@@ -30,20 +39,21 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
     const d = new Date();
     const day = d.getDate().toString().padStart(2, '0');
     const year = d.getFullYear();
-    let month = d.getMonth() + 1;
+    let month: string | number = d.getMonth() + 1;
     month = month.toString().padStart(2, '0');
     return [year, month, day].join('-');
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newEvent = {
+    if (!date || !eCategoryId || !pId) { return; }
+    const newEvent: EventForm = {
       date: date,
-      time: time,
-      description: description,
+      time: time ?? null,
+      description: description ?? null,
       event_category_id: eCategoryId,
       pet_id: pId,
-      user_id: user.id,
+      user_id: user!.id,
     };
     postEvent(newEvent)
       .then(() => {
@@ -64,20 +74,20 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
         <Row>
           <Col className="d-flex justify-content-start">
             {petId ? (
-              petOptions.filter((p) => p.id == petId).map((p) => p.name)
+              petOptions?.filter((p) => p.id == petId).map((p) => p.name)
             ) : (
-              <select onChange={(e) => setPId(e.target.value)}>
-                <option value={null}>Pet</option>
-                {petOptions.map((p) => (
+              <select onChange={(e) => setPId(parseInt(e.target.value))}>
+                <option value={undefined}>Pet</option>
+                {petOptions?.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name}
                   </option>
                 ))}
               </select>
             )}
-            <select onChange={(e) => setECategoryId(e.target.value)}>
-              <option value={null}>Category</option>
-              {eCategoryOptions.map((ec) => (
+            <select onChange={(e) => setECategoryId(parseInt(e.target.value))}>
+              <option value={undefined}>Category</option>
+              {eCategoryOptions?.map((ec) => (
                 <option key={ec.id} value={ec.id}>
                   {ec.title}
                 </option>

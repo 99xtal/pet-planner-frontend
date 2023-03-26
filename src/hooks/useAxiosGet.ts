@@ -2,9 +2,9 @@ import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 
-const useAxiosGet = (url: string) => {
+const useAxiosGet = <T>(url: string) => {
   const { token } = useContext(AuthContext);
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<T>();
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ const useAxiosGet = (url: string) => {
     fetchData();
   }, [url, token]);
 
-  return [data, isLoading];
+  return { data, isLoading };
 };
 
 export default useAxiosGet;

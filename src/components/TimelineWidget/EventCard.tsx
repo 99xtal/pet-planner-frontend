@@ -3,8 +3,14 @@ import './EventCard.css';
 import { Row, Col } from 'react-bootstrap';
 import EventMenu from './EventMenu';
 import EventEditForm from './EventEditForm';
+import type { Event } from '../../api/events/types';
 
-const EventCard = ({ event, setNeedsRefresh }) => {
+interface Props {
+  event: Event;
+  setNeedsRefresh: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const EventCard: React.FC<Props> = ({ event, setNeedsRefresh }) => {
   const [editMode, setEditMode] = useState(false);
 
   return (
