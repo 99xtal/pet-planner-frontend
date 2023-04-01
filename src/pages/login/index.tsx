@@ -7,7 +7,7 @@ import { PasswordInput, TextInput } from '../../components/input';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
 
-import styles from './styles.module.css';
+import styles from './styles.module.scss';
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
