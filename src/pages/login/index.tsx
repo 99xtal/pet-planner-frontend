@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+
 import { WidgetBorder } from '../../components/borders';
-import Widget from '../../components/Widget/Widget';
+import { PasswordInput, TextInput } from '../../components/input';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
+
 import styles from './styles.module.css';
 
 const LoginPage = () => {
@@ -27,17 +29,13 @@ const LoginPage = () => {
       <WidgetBorder>
         <form onSubmit={handleSubmit}>
           <div className={styles.login__form}>
-            <input
-              type="text"
-              className={styles.login__formInput}
+            <TextInput
               placeholder="Username"
               name="username"
               value={formData.username}
               onChange={handleInputChange}
             />
-            <input
-              type="password"
-              className={styles.login__formInput}             
+            <PasswordInput
               placeholder="Password"
               name="password"
               value={formData.password}
