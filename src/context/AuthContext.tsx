@@ -36,6 +36,7 @@ function setUserObject(user: TokenData | null) {
 }
 
 export const AuthProvider = ({ children }) => {
+  // @ts-ignore
   const userToken = JSON.parse(localStorage.getItem('token')) || null;
   const decodedUser: TokenData | null = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
@@ -61,7 +62,7 @@ export const AuthProvider = ({ children }) => {
         navigate('/register');
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
         navigate('/register');
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
       setIsServerError(true);
       navigate('/register');
     }

@@ -97,7 +97,7 @@ const PetPage = () => {
               sm={1}
               className="d-flex justify-content-end align-items-center"
             >
-              <PetPageEditMenu petId={petId} setEditMode={setEditMode} />
+              <PetPageEditMenu petId={parseInt(petId!)} setEditMode={setEditMode} />
             </Col>
           </Row>
 

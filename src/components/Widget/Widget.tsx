@@ -3,7 +3,7 @@ import styles from './Widget.module.scss';
 
 interface WidgetProps {
   title?: string;
-  menu?: unknown;
+  menu?: React.ReactNode;
   editMode?: boolean;
   children: React.ReactNode;
 }
