@@ -1,4 +1,14 @@
-.login__form {
+.register__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background: radial-gradient(#9bf268, #389602);
+}
+
+.register__form {
   padding: 32px 16px 8px 16px;
   display: flex;
   flex-direction: column;
@@ -7,7 +17,7 @@
   gap: 24px;
 }
 
-.login__form input {
+.register__form input {
   font-size: 24px;
   border-style: solid;
   border-color: #bcbcbc;
@@ -20,28 +30,19 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.16);
 }
 
-.login__form input::placeholder {
+.register__form input::placeholder {
   color: #bcbcbc;
   opacity: 1;
 }
 
-.login__form button {
-  background-color: #56bd1a;
-  border: 2px solid #56bd1a;
-  border-radius: 10px;
-  color: white;
-  font-weight: bold;
-  font-family: "Varela Round", sans-serif;
-  font-size: 24px;
-  padding: 0.4rem 1rem;
-}
-
-.login__buttons {
+.register__buttons {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 6px;
 }
 
-.login__buttons a {
+.register__buttons a {
   color: #707070;
 }
