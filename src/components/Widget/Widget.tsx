@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Widget.module.css';
+import styles from './Widget.module.scss';
 
 interface WidgetProps {
   title?: string;

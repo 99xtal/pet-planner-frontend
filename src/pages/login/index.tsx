@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { WidgetBorder } from '../../components/borders';
 import Widget from '../../components/Widget/Widget';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
@@ -23,7 +24,7 @@ const LoginPage = () => {
     <div className={styles.login__body}>
       <h1 className={styles.logo__title}>petPal</h1>
       <h3 className={styles.logo__subtitle}>An all-in-one pet planner</h3>
-      <Widget>
+      <WidgetBorder>
         <form onSubmit={handleSubmit}>
           <div className={styles.login__form}>
             <input
@@ -51,7 +52,7 @@ const LoginPage = () => {
             </div>
           </div>
         </form>
-      </Widget>
+      </WidgetBorder>
     </div>
   );
 };
