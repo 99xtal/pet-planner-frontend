@@ -24,33 +24,36 @@ const LoginPage = () => {
   }, [isServerError]);
   
   return (
-    <div className={styles.login__body}>
+    <div className={styles.main}>
       <h1 className={styles.logo__title}>petPal</h1>
       <h3 className={styles.logo__subtitle}>An all-in-one pet planner</h3>
       <WidgetBorder>
-        <form onSubmit={handleSubmit}>
-          <div className={styles.login__form}>
-            <TextInput
-              placeholder="Username"
-              name="username"
-              value={formData.username}
-              onChange={handleInputChange}
-            />
-            <PasswordInput
-              placeholder="Password"
-              name="password"
-              value={formData.password}
-              onChange={handleInputChange}
-            />
-            {isServerError ? (
-              <p className="error">Login failed, incorrect credentials!</p>
-            ) : null}
-            <div className={styles.login__buttons}>
-              <SubmitButton>Log In</SubmitButton>
-              <Link className={styles.login__buttonsLink} to="/register">Create an account</Link>
+        <div className={styles.login}>
+          <form onSubmit={handleSubmit}>
+            <div className={styles.login__form}>
+              <TextInput
+                placeholder="Username"
+                name="username"
+                value={formData.username}
+                onChange={handleInputChange}
+              />
+              <PasswordInput
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleInputChange}
+              />
+              {isServerError ? (
+                <p className="error">Login failed, incorrect credentials!</p>
+              ) : null}
+              <div className={styles.login__buttons}>
+                <SubmitButton>Log In</SubmitButton>
+              </div>
+
             </div>
-          </div>
-        </form>
+          </form>
+          <Link className={styles.login__buttonsLink} to="/register">Create an account</Link>
+        </div>
       </WidgetBorder>
     </div>
   );
