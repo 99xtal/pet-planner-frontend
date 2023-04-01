@@ -8,12 +8,12 @@ interface Props {
 }
 
 const SideBarSublink: React.FC<Props> = ({ title, onClick, icon }) => {
-  return (
-    <div className="sublink" onClick={onClick}>
-      {icon}
-      <p>{title}</p>
-    </div>
-  );
+	return (
+		<div className="sublink" onClick={onClick}>
+			{icon}
+			<p>{title}</p>
+		</div>
+	);
 };
 
 export default SideBarSublink;

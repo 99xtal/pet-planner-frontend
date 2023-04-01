@@ -1,4 +1,4 @@
-import type { Pet, PetCategory } from '../pets/types'
+import type { Pet, PetCategory } from '../pets/types';
 
 export enum FoodAmountUnits {
     GRAMS = 'g',

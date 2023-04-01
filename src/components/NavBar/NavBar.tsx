@@ -6,25 +6,25 @@ import { SubmitButton } from '../buttons';
 import styles from './NavBar.module.scss';
 
 const Navbar = () => {
-  const { logoutUser } = useContext(AuthContext);
+	const { logoutUser } = useContext(AuthContext);
   
-  return (
-    <div className={styles.navBar}>
-      <ul className={styles.navBar__list}>
-        <li className={styles.navBar__listItem}>
-          <Link
-            to="/dashboard"
-            className={styles.navBar__logo}
-          >
+	return (
+		<div className={styles.navBar}>
+			<ul className={styles.navBar__list}>
+				<li className={styles.navBar__listItem}>
+					<Link
+						to="/dashboard"
+						className={styles.navBar__logo}
+					>
             petPal
-          </Link>
-        </li>
-        <li>
-          <SubmitButton onClick={logoutUser}>Logout</SubmitButton>
-        </li>
-      </ul>
-    </div>
-  );
+					</Link>
+				</li>
+				<li>
+					<SubmitButton onClick={logoutUser}>Logout</SubmitButton>
+				</li>
+			</ul>
+		</div>
+	);
 };
 
 export default Navbar;

@@ -15,61 +15,61 @@ interface PetsContextValue {
 }
 
 const PetsContext = createContext<PetsContextValue>({
-  pets: [],
-  getPets: () => null,
-  addPet: (pet: PetForm) => null,
-  updatePet: () => null,
-  deletePet: () => null
+	pets: [],
+	getPets: () => null,
+	addPet: (pet: PetForm) => null,
+	updatePet: () => null,
+	deletePet: () => null
 });
 
 export default PetsContext;
 
 export const PetsProvider = ({ children }) => {
-  const [pets, setPets] = useState<Pet[]>([]);
-  const [needsUpdate, setNeedsUpdate] = useState(false);
-  const navigate = useNavigate();
+	const [pets, setPets] = useState<Pet[]>([]);
+	const [needsUpdate, setNeedsUpdate] = useState(false);
+	const navigate = useNavigate();
 
-  useEffect(() => {
-    getPets()
-      .then((res) => setPets(res.data))
-      .catch((err) => console.log(err));
+	useEffect(() => {
+		getPets()
+			.then((res) => setPets(res.data))
+			.catch((err) => console.log(err));
 
-    return () => setNeedsUpdate(false);
-  }, [needsUpdate]);
+		return () => setNeedsUpdate(false);
+	}, [needsUpdate]);
 
-  function addPet(newPet: PetForm) {
-    postPet(newPet)
-      .then((res) => {
-        setNeedsUpdate(true);
-        navigate(`/pets/${res.data.id}/`);
-      })
-      .catch((err) => console.log(err));
-  }
+	function addPet(newPet: PetForm) {
+		postPet(newPet)
+			.then((res) => {
+				setNeedsUpdate(true);
+				navigate(`/pets/${res.data.id}/`);
+			})
+			.catch((err) => console.log(err));
+	}
 
-  function updatePet(petId: number, updatedPet: Partial<Pet>) {
-    patchPet(petId, updatedPet)
-      .then(() => setNeedsUpdate(true))
-      .catch((err) => console.log(err));
-  }
+	function updatePet(petId: number, updatedPet: Partial<Pet>) {
+		patchPet(petId, updatedPet)
+			.then(() => setNeedsUpdate(true))
+			.catch((err) => console.log(err));
+	}
 
-  function removePet(petId: number) {
-    deletePet(petId)
-      .then(() => {
-        setNeedsUpdate(true);
-        navigate('/dashboard');
-      })
-      .catch((err) => console.log(err));
-  }
+	function removePet(petId: number) {
+		deletePet(petId)
+			.then(() => {
+				setNeedsUpdate(true);
+				navigate('/dashboard');
+			})
+			.catch((err) => console.log(err));
+	}
 
-  const contextData = {
-    pets,
-    getPets,
-    addPet,
-    updatePet,
-    deletePet: removePet,
-  };
+	const contextData = {
+		pets,
+		getPets,
+		addPet,
+		updatePet,
+		deletePet: removePet,
+	};
 
-  return (
-    <PetsContext.Provider value={contextData}>{children}</PetsContext.Provider>
-  );
+	return (
+		<PetsContext.Provider value={contextData}>{children}</PetsContext.Provider>
+	);
 };

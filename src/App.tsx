@@ -19,37 +19,37 @@ import { DashboardProvider } from './context/DashboardContext';
 import { PetsProvider } from './context/PetsContext';
 
 function App() {
-  return (
-    <div className="app">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <PrivateRoute>
-              <DashboardProvider>
-                <PetsProvider>
-                  <HomePage />
-                </PetsProvider>
-              </DashboardProvider>
-            </PrivateRoute>
-          }
-        >
-          <Route path="dashboard" element={<DashboardPage />} />
-          <Route path="pets" element={<PetsPage />}>
-            <Route
-              path=":petId"
-              element={<PetPage />}
-              key={window.location.pathname}
-            />
-          </Route>
-          <Route path="addpet" element={<AddPetPage />} />
-          <Route path="settings" element={<SettingsPage />} />
-        </Route>
-        <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
-      </Routes>
-    </div>
-  );
+	return (
+		<div className="app">
+			<Routes>
+				<Route
+					path="/"
+					element={
+						<PrivateRoute>
+							<DashboardProvider>
+								<PetsProvider>
+									<HomePage />
+								</PetsProvider>
+							</DashboardProvider>
+						</PrivateRoute>
+					}
+				>
+					<Route path="dashboard" element={<DashboardPage />} />
+					<Route path="pets" element={<PetsPage />}>
+						<Route
+							path=":petId"
+							element={<PetPage />}
+							key={window.location.pathname}
+						/>
+					</Route>
+					<Route path="addpet" element={<AddPetPage />} />
+					<Route path="settings" element={<SettingsPage />} />
+				</Route>
+				<Route path="/register" element={<RegisterPage />} />
+				<Route path="/login" element={<LoginPage />} />
+			</Routes>
+		</div>
+	);
 }
 
 export default App;

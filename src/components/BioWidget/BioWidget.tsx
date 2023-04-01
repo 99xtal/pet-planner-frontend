@@ -17,43 +17,43 @@ interface Props {
 }
 
 const BioWidget: React.FC<Props> = ({ petId, onDashboard }) => {
-  const [pet, setPet] = useState<Pet>();
-  const [needsUpdate, setNeedsUpdate] = useState(false);
-  const [editMode, setEditMode] = useState(false);
+	const [pet, setPet] = useState<Pet>();
+	const [needsUpdate, setNeedsUpdate] = useState(false);
+	const [editMode, setEditMode] = useState(false);
 
-  useEffect(() => {
-    getPetById(petId)
-      .then((res) => setPet(res.data))
-      .catch((err) => console.log(err));
+	useEffect(() => {
+		getPetById(petId)
+			.then((res) => setPet(res.data))
+			.catch((err) => console.log(err));
 
-    return () => setNeedsUpdate(false);
-  }, [petId, needsUpdate]);
+		return () => setNeedsUpdate(false);
+	}, [petId, needsUpdate]);
 
-  const editMenu = (
-    <WidgetEditMenu type="bio" petId={petId} setEditMode={setEditMode} />
-  );
+	const editMenu = (
+		<WidgetEditMenu type="bio" petId={petId} setEditMode={setEditMode} />
+	);
 
-  return (
-    <>
-      {pet && (
-        <Widget
-          title={onDashboard ? `${pet.name}'s Bio` : 'Bio'}
-          menu={editMenu}
-          editMode={editMode}
-        >
-          {editMode ? (
-            <BioInfoEdit
-              pet={pet}
-              setEditMode={setEditMode}
-              setNeedsUpdate={setNeedsUpdate}
-            />
-          ) : (
-            <BioInfoDisplay pet={pet} />
-          )}
-        </Widget>
-      )}
-    </>
-  );
+	return (
+		<>
+			{pet && (
+				<Widget
+					title={onDashboard ? `${pet.name}'s Bio` : 'Bio'}
+					menu={editMenu}
+					editMode={editMode}
+				>
+					{editMode ? (
+						<BioInfoEdit
+							pet={pet}
+							setEditMode={setEditMode}
+							setNeedsUpdate={setNeedsUpdate}
+						/>
+					) : (
+						<BioInfoDisplay pet={pet} />
+					)}
+				</Widget>
+			)}
+		</>
+	);
 };
 
 export default BioWidget;

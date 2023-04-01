@@ -1,5 +1,5 @@
-import type { User } from '../auth/types'
-import type { Pet } from '../pets/types'
+import type { User } from '../auth/types';
+import type { Pet } from '../pets/types';
 
 interface EventCategory {
     id: number;

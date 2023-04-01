@@ -1,9 +1,9 @@
-import type { Pet, PetCategory } from "../pets/types";
+import type { Pet, PetCategory } from '../pets/types';
 
 export enum MedicationAmountUnits {
-    PILLS = "pills",
-    CCS = "ccs",
-    DROPS = "drops"
+    PILLS = 'pills',
+    CCS = 'ccs',
+    DROPS = 'drops'
 }
 
 export interface Medicine {
