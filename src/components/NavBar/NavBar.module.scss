@@ -1,0 +1,28 @@
+.navBar {
+  display: flex;
+  background: $SECONDARY_GREEN_1;
+  color: white;
+  height: 64px;
+
+  &__list {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style-type: none;
+    margin-bottom: 0;
+    width: 100%;
+  }
+
+  &__listItem {
+    cursor: pointer;
+    font-size: 2rem;
+  }
+
+  &__logo {
+    text-decoration: none;
+    color: white;
+    font-family: "Raleway", sans-serif;
+    font-weight: bold;
+  }
+}
+

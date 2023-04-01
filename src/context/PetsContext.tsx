@@ -1,4 +1,3 @@
-import { AxiosResponse } from 'axios';
 import React, { createContext, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -17,7 +16,7 @@ interface PetsContextValue {
 const PetsContext = createContext<PetsContextValue>({
   pets: [],
   getPets: () => null,
-  addPet: (pet: PetForm) => null,
+  addPet: () => null,
   updatePet: () => null,
   deletePet: () => null
 });

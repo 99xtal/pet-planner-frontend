@@ -16,8 +16,8 @@ interface Props {
 const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh }) => {
   const [eCategoryId, setECategoryId] = useState(event.event_category.id);
   const [date, setDate] = useState(event.date);
-  const [time, setTime] = useState(event.time);
-  const [description, setDescription] = useState(event.description);
+  const [time, setTime] = useState(event.time ?? '');
+  const [description, setDescription] = useState(event.description ?? '');
 
   const [eCategoryOptions] = useAxiosGet(
     `http://${baseUrl}/api/events/categories/`
@@ -41,10 +41,11 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
 
   return (
     <div>
-      <form id={event.id}>
+      <form id={event.id.toString()}>
         <Row>
           <Col>
-            <select onChange={(e) => setECategoryId(e.target.value)}>
+            <select onChange={(e) => setECategoryId(parseInt(e.target.value))}>
+              {/* @ts-ignore */}
               {eCategoryOptions.map((ec) => (
                 <option key={ec.id} value={ec.id}>
                   {ec.title}

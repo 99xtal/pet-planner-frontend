@@ -2,6 +2,7 @@ import React, { useState, useContext, AnchorHTMLAttributes } from 'react';
 import DashboardContext from '../../context/DashboardContext';
 import { Dropdown } from 'react-bootstrap';
 import { BsThreeDots } from 'react-icons/bs';
+import { WidgetOptions } from '../../api/widgets/types';
 
 interface Props {
   petId: number;
@@ -12,24 +13,24 @@ const BioWidgetEditMenu: React.FC<Props> = ({ petId, setEditMode }) => {
   const { addToDashboard, removeFromDashboard, findOnDashboard } =
     useContext(DashboardContext);
   const [isOnDashboard, setIsOnDashboard] = useState(
-    findOnDashboard('bio', petId) === undefined ? false : true
+    findOnDashboard(WidgetOptions.BIO, petId) === undefined ? false : true
   );
 
   const handleSelect = (key: string | null) => {
     switch (key) {
-      case 'edit':
-        setEditMode((current) => !current);
-        break;
-      case 'add':
-        addToDashboard('bio', petId);
-        setIsOnDashboard(true);
-        break;
-      case 'remove':
-        removeFromDashboard('bio', petId);
-        setIsOnDashboard(false);
-        break;
-      default:
-        console.log('Invalid select event');
+    case 'edit':
+      setEditMode((current) => !current);
+      break;
+    case 'add':
+      addToDashboard(WidgetOptions.BIO, petId);
+      setIsOnDashboard(true);
+      break;
+    case 'remove':
+      removeFromDashboard(WidgetOptions.BIO, petId);
+      setIsOnDashboard(false);
+      break;
+    default:
+      console.log('Invalid select event');
     }
   };
 

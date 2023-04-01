@@ -9,5 +9,10 @@ export default defineConfig({
       scopeBehaviour: 'local',
       localsConvention: 'camelCase',
     },
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "./src/styles/_colors.scss";',
+      },
+    },
   },
 });

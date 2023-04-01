@@ -1,5 +1,5 @@
 import { get, post, patch, destroy } from '../config';
-import type { Event, EventForm } from './types'
+import type { Event, EventForm } from './types';
 
 export function getEvents() {
   return get<Event[]>('/events/');

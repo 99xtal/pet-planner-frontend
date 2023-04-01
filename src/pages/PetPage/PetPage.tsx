@@ -33,11 +33,11 @@ const PetPage = () => {
   useEffect(() => {
     if (petId) {
       getPetById(parseInt(petId))
-      .then((res) => {
-        setPet(res.data);
-        setName(res.data.name);
-      })
-      .catch((err) => console.log(err));
+        .then((res) => {
+          setPet(res.data);
+          setName(res.data.name);
+        })
+        .catch((err) => console.log(err));
 
     }
     return () => setNeedsUpdate(false);
@@ -45,17 +45,17 @@ const PetPage = () => {
 
   const getIcon = (category) => {
     switch (category.toLowerCase()) {
-      case 'dog':
-        return <FaDog size={96} color="white" />;
-      case 'cat':
-        return <FaCat size={96} color="white" />;
-      case 'snake':
-        return <GiSandSnake size={96} color="white" />;
-      case 'gecko':
-      case 'lizard':
-        return <GiGecko size={96} color="white" />;
-      default:
-        return null;
+    case 'dog':
+      return <FaDog size={96} color="white" />;
+    case 'cat':
+      return <FaCat size={96} color="white" />;
+    case 'snake':
+      return <GiSandSnake size={96} color="white" />;
+    case 'gecko':
+    case 'lizard':
+      return <GiGecko size={96} color="white" />;
+    default:
+      return null;
     }
   };
 
@@ -97,7 +97,7 @@ const PetPage = () => {
               sm={1}
               className="d-flex justify-content-end align-items-center"
             >
-              <PetPageEditMenu petId={petId} setEditMode={setEditMode} />
+              <PetPageEditMenu petId={parseInt(petId!)} setEditMode={setEditMode} />
             </Col>
           </Row>
 

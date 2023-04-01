@@ -11,7 +11,7 @@ const useAxiosGet = (url: string) => {
     setIsLoading(true);
     const fetchData = async () => {
       try {
-        let response = await axios.get(url, {
+        const response = await axios.get(url, {
           headers: {
             Authorization: 'Bearer ' + token,
           },
@@ -19,7 +19,7 @@ const useAxiosGet = (url: string) => {
         setData(response.data);
         setIsLoading(false);
       } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
       }
     };
     fetchData();

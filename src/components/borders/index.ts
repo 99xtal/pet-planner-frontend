@@ -1,5 +1,5 @@
-import WidgetBorder from "./WidgetBorder";
+import WidgetBorder from './WidgetBorder';
 
 export {
-    WidgetBorder
+  WidgetBorder
 };

@@ -1,7 +1,7 @@
-import PasswordInput from "./PasswordInput";
-import TextInput from "./TextInput";
+import PasswordInput from './PasswordInput';
+import TextInput from './TextInput';
 
 export {
-    PasswordInput,
-    TextInput
+  PasswordInput,
+  TextInput
 };

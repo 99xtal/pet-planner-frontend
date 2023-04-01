@@ -13,9 +13,9 @@ interface DashboardContextValue {
 
 const DashboardContext = createContext<DashboardContextValue>({
   dashboard: [],
-  addToDashboard: (_, __) => null,
-  removeFromDashboard: (_, __) => new Promise((resolve) => null),
-  findOnDashboard: (_, __) => undefined,
+  addToDashboard: () => null,
+  removeFromDashboard: () => new Promise(() => null),
+  findOnDashboard: () => undefined,
 });
 
 export default DashboardContext;
@@ -35,7 +35,7 @@ export const DashboardProvider = ({ children }) => {
 
   function addToDashboard(widgetType: WidgetOptions, petId: number) {
     if (!user) { return; }
-    let newWidget: WidgetForm = {
+    const newWidget: WidgetForm = {
       type: widgetType,
       user_id: user.id,
     };

@@ -17,7 +17,7 @@ export function patchMedication(medicationId: number, updatedMedication: Partial
   return patch<Medication>(`/medications/${medicationId}/`, updatedMedication);
 }
 
-export function deleteMedication(medicationId: Number) {
+export function deleteMedication(medicationId: number) {
   return destroy(`/medications/${medicationId}/`);
 }
 

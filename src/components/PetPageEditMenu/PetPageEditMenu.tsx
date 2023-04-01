@@ -13,14 +13,14 @@ const PetPageEditMenu: React.FC<Props> = ({ petId, setEditMode }) => {
 
   const handleSelect = (key: string | null) => {
     switch (key) {
-      case 'rename':
-        setEditMode(true);
-        break;
-      case 'delete':
-        deletePet(petId);
-        break;
-      default:
-        console.log('Invalid select event');
+    case 'rename':
+      setEditMode(true);
+      break;
+    case 'delete':
+      deletePet(petId);
+      break;
+    default:
+      console.log('Invalid select event');
     }
   };
 

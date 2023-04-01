@@ -1,6 +1,7 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // General Imports
 import React, { useContext } from 'react';
-import './SideBar.css';
+import styles from './SideBar.module.scss';
 
 // Component Imports
 import SideBarLink from '../SideBarLink/SideBarLink';
@@ -18,7 +19,7 @@ const SideBar = () => {
   const { pets } = useContext(PetsContext);
 
   return (
-    <div className="sidebar">
+    <div className={styles.sidebar}>
       <SideBarLink
         title="Dashboard"
         path="/dashboard"
@@ -27,14 +28,14 @@ const SideBar = () => {
       <SideBarDropdown title="My Pets" icon={<FaPaw size={24} />}>
         {pets &&
           pets.map((pet) => {
-            return (
-              <SideBarSublink
-                key={pet.id}
-                title={pet.name}
-                onClick={() => navigate(`/pets/${pet.id}/`)}
-                icon={<FaPaw size={16} />}
-              />
-            );
+        	return (
+          		<SideBarSublink
+          			key={pet.id}
+          			title={pet.name}
+          			onClick={() => navigate(`/pets/${pet.id}/`)}
+          			icon={<FaPaw size={16} />}
+          		/>
+          	);
           })}
         <SideBarSublink
           title="Add Pet"
@@ -42,7 +43,6 @@ const SideBar = () => {
           icon={<BsPlus size={24} />}
         />
       </SideBarDropdown>
-
       <SideBarLink
         title="Settings"
         path="/settings"

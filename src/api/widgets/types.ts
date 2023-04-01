@@ -1,5 +1,5 @@
-import { User } from "../auth/types";
-import { Pet } from "../pets/types";
+import { User } from '../auth/types';
+import { Pet } from '../pets/types';
 
 export enum WidgetOptions {
     TIMELINE = 'timeline',

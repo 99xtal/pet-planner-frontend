@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { loginUser, registerUser } from '../api/auth';
-import { LoginForm, RegistrationForm, TokenData, User, UserBasic } from '../api/auth/types';
+import { LoginForm, RegistrationForm, TokenData, UserBasic } from '../api/auth/types';
 
 interface AuthContextValue {
   user: UserBasic | null,
@@ -16,9 +16,9 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({
   user: null,
   token: null,
-  loginUser: (loginForm: LoginForm) => new Promise(() => null),
+  loginUser: () => new Promise(() => null),
   logoutUser: () => null,
-  registerUser: (registerForm: RegistrationForm) => new Promise(() => null),
+  registerUser: () => new Promise(() => null),
   isServerError: false,
 });
 
@@ -36,6 +36,7 @@ function setUserObject(user: TokenData | null) {
 }
 
 export const AuthProvider = ({ children }) => {
+  // @ts-ignore
   const userToken = JSON.parse(localStorage.getItem('token')) || null;
   const decodedUser: TokenData | null = userToken ? jwtDecode(userToken) : null;
   const [token, setToken] = useState(userToken);
@@ -45,14 +46,14 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (registerData: RegistrationForm) => {
     try {
-      let finalData = {
+      const finalData = {
         username: registerData.username,
         password: registerData.password,
         email: registerData.email,
         first_name: registerData.first_name,
         last_name: registerData.last_name,
       };
-      let response = await registerUser(finalData);
+      const response = await registerUser(finalData);
       if (response.status === 201) {
         console.log('Successful registration! Log in to access token');
         setIsServerError(false);
@@ -61,17 +62,17 @@ export const AuthProvider = ({ children }) => {
         navigate('/register');
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
     }
   };
 
   const login = async (loginData: LoginForm) => {
     try {
-      let response = await loginUser(loginData)
+      const response = await loginUser(loginData);
       if (response.status === 200) {
         localStorage.setItem('token', JSON.stringify(response.data.access));
         setToken(response.data.access);
-        let loggedInUser = jwtDecode<TokenData>(response.data.access)
+        const loggedInUser = jwtDecode<TokenData>(response.data.access);
         setUser(setUserObject(loggedInUser));
         setIsServerError(false);
         navigate('/dashboard');
@@ -79,7 +80,7 @@ export const AuthProvider = ({ children }) => {
         navigate('/register');
       }
     } catch (error) {
-      console.log(error.response.data);
+      console.log(error);
       setIsServerError(true);
       navigate('/register');
     }
