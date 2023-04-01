@@ -1,35 +1,107 @@
 import React from 'react';
-import userEvent from '@testing-library/user-event';
 import { test, vi } from 'vitest';
 
 import LoginForm from './LoginForm';
-import { renderInMockAuthContext } from '../../test/utils';
+import { renderInMockAuthContext, setupTestUser, waitAsync } from '../../test/utils';
 
 const mockLogin = vi.fn();
 
-const loggedOutAuthContextState = {
-  user: null,
-  token: null,
-  loginUser: mockLogin,
-  logoutUser: vi.fn(),
-  registerUser: vi.fn(),
-  isServerError: false,
-};
+beforeEach(() => {
+  vi.clearAllMocks();
+});
 
-const setupUser = () => userEvent.setup();
+test('disallows form submission if username and password fields not set', async () => {
+  const user = setupTestUser();
+  const { submitButton } = getLoginFormComponents();
 
-const waitAsync = (ms: number) => new Promise((res) => setTimeout(() => res(null), ms));
+  await user.click(submitButton);
 
-interface LoginFormComponents {
-  submitButton: HTMLElement,
-  usernameInput: HTMLElement,
-  passwordInput: HTMLElement,
-  usernameError: HTMLElement,
-  passwordError: HTMLElement,
-}
+  expect(mockLogin).toBeCalledTimes(0);
+});
 
-const getLoginFormComponents = () => {
-  const { getByText, getByPlaceholderText, queryByText } = renderInMockAuthContext(<LoginForm />, loggedOutAuthContextState);
+test('disallows form submission if only username field is set', async () => {
+  const user = setupTestUser();
+  const { submitButton, usernameInput } = getLoginFormComponents();
+
+  await user.click(usernameInput);
+  await user.keyboard('username');
+
+  await user.click(submitButton);
+
+  expect(mockLogin).toBeCalledTimes(0);
+});
+
+test('disallows form submission if only password field is set', async () => {
+  const user = setupTestUser();
+  const { submitButton, passwordInput } = getLoginFormComponents();
+
+  await user.click(passwordInput);
+  await user.keyboard('password');
+
+  await user.click(submitButton);
+
+  expect(mockLogin).toBeCalledTimes(0);
+});
+
+
+test('allows form submission if username and password fields set', async () => {
+  const user = setupTestUser();
+  const { usernameInput, passwordInput, submitButton } = getLoginFormComponents();
+
+  await user.click(usernameInput);
+  await user.keyboard('username');
+
+  await user.click(passwordInput);
+  await user.keyboard('password');
+
+  await user.click(submitButton);
+
+  expect(mockLogin).toBeCalledTimes(1);
+});
+
+test('shows a warning if username field is empty on submit', async () => {
+  const user = setupTestUser();
+  const { submitButton, usernameError} = getLoginFormComponents();
+
+  await user.click(submitButton);
+  expect(usernameError).toBeVisible();
+});
+
+test('shows a warning if password field is empty on submit', async () => {
+  const user = setupTestUser();
+  const { submitButton, passwordError} = getLoginFormComponents();
+
+  await user.click(submitButton);
+  expect(passwordError).toBeVisible();
+});
+
+test.todo('shows a warning if login credentials are incorrect');
+
+test('submit button is disabled while processing request', async () => {
+  const user = setupTestUser();
+  const { usernameInput, passwordInput, submitButton } = getLoginFormComponents();
+  mockLogin.mockImplementation(() => waitAsync(1000));
+
+  await user.click(usernameInput);
+  await user.keyboard('username');
+
+  await user.click(passwordInput);
+  await user.keyboard('password');
+
+  await user.tripleClick(submitButton);
+
+  expect(mockLogin).toBeCalledTimes(1);
+});
+
+function getLoginFormComponents() {
+  const { getByText, getByPlaceholderText, queryByText } = renderInMockAuthContext(<LoginForm />, {
+    user: null,
+    token: null,
+    loginUser: mockLogin,
+    logoutUser: vi.fn(),
+    registerUser: vi.fn(),
+    isServerError: false,
+  });
   const submitButton = getByText('Log In', { exact: true });
   const usernameInput = getByPlaceholderText('username', { exact: false });
   const passwordInput = getByPlaceholderText('password', { exact: false });
@@ -43,92 +115,5 @@ const getLoginFormComponents = () => {
     passwordInput,
     usernameError,
     passwordError,
-  } as LoginFormComponents;
-};
-
-const doLoginSubmission = async (user, components: LoginFormComponents) => {
-  const { usernameInput, passwordInput, submitButton } = components;
-  await user.click(usernameInput);
-  await user.keyboard('username');
-
-  await user.click(passwordInput);
-  await user.keyboard('password');
-
-  await user.click(submitButton);
-};
-
-beforeEach(() => {
-  vi.clearAllMocks();
-});
-
-test('disallows form submission if username and password fields not set', async () => {
-  const user = setupUser();
-  const { submitButton } = getLoginFormComponents();
-
-  await user.click(submitButton);
-
-  expect(mockLogin).toBeCalledTimes(0);
-});
-
-test('disallows form submission if only username field is set', async () => {
-  const user = setupUser();
-  const { submitButton, usernameInput } = getLoginFormComponents();
-
-  await user.click(usernameInput);
-  await user.keyboard('username');
-
-  await user.click(submitButton);
-
-  expect(mockLogin).toBeCalledTimes(0);
-});
-
-test('disallows form submission if only password field is set', async () => {
-  const user = setupUser();
-  const { submitButton, passwordInput } = getLoginFormComponents();
-
-  await user.click(passwordInput);
-  await user.keyboard('password');
-
-  await user.click(submitButton);
-
-  expect(mockLogin).toBeCalledTimes(0);
-});
-
-
-test('allows form submission if username and password fields set', async () => {
-  const user = setupUser();
-  const components = getLoginFormComponents();
-
-  await doLoginSubmission(user, components);
-
-  expect(mockLogin).toBeCalledTimes(1);
-});
-
-test('shows a warning if username field is empty on submit', async () => {
-  const user = setupUser();
-  const { submitButton, usernameError} = getLoginFormComponents();
-
-  await user.click(submitButton);
-  expect(usernameError).toBeVisible();
-});
-
-test('shows a warning if password field is empty on submit', async () => {
-  const user = setupUser();
-  const { submitButton, passwordError} = getLoginFormComponents();
-
-  await user.click(submitButton);
-  expect(passwordError).toBeVisible();
-});
-
-test.todo('shows a warning if login credentials are incorrect');
-
-test('submit button is disabled while processing request', async () => {
-  const user = setupUser();
-  const components = getLoginFormComponents();
-  mockLogin.mockImplementation(() => waitAsync(1000));
-
-  await doLoginSubmission(user, components);
-  await user.tripleClick(components.submitButton);
-
-  expect(mockLogin).toBeCalledTimes(1);
-});
+  };
+}
