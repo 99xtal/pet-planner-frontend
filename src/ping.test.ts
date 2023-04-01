@@ -1,5 +1,5 @@
-import { it } from '@jest/globals';  
+import { expect, test } from 'vitest';
 
-it('test runner works', () => {
+test('test runner works', () => {
   expect(true).toBeTruthy();
 });
