@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Widget from '../../components/Widget/Widget';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
-import styles from './LoginPage.module.css';
+import styles from './styles.module.css';
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
@@ -36,7 +36,8 @@ const LoginPage = () => {
             />
             <input
               type="password"
-              className={styles.login__formInput}              placeholder="Password"
+              className={styles.login__formInput}             
+              placeholder="Password"
               name="password"
               value={formData.password}
               onChange={handleInputChange}

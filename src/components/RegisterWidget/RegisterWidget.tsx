@@ -69,7 +69,7 @@ const RegisterWidget = () => {
           </p>
           <div className="register__buttons">
             <button>Register!</button>
-            <Link to="login">Back to login</Link>
+            <Link to="/login">Back to login</Link>
           </div>
         </div>
       </form>
