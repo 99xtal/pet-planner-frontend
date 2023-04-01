@@ -1,5 +1,5 @@
 import React from 'react';
-import './Widget.css';
+import styles from './Widget.module.css';
 
 interface WidgetProps {
   title?: string;
@@ -10,13 +10,13 @@ interface WidgetProps {
 
 const Widget: React.FC<WidgetProps> = ({ title, menu, editMode, children }) => {
   return (
-    <div className="widget">
+    <div className={styles.widget}>
       {/* @ts-ignore */}
-      <div className="widget__header">
-        <h2 className="widget__title">{title}</h2>
+      <div className={styles.widget__header}>
+        <h2 className={styles.widget__title}>{title}</h2>
         {!editMode && menu}
       </div>
-      <div className="widget__body">{children}</div>
+      <div className={styles.widget__body}>{children}</div>
     </div>
   );
 };

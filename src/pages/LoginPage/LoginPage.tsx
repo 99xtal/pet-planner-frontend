@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import Widget from '../../components/Widget/Widget';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
-import './LoginPage.css';
+import styles from './LoginPage.module.css';
 
 const LoginPage = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
@@ -20,23 +20,23 @@ const LoginPage = () => {
   }, [isServerError]);
   
   return (
-    <div className="login__body">
-      <h1>petPal</h1>
-      <h3>An all-in-one pet planner</h3>
+    <div className={styles.login__body}>
+      <h1 className={styles.logo__title}>petPal</h1>
+      <h3 className={styles.logo__subtitle}>An all-in-one pet planner</h3>
       <Widget>
         <form onSubmit={handleSubmit}>
-          <div className="login__form">
+          <div className={styles.login__form}>
             <input
               type="text"
+              className={styles.login__formInput}
               placeholder="Username"
               name="username"
               value={formData.username}
               onChange={handleInputChange}
             />
-
             <input
               type="password"
-              placeholder="Password"
+              className={styles.login__formInput}              placeholder="Password"
               name="password"
               value={formData.password}
               onChange={handleInputChange}
@@ -44,13 +44,13 @@ const LoginPage = () => {
             {isServerError ? (
               <p className="error">Login failed, incorrect credentials!</p>
             ) : null}
-            <div className="login__buttons">
-              <button>Log In</button>
-              <Link to="/register">Create an account</Link>
+            <div className={styles.login__buttons}>
+              <button className={styles.login__formButton}>Log In</button>
+              <Link className={styles.login__buttonsLink} to="/register">Create an account</Link>
             </div>
           </div>
         </form>
-    </Widget>
+      </Widget>
     </div>
   );
 };

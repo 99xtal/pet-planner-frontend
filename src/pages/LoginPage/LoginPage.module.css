@@ -12,13 +12,13 @@
   background: radial-gradient(#9bf268, #389602);
 }
 
-.login__body h1 {
+.logo__title {
   font-size: 64px;
   font-weight: 800;
   color: white;
 }
 
-.login__body h3 {
+.logo__subtitle {
   color: white;
   font-weight: 600;
 }
@@ -32,7 +32,7 @@
   gap: 24px;
 }
 
-.login__form input {
+.login__formInput {
   font-size: 24px;
   border-style: solid;
   border-color: #bcbcbc;
@@ -45,12 +45,12 @@
   box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.16);
 }
 
-.login__form input::placeholder {
+.login__formInput::placeholder {
   color: #bcbcbc;
   opacity: 1;
 }
 
-.login__form button {
+.login__formButton {
   background-color: #56bd1a;
   border: 2px solid #56bd1a;
   border-radius: 10px;
@@ -67,6 +67,6 @@
   gap: 6px;
 }
 
-.login__buttons a {
+.login__buttonsLink {
   color: #707070;
 }
