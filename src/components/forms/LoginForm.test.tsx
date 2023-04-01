@@ -10,7 +10,7 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-test('disallows form submission if username and password fields not set', async () => {
+test('doesn\'t submit form if username and password fields not set', async () => {
   const user = setupTestUser();
   const { submitButton } = getLoginFormComponents();
 
@@ -19,7 +19,7 @@ test('disallows form submission if username and password fields not set', async 
   expect(mockLogin).toBeCalledTimes(0);
 });
 
-test('disallows form submission if only username field is set', async () => {
+test('doesn\'t submit form  if only username field is set', async () => {
   const user = setupTestUser();
   const { submitButton, usernameInput } = getLoginFormComponents();
 
@@ -31,7 +31,7 @@ test('disallows form submission if only username field is set', async () => {
   expect(mockLogin).toBeCalledTimes(0);
 });
 
-test('disallows form submission if only password field is set', async () => {
+test('doesn\'t submit form  if only password field is set', async () => {
   const user = setupTestUser();
   const { submitButton, passwordInput } = getLoginFormComponents();
 
@@ -44,7 +44,7 @@ test('disallows form submission if only password field is set', async () => {
 });
 
 
-test('allows form submission if username and password fields set', async () => {
+test('submits form if username and password fields set', async () => {
   const user = setupTestUser();
   const { usernameInput, passwordInput, submitButton } = getLoginFormComponents();
 
