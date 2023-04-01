@@ -1,25 +1,52 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import './AddEventForm.css';
 import { Container, Row, Col } from 'react-bootstrap';
 
-import useAxiosGet from '../../hooks/useAxiosGet';
-
-import { postEvent } from '../../api';
+import { getEventCategories, getPets, postEvent } from '../../api';
 import AuthContext from '../../context/AuthContext';
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import type { EventCategory, EventForm } from '../../api/events/types';
+import { Pet } from '../../api/pets/types';
 
 const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
-  const [eCategoryId, setECategoryId] = useState(null);
+  const { user } = useContext(AuthContext);
+  const [eCategoryId, setECategoryId] = useState<string>();
   const [date, setDate] = useState(getInitialDate());
   const [time, setTime] = useState(getInitialTime());
-  const [description, setDescription] = useState(null);
+  const [description, setDescription] = useState<string>();
   const [pId, setPId] = useState(petId);
+  const [eCategoryOptions, setECategoryOptions] = useState<EventCategory[]>([]);
+  const [petOptions, setPetOptions] = useState<Pet[]>([]);
 
-  const { user } = useContext(AuthContext);
-  const [petOptions] = useAxiosGet(`http://${baseUrl}/api/pets/`);
-  const [eCategoryOptions] = useAxiosGet(
-    `http://${baseUrl}/api/events/categories/`
-  );
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const result = await getEventCategories();
+        if (result.data) {
+          setECategoryOptions(result.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchOptions();
+  }, []);
+
+
+  useEffect(() => {
+    const fetchPetOptions = async () => {
+      try {
+        const result = await getPets();
+        if (result.data) {
+          setPetOptions(result.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchPetOptions();
+  });
 
   function getInitialTime() {
     const d = new Date();
@@ -30,20 +57,24 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
     const d = new Date();
     const day = d.getDate().toString().padStart(2, '0');
     const year = d.getFullYear();
-    let month = d.getMonth() + 1;
+    let month: string | number = d.getMonth() + 1;
     month = month.toString().padStart(2, '0');
     return [year, month, day].join('-');
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    const newEvent = {
+    if (!eCategoryId) {
+      return;
+    }
+
+    const newEvent: EventForm = {
       date: date,
       time: time,
-      description: description,
-      event_category_id: eCategoryId,
+      description: description ?? null,
+      event_category_id: parseInt(eCategoryId),
       pet_id: pId,
-      user_id: user.id,
+      user_id: user!.id,
     };
     postEvent(newEvent)
       .then(() => {
@@ -51,6 +82,10 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
         setNeedsRefresh(true);
       })
       .catch((err) => console.log(err));
+  }
+
+  if (!eCategoryOptions && !petOptions) {
+    return null;
   }
 
   return (
@@ -67,7 +102,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
               petOptions.filter((p) => p.id == petId).map((p) => p.name)
             ) : (
               <select onChange={(e) => setPId(e.target.value)}>
-                <option value={null}>Pet</option>
+                <option value={undefined}>Pet</option>
                 {petOptions.map((p) => (
                   <option key={p.id} value={p.id}>
                     {p.name}
@@ -76,7 +111,7 @@ const AddEventForm = ({ petId, setAddToggled, setNeedsRefresh }) => {
               </select>
             )}
             <select onChange={(e) => setECategoryId(e.target.value)}>
-              <option value={null}>Category</option>
+              <option value={undefined}>Category</option>
               {eCategoryOptions.map((ec) => (
                 <option key={ec.id} value={ec.id}>
                   {ec.title}

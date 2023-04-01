@@ -1,7 +1,7 @@
 import type { User } from '../auth/types';
 import type { Pet } from '../pets/types';
 
-interface EventCategory {
+export interface EventCategory {
     id: number;
     title: string;
 }

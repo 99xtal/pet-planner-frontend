@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
-import useAxiosGet from '../../hooks/useAxiosGet';
-
-import { patchEvent } from '../../api';
-import type { Event } from '../../api/events/types';
-const baseUrl = import.meta.env.VITE_API_BASE_URL;
+import { getEventCategories, patchEvent } from '../../api';
+import type { Event, EventCategory } from '../../api/events/types';
 
 interface Props {
   event: Event;
@@ -18,10 +15,22 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
   const [date, setDate] = useState(event.date);
   const [time, setTime] = useState(event.time ?? '');
   const [description, setDescription] = useState(event.description ?? '');
+  const [eCategoryOptions, setECategoryOptions] = useState<EventCategory[]>();
 
-  const [eCategoryOptions] = useAxiosGet(
-    `http://${baseUrl}/api/events/categories/`
-  );
+  useEffect(() => {
+    const fetchOptions = async () => {
+      try {
+        const result = await getEventCategories();
+        if (result.data) {
+          setECategoryOptions(result.data);
+        }
+      } catch (err) {
+        console.error(err);
+      }
+    };
+
+    fetchOptions();
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -39,13 +48,16 @@ const EventEditForm: React.FC<Props> = ({ event, setEditMode, setNeedsRefresh })
       .catch((err) => console.log(err));
   };
 
+  if (!eCategoryOptions) {
+    return null;
+  }
+
   return (
     <div>
       <form id={event.id.toString()}>
         <Row>
           <Col>
             <select onChange={(e) => setECategoryId(parseInt(e.target.value))}>
-              {/* @ts-ignore */}
               {eCategoryOptions.map((ec) => (
                 <option key={ec.id} value={ec.id}>
                   {ec.title}
