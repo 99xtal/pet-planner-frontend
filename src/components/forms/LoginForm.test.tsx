@@ -1,7 +1,30 @@
-import { test } from 'vitest';
+import React from 'react';
+import { fireEvent } from '@testing-library/react';
+import { test, vi } from 'vitest';
 import LoginForm from './LoginForm';
+import { renderInMockAuthContext } from '../../test/utils';
 
-test.todo('only allows form submission if username and password fields set');
+const mockLogin = vi.fn();
+
+const loggedOutAuthContextState = {
+  user: null,
+  token: null,
+  loginUser: mockLogin,
+  logoutUser: vi.fn(),
+  registerUser: vi.fn(),
+  isServerError: false,
+};
+
+const renderInAuthContextLoggedOutState = (component: React.ReactNode) => renderInMockAuthContext(component, loggedOutAuthContextState);
+
+test('only allows form submission if username and password fields set', () => {
+  const { getByText } = renderInAuthContextLoggedOutState(<LoginForm />);
+  const submitButton = getByText('Log In', { exact: true });
+
+  fireEvent.click(submitButton);
+
+  expect(mockLogin).toBeCalledTimes(0);
+});
 
 test.todo('shows a warning if username field is empty on submit');
 

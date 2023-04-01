@@ -4,7 +4,7 @@ import jwtDecode from 'jwt-decode';
 import { loginUser, registerUser } from '../api/auth';
 import { LoginForm, RegistrationForm, TokenData, UserBasic } from '../api/auth/types';
 
-interface AuthContextValue {
+export interface AuthContextValue {
   user: UserBasic | null,
   token: string | null,
   loginUser: (loginForm: LoginForm) => Promise<void>,
