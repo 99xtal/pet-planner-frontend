@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { WidgetBorder } from '../../components/borders';
+import { SubmitButton } from '../../components/buttons';
 import { PasswordInput, TextInput } from '../../components/input';
 import AuthContext from '../../context/AuthContext';
 import useCustomForm from '../../hooks/useCustomForm';
@@ -45,7 +46,7 @@ const LoginPage = () => {
               <p className="error">Login failed, incorrect credentials!</p>
             ) : null}
             <div className={styles.login__buttons}>
-              <button className={styles.login__formButton}>Log In</button>
+              <SubmitButton>Log In</SubmitButton>
               <Link className={styles.login__buttonsLink} to="/register">Create an account</Link>
             </div>
           </div>

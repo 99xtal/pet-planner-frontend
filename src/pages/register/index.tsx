@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { SubmitButton } from '../../components/buttons';
 import { PasswordInput, TextInput } from '../../components/input';
 
 import Widget from '../../components/Widget/Widget';
@@ -62,7 +63,7 @@ const RegisterPage = () => {
               special characters!
             </p>
             <div className="register__buttons">
-              <button>Register!</button>
+              <SubmitButton>Register!</SubmitButton>
               <Link to="/login">Back to login</Link>
             </div>
           </div>
