@@ -4,6 +4,7 @@ import {
   postEvent,
   patchEvent,
   deleteEvent,
+  getEventCategories
 } from './events';
 
 import {
@@ -44,6 +45,7 @@ export {
   postEvent,
   patchEvent,
   deleteEvent,
+  getEventCategories,
   getMeals,
   getMealsByPet,
   postMeal,
