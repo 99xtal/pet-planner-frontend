@@ -13,39 +13,39 @@ import ProfileEdit from './ProfileEdit';
 import type { User } from '../../api/auth/types';
 
 const ProfileWidget = () => {
-	const [profile, setProfile] = useState<User>();
-	const [needsUpdate, setNeedsUpdate] = useState(false);
-	const [editMode, setEditMode] = useState(false);
+  const [profile, setProfile] = useState<User>();
+  const [needsUpdate, setNeedsUpdate] = useState(false);
+  const [editMode, setEditMode] = useState(false);
 
-	useEffect(() => {
-		getProfile()
-			.then((res) => setProfile(res.data))
-			.catch((err) => console.log(err));
+  useEffect(() => {
+    getProfile()
+      .then((res) => setProfile(res.data))
+      .catch((err) => console.log(err));
 
-		return () => setNeedsUpdate(false);
-	}, [needsUpdate]);
+    return () => setNeedsUpdate(false);
+  }, [needsUpdate]);
 
-	const editMenu = (
-		<WidgetEditMenu type="profile" petId={null} setEditMode={setEditMode} />
-	);
+  const editMenu = (
+    <WidgetEditMenu type="profile" petId={null} setEditMode={setEditMode} />
+  );
 
-	return (
-		<>
-			{profile && (
-				<Widget title="Profile" menu={editMenu} editMode={editMode}>
-					{editMode ? (
-						<ProfileEdit
-							profile={profile}
-							setEditMode={setEditMode}
-							setNeedsUpdate={setNeedsUpdate}
-						/>
-					) : (
-						<ProfileDisplay profile={profile} />
-					)}
-				</Widget>
-			)}
-		</>
-	);
+  return (
+    <>
+      {profile && (
+        <Widget title="Profile" menu={editMenu} editMode={editMode}>
+          {editMode ? (
+            <ProfileEdit
+              profile={profile}
+              setEditMode={setEditMode}
+              setNeedsUpdate={setNeedsUpdate}
+            />
+          ) : (
+            <ProfileDisplay profile={profile} />
+          )}
+        </Widget>
+      )}
+    </>
+  );
 };
 
 export default ProfileWidget;

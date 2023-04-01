@@ -9,16 +9,16 @@ interface Props {
 }
 
 const SideBarLink: React.FC<Props> = ({ title, path, icon }) => {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	return (
-		<div className="sidebarlink" onClick={() => navigate(path)}>
-			{icon}
-			<div>
-				<p>{title}</p>
-			</div>
-		</div>
-	);
+  return (
+    <div className="sidebarlink" onClick={() => navigate(path)}>
+      {icon}
+      <div>
+        <p>{title}</p>
+      </div>
+    </div>
+  );
 };
 
 export default SideBarLink;

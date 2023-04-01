@@ -7,13 +7,13 @@ interface Props {
 }
 
 const WidgetBorder: React.FC<Props> = ({ children }) => {
-	return (
-		<div className={styles.outerBorder}>
-			<div className={styles.innerBorder}>
-				{children}
-			</div>
-		</div>
-	);
+  return (
+    <div className={styles.outerBorder}>
+      <div className={styles.innerBorder}>
+        {children}
+      </div>
+    </div>
+  );
 };
 
 export default WidgetBorder;
