@@ -1,29 +1,26 @@
 import React from 'react';
 import { useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
-import './NavBar.css';
+import { SubmitButton } from '../buttons';
+import styles from './NavBar.module.scss';
 
 const Navbar = () => {
-  const { logoutUser, user } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { logoutUser } = useContext(AuthContext);
+  
   return (
-    <div className="navBar">
-      <ul>
-        <li className="brand">
+    <div className={styles.navBar}>
+      <ul className={styles.navBar__list}>
+        <li className={styles.navBar__listItem}>
           <Link
             to="/dashboard"
-            style={{ textDecoration: 'none', color: 'white' }}
+            className={styles.navBar__logo}
           >
-            <b>petPal</b>
+            petPal
           </Link>
         </li>
         <li>
-          {user ? (
-            <button onClick={logoutUser}>Logout</button>
-          ) : (
-            <button onClick={() => navigate('/login')}>Login</button>
-          )}
+          <SubmitButton onClick={logoutUser}>Logout</SubmitButton>
         </li>
       </ul>
     </div>
