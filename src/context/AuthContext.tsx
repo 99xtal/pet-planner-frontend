@@ -2,7 +2,7 @@ import React, { createContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import jwtDecode from 'jwt-decode';
 import { loginUser, registerUser } from '../api/auth';
-import { LoginForm, RegistrationForm, TokenData, User, UserBasic } from '../api/auth/types';
+import { LoginForm, RegistrationForm, TokenData, UserBasic } from '../api/auth/types';
 
 interface AuthContextValue {
   user: UserBasic | null,
@@ -16,9 +16,9 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue>({
   user: null,
   token: null,
-  loginUser: (loginForm: LoginForm) => new Promise(() => null),
+  loginUser: () => new Promise(() => null),
   logoutUser: () => null,
-  registerUser: (registerForm: RegistrationForm) => new Promise(() => null),
+  registerUser: () => new Promise(() => null),
   isServerError: false,
 });
 

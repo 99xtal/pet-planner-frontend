@@ -13,9 +13,9 @@ interface DashboardContextValue {
 
 const DashboardContext = createContext<DashboardContextValue>({
   dashboard: [],
-  addToDashboard: (_, __) => null,
-  removeFromDashboard: (_, __) => new Promise((resolve) => null),
-  findOnDashboard: (_, __) => undefined,
+  addToDashboard: () => null,
+  removeFromDashboard: () => new Promise(() => null),
+  findOnDashboard: () => undefined,
 });
 
 export default DashboardContext;

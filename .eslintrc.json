@@ -35,6 +35,9 @@
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "react/prop-types": "off",
+        "react/display-name": "warn",
+        "@typescript-eslint/ban-ts-comment": "warn"
     }
 }

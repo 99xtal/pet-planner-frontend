@@ -1,3 +1,4 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
 // General Imports
 import React, { useContext } from 'react';
 import styles from './SideBar.module.scss';
@@ -27,8 +28,7 @@ const SideBar = () => {
       <SideBarDropdown title="My Pets" icon={<FaPaw size={24} />}>
         {pets &&
           pets.map((pet) => {
-          	// eslint-disable-next-line no-mixed-spaces-and-tabs
-          	return (
+        	return (
           		<SideBarSublink
           			key={pet.id}
           			title={pet.name}
