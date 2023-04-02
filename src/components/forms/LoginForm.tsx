@@ -1,47 +1,46 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useState } from 'react';
+import { useForm } from 'react-hook-form';
 
 import AuthContext from '../../context/AuthContext';
-import useCustomForm from '../../hooks/useCustomForm';
 import { SubmitButton } from '../buttons';
-import { PasswordInput, TextInput } from '../input';
+import { FormPasswordInput, FormTextInput } from '../input';
+import type { LoginForm } from '../../api/auth/types';
 
 import styles from './LoginForm.module.scss';
+import { listMissingFields } from '../../utils/forms';
 
 const LoginForm: React.FC = () => {
-  const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: '', password: '' };
-  const { formData, handleInputChange, handleSubmit, reset } = useCustomForm(
-    defaultValues,
-    loginUser
-  );
-  
-  useEffect(() => {
-    if (isServerError) {
-      reset();
+  const { loginUser } = useContext(AuthContext);
+  const [error, setError] = useState(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>();  
+
+  const onSubmit = async (formData: LoginForm) => {
+    try {
+      await loginUser(formData);
+      setError(false);
+    } catch (err) {
+      setError(true);
     }
-  }, [isServerError]);
-    
+  };
+
   return (
-    <form onSubmit={handleSubmit}>
-      <div className={styles.form}>
-        <TextInput
-          placeholder="Username"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
-        />
-        <PasswordInput
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
-        />
-        {isServerError ? (
-          <p className="error">Login failed, incorrect credentials!</p>
-        ) : null}
-        <div className={styles.form__buttonContainer}>
-          <SubmitButton>Log In</SubmitButton>
-        </div>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <FormTextInput<LoginForm>
+        placeholder={'Username'}
+        label={'username'}
+        register={register}
+        required
+      />
+      <FormPasswordInput<LoginForm>
+        placeholder={'Password'}
+        label={'password'}
+        register={register}
+        required
+      />
+      {!error && !!Object.keys(errors).length && <p className={styles.error}>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
+      {error && <p className={styles.error}>Login failed. Invalid username or password.</p>}
+      <div className={styles.form__buttonContainer}>
+        <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
       </div>
     </form>
   );

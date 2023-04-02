@@ -1,13 +1,19 @@
 .form {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 24px;
+    gap: 16px;
 
     &__buttonContainer {
         display: flex;
         flex-direction: column;
         gap: 6px;
     }
+}
+
+.error {
+    text-align: center;
+    margin-bottom: 0;
 }
