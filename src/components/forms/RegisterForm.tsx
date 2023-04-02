@@ -11,7 +11,7 @@ interface Props {
 }
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit: onSubmit }) => {
-  const { register, handleSubmit } = useForm<RegistrationForm>();
+  const { register, handleSubmit, formState: { isSubmitting } } = useForm<RegistrationForm>();
       
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -35,11 +35,11 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit: onSubmit }) => {
           required
         />
         <p style={{ fontSize: '12px' }}>
-            NOTE: Make this an uncommon password with characters, numbers, and
-            special characters!
+          NOTE: Make this an uncommon password with characters, numbers, and
+          special characters!
         </p>
         <div className={styles.register__buttons}>
-          <SubmitButton>Register!</SubmitButton>
+          <SubmitButton disabled={isSubmitting}>Register!</SubmitButton>
         </div>
       </div>
     </form>
