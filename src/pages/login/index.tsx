@@ -10,7 +10,7 @@ const LoginPage = () => {
   return (
     <main className={styles.main}>
       <h1 className={styles.logo__title}>petPal</h1>
-      <h3 className={styles.logo__subtitle}>An all-in-one pet planner</h3>
+      <h3 className={styles.logo__subtitle}>Making petcare easy</h3>
       <WidgetBorder>
         <div className={styles.login}>
           <LoginForm />
