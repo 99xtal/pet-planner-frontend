@@ -33,20 +33,6 @@
   align-items: center;
   gap: 16px;
 
-  &__form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 24px;
-  }
-
-  &__buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-
   &__buttonsLink {
     color: #707070;
   }
