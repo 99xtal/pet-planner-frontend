@@ -9,6 +9,8 @@ export const renderInMockAuthContext = (component: React.ReactNode, contextValue
   </AuthContext.Provider>
 );
 
+export const immediatelyRejectPromise = () => new Promise((_, rej) => rej());
+
 export const waitAsync = (ms: number) => new Promise((res) => setTimeout(() => res(null), ms));
 
 export const setupTestUser = () => userEvent.setup();

@@ -3,7 +3,6 @@ import { useForm } from 'react-hook-form';
 
 import AuthContext from '../../context/AuthContext';
 import { SubmitButton } from '../buttons';
-import { FormPasswordInput, FormTextInput } from '../input';
 import type { LoginForm } from '../../api/auth/types';
 
 import styles from './LoginForm.module.scss';
@@ -16,8 +15,8 @@ const LoginForm: React.FC = () => {
 
   const onSubmit = async (formData: LoginForm) => {
     try {
-      await loginUser(formData);
       setError(false);
+      await loginUser(formData);
     } catch (err) {
       setError(true);
     }
@@ -25,22 +24,24 @@ const LoginForm: React.FC = () => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <FormTextInput<LoginForm>
-        placeholder={'Username'}
-        label={'username'}
-        register={register}
-        required
+      <input
+        aria-label='username'
+        type="text"
+        placeholder='Username'
+        className={styles.form__input}
+        {...register('username', { required: true })}
       />
-      <FormPasswordInput<LoginForm>
-        placeholder={'Password'}
-        label={'password'}
-        register={register}
-        required
+      <input
+        aria-label='password'
+        type='password'
+        placeholder='Password'
+        className={styles.form__input}
+        {...register('password', { required: true })}
       />
       {!error && !!Object.keys(errors).length && <p className={styles.error}>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
-      {error && <p className={styles.error}>Login failed. Invalid username or password.</p>}
+      {error && <p className={styles.error}>Login failed. Incorrect username or password.</p>}
       <div className={styles.form__buttonContainer}>
-        <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
+        <SubmitButton loading={isSubmitting} disabled={isSubmitting}>Log In</SubmitButton>
       </div>
     </form>
   );

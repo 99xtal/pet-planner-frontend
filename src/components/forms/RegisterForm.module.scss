@@ -8,11 +8,20 @@
         gap: 16px;
     }
 
+    &__input {
+        @include text-input;
+    }
+
     &__buttons {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         gap: 6px;
+    }
+
+    &__text {
+        font-size: 12px;
+        color: $GRAY;
     }
 }

@@ -1,0 +1,17 @@
+@mixin text-input {
+    font-size: 18px;
+    border-style: solid;
+    border-color: #bcbcbc;
+    border-width: 1px;
+    border-radius: 10px;
+    padding: 8px 16px;
+    width: 100%;
+    -moz-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16);
+    -webkit-box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.16);
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.16);
+
+    &::placeholder {
+        color: #bcbcbc;
+        opacity: 1;
+    }
+}

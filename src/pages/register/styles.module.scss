@@ -5,7 +5,7 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: #f6f6f6ed;
+    background: $SOFT_WHITE;
 }
 
 .register {
@@ -18,6 +18,8 @@
 
     &__link {
         color: #707070;
+        margin-bottom: 0;
+        padding-bottom: 0;
     }
 }
 
