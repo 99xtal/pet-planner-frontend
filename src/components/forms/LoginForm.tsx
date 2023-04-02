@@ -1,40 +1,32 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
+import { useForm } from 'react-hook-form';
 
 import AuthContext from '../../context/AuthContext';
-import useCustomForm from '../../hooks/useCustomForm';
 import { SubmitButton } from '../buttons';
-import { PasswordInput, TextInput } from '../input';
+import { FormPasswordInput, FormTextInput,  } from '../input';
+import type { LoginForm } from '../../api/auth/types';
 
 import styles from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const defaultValues = { username: '', password: '' };
-  const { formData, handleInputChange, handleSubmit, reset } = useCustomForm(
-    defaultValues,
-    loginUser
-  );
+  const { register, handleSubmit } = useForm<LoginForm>();
   
-  useEffect(() => {
-    if (isServerError) {
-      reset();
-    }
-  }, [isServerError]);
-    
+
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(loginUser)}>
       <div className={styles.form}>
-        <TextInput
-          placeholder="Username"
-          name="username"
-          value={formData.username}
-          onChange={handleInputChange}
+        <FormTextInput<LoginForm>
+          placeholder={'Username'}
+          label={'username'}
+          register={register}
+          required
         />
-        <PasswordInput
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
+        <FormPasswordInput<LoginForm>
+          placeholder={'Password'}
+          label={'password'}
+          register={register}
+          required
         />
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
