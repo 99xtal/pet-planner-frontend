@@ -2,7 +2,7 @@ import { render } from '@testing-library/react';
 import React from 'react';
 import { beforeEach, test, vi } from 'vitest';
 
-import { setupTestUser } from '../../test/utils';
+import { setupTestUser, waitAsync } from '../../test/utils';
 import RegisterForm from './RegisterForm';
 
 const mockRegisterCallback = vi.fn();
@@ -67,4 +67,26 @@ test('disables form submission if passwords does not match', async () => {
   await user.click(submitButton());
   
   expect(mockRegisterCallback).toBeCalledTimes(0);
+});
+
+test('disables submit button while processing request', async () => {
+  const { user, component: { usernameInput, passwordInput, emailInput, secondPasswordInput, submitButton }} = setupTest();
+  
+  mockRegisterCallback.mockImplementation(() => waitAsync(1000));
+
+  await user.click(usernameInput());
+  await user.keyboard('test_user');
+
+  await user.click(emailInput());
+  await user.keyboard('testuser@email.com');
+  
+  await user.click(passwordInput());
+  await user.keyboard('password');
+
+  await user.click(secondPasswordInput());
+  await user.keyboard('password');
+
+  await user.tripleClick(submitButton());
+
+  expect(mockRegisterCallback).toBeCalledTimes(1);
 });

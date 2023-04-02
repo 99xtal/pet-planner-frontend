@@ -19,11 +19,11 @@ interface RegisterForm {
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   const { register, handleSubmit: handleFormSubmit, formState: { isSubmitting } } = useForm<RegisterForm>();
   
-  const onSubmit = (formValues: RegisterForm) => {
+  const onSubmit = async (formValues: RegisterForm) => {
     if (formValues.password !== formValues.verify) {
       return;
     }
-    handleSubmit({
+    await handleSubmit({
       username: formValues.username,
       password: formValues.password,
       email: formValues.email,
