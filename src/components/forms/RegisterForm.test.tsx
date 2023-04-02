@@ -27,7 +27,7 @@ const setupTest = () => {
   };
 };
 
-test('form only submitted if all required fields are set', async () => {
+test('only submits form if all required fields are set', async () => {
   const { user, component: { usernameInput, emailInput, passwordInput, secondPasswordInput, submitButton } } = setupTest();
 
   await user.click(usernameInput());
@@ -49,7 +49,7 @@ test('form only submitted if all required fields are set', async () => {
   expect(mockRegisterCallback).toBeCalledTimes(1);
 });
 
-test('form is not submitted if second password does not match', async () => {
+test('disables form submission if passwords does not match', async () => {
   const { user, component: { usernameInput, emailInput, passwordInput, secondPasswordInput, submitButton } } = setupTest();
 
   await user.click(usernameInput());

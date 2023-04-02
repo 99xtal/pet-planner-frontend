@@ -35,46 +35,17 @@ beforeEach(() => {
   vi.clearAllMocks();
 });
 
-test('doesn\'t submit form if username and password fields not set', async () => {
-  const { user, component: { submitButton } } = setupTest();
-
-  await user.click(submitButton());
-
-  expect(mockLogin).toBeCalledTimes(0);
-});
-
-test('doesn\'t submit form if only username field is set', async () => {
-  const { user, component: { usernameInput, submitButton } } = setupTest();
+test('only submits form if all required fields are set',  async () => {
+  const { user, component: { usernameInput, passwordInput, submitButton } } = setupTest();
 
   await user.click(usernameInput());
   await user.keyboard('username');
-
   await user.click(submitButton());
 
   expect(mockLogin).toBeCalledTimes(0);
-});
-
-test('doesn\'t submit form if only password field is set', async () => {
-  const { user, component: { passwordInput, submitButton }} = setupTest();
 
   await user.click(passwordInput());
   await user.keyboard('password');
-
-  await user.click(submitButton());
-
-  expect(mockLogin).toBeCalledTimes(0);
-});
-
-
-test('submits form if username and password fields set', async () => {
-  const { user, component: { usernameInput, passwordInput, submitButton }} = setupTest();
-
-  await user.click(usernameInput());
-  await user.keyboard('username');
-
-  await user.click(passwordInput());
-  await user.keyboard('password');
-
   await user.click(submitButton());
 
   expect(mockLogin).toBeCalledTimes(1);
@@ -112,7 +83,7 @@ test('shows a warning if login throws error', async () => {
   expect(loginError()).toBeVisible();
 });
 
-test('submit button is disabled while processing request', async () => {
+test('disables submit button while processing request', async () => {
   const { user, component: { usernameInput, passwordInput, submitButton }} = setupTest();
   
   mockLogin.mockImplementation(() => waitAsync(1000));
