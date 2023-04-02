@@ -12,6 +12,8 @@ interface Props<T extends FieldValues> extends React.DetailedHTMLProps<React.Inp
 function FormTextInput<T extends FieldValues>({ label, register, required, ...rest }: Props<T>) {
   return (
     <input
+      id={label}
+      aria-label={label}
       type="text"
       className={styles.input}
       {...register(label, { required })}

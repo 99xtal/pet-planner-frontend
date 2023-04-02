@@ -13,6 +13,7 @@ function FormPasswordInput<T extends FieldValues>({label, register, required, ..
   return (
     <input
       type="password"
+      aria-label={label}
       className={styles.input}
       {...register(label, { required })}
       {...rest}
