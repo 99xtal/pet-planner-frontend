@@ -33,18 +33,6 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit: onSubmit }) => {
           onChange={handleInputChange}
         />
         <TextInput 
-          name="firstName"
-          placeholder='First Name'
-          value={formData.first_name}
-          onChange={handleInputChange}
-        />
-        <TextInput 
-          name="lastName"
-          placeholder='Last Name'
-          value={formData.last_name}
-          onChange={handleInputChange}
-        />
-        <TextInput 
           name="email"
           placeholder='Email'
           value={formData.email}
