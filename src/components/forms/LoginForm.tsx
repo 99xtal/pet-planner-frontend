@@ -15,7 +15,7 @@ const listMissingFields = (errors: FieldErrors<LoginForm>) => {
 
 const LoginForm: React.FC = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();  
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>();  
 
   return (
     <form onSubmit={handleSubmit(loginUser)}>
@@ -37,7 +37,7 @@ const LoginForm: React.FC = () => {
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}
         <div className={styles.form__buttonContainer}>
-          <SubmitButton>Log In</SubmitButton>
+          <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
         </div>
       </div>
     </form>
