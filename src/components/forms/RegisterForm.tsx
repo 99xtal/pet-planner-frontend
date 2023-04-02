@@ -63,12 +63,12 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
           className={styles.register__input}
           {...register('confirmPassword', { required: true })}
         />
-        <p style={{ fontSize: '12px' }}>
+        <p className={styles.register__text}>
           NOTE: Make this an uncommon password with characters, numbers, and
           special characters!
         </p>
         <div className={styles.register__buttons}>
-          <SubmitButton disabled={isSubmitting}>Register!</SubmitButton>
+          <SubmitButton loading={isSubmitting} disabled={isSubmitting}>Sign Up</SubmitButton>
         </div>
       </div>
     </form>

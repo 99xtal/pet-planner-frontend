@@ -12,10 +12,10 @@ const RegisterPage = () => {
 
   return (
     <div className={styles.main}>
-      <TitledWidgetBorder title="Sign Up">
+      <TitledWidgetBorder title="Join PetPal">
         <div className={styles.register}>
           <RegisterForm handleSubmit={registerUser}/>
-          <Link className={styles.register__link} to="/login">Back to login</Link>
+          <p className={styles.register__link}>Already a member? <Link className={styles.register__link} to="/login">Login</Link></p>
         </div>
       </TitledWidgetBorder>
     </div>

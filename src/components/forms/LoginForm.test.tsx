@@ -51,39 +51,7 @@ test('only submits form if all required fields are set',  async () => {
   expect(mockLogin).toBeCalledTimes(1);
 });
 
-test('shows a warning if username field is empty on submit', async () => {
-  const { user, component: { submitButton, usernameError } } = setupTest();
-
-  await user.click(submitButton());
-
-  expect(usernameError()).toBeTruthy();
-  expect(usernameError()).toBeVisible();
-});
-
-test('shows a warning if password field is empty on submit', async () => {
-  const { user, component: { submitButton, passwordError } } = setupTest();
-
-  await user.click(submitButton());
-
-  expect(passwordError()).toBeTruthy();
-  expect(passwordError()).toBeVisible();});
-
-test('shows a warning if login throws error', async () => {
-  const { user, component: { usernameInput, passwordInput, submitButton, loginError }} = setupTest();
-  mockLogin.mockImplementation(() => immediatelyRejectPromise());
-
-  await user.click(usernameInput());
-  await user.keyboard('username');
-
-  await user.click(passwordInput());
-  await user.keyboard('password');
-
-  await user.click(submitButton());
-  
-  expect(loginError()).toBeVisible();
-});
-
-test('disables submit button while processing request', async () => {
+test('disables form submission while processing request', async () => {
   const { user, component: { usernameInput, passwordInput, submitButton }} = setupTest();
   
   mockLogin.mockImplementation(() => waitAsync(1000));
@@ -97,4 +65,36 @@ test('disables submit button while processing request', async () => {
   await user.tripleClick(submitButton());
 
   expect(mockLogin).toBeCalledTimes(1);
+});
+
+test('shows a warning for invalid username (empty) on submit', async () => {
+  const { user, component: { submitButton, usernameError } } = setupTest();
+
+  await user.click(submitButton());
+
+  expect(usernameError()).toBeTruthy();
+  expect(usernameError()).toBeVisible();
+});
+
+test('shows a warning for invalid password (empty) on submit', async () => {
+  const { user, component: { submitButton, passwordError } } = setupTest();
+
+  await user.click(submitButton());
+
+  expect(passwordError()).toBeTruthy();
+  expect(passwordError()).toBeVisible();});
+
+test('shows a warning for login request error', async () => {
+  const { user, component: { usernameInput, passwordInput, submitButton, loginError }} = setupTest();
+  mockLogin.mockImplementation(() => immediatelyRejectPromise());
+
+  await user.click(usernameInput());
+  await user.keyboard('username');
+
+  await user.click(passwordInput());
+  await user.keyboard('password');
+
+  await user.click(submitButton());
+  
+  expect(loginError()).toBeVisible();
 });

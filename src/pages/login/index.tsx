@@ -14,7 +14,7 @@ const LoginPage = () => {
       <WidgetBorder>
         <div className={styles.login}>
           <LoginForm />
-          <Link className={styles.login__buttonsLink} to="/register">Create an account</Link>
+          <Link className={styles.login__buttonsLink} to="/register">Sign Up</Link>
         </div>
       </WidgetBorder>
     </main>

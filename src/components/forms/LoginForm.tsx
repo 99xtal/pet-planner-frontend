@@ -41,7 +41,7 @@ const LoginForm: React.FC = () => {
       {!error && !!Object.keys(errors).length && <p className={styles.error}>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
       {error && <p className={styles.error}>Login failed. Incorrect username or password.</p>}
       <div className={styles.form__buttonContainer}>
-        <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
+        <SubmitButton loading={isSubmitting} disabled={isSubmitting}>Log In</SubmitButton>
       </div>
     </form>
   );

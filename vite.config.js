@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react-swc';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  assetsInclude: ['**/**.svg'],
   css: {
     modules: {
       scopeBehaviour: 'local',
@@ -12,8 +13,8 @@ export default defineConfig({
     preprocessorOptions: {
       scss: {
         additionalData: `
-        @import "./src/styles/_colors.scss";
-        @import "./src/styles/_mixins.scss";
+          @import "./src/styles/_colors.scss";
+          @import "./src/styles/_mixins.scss";
         `,
       },
     },
