@@ -15,8 +15,8 @@ const LoginForm: React.FC = () => {
 
   const onSubmit = async (formData: LoginForm) => {
     try {
-      await loginUser(formData);
       setError(false);
+      await loginUser(formData);
     } catch (err) {
       setError(true);
     }
