@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm, FieldErrors} from 'react-hook-form';
 
 import AuthContext from '../../context/AuthContext';
@@ -14,11 +14,21 @@ const listMissingFields = (errors: FieldErrors<LoginForm>) => {
 };
 
 const LoginForm: React.FC = () => {
-  const { loginUser, isServerError } = useContext(AuthContext);
-  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>();  
+  const { loginUser } = useContext(AuthContext);
+  const [error, setError] = useState(false);
+  const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted } } = useForm<LoginForm>();  
+
+  const onSubmit = async (formData: LoginForm) => {
+    try {
+      await loginUser(formData);
+      setError(false);
+    } catch (err) {
+      setError(true);
+    }
+  };
 
   return (
-    <form onSubmit={handleSubmit(loginUser)}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.form}>
         <FormTextInput<LoginForm>
           placeholder={'Username'}
@@ -32,10 +42,8 @@ const LoginForm: React.FC = () => {
           register={register}
           required
         />
-        {!!Object.keys(errors).length && <p>{`Invalid ${listMissingFields(errors).join(' and ')}`}</p>}
-        {isServerError ? (
-          <p className="error">Login failed, incorrect credentials!</p>
-        ) : null}
+        {!!Object.keys(errors).length && <p>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
+        {error && <p className="error">Login failed. Invalid username or password.</p>}
         <div className={styles.form__buttonContainer}>
           <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
         </div>

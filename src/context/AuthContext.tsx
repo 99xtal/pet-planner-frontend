@@ -67,21 +67,15 @@ export const AuthProvider = ({ children }) => {
   };
 
   const login = async (loginData: LoginForm) => {
-    try {
-      const response = await loginUser(loginData);
-      if (response.status === 200) {
-        localStorage.setItem('token', JSON.stringify(response.data.access));
-        setToken(response.data.access);
-        const loggedInUser = jwtDecode<TokenData>(response.data.access);
-        setUser(setUserObject(loggedInUser));
-        setIsServerError(false);
-        navigate('/dashboard');
-      } else {
-        navigate('/register');
-      }
-    } catch (error) {
-      console.log(error);
-      setIsServerError(true);
+    const response = await loginUser(loginData);
+    if (response.status === 200) {
+      localStorage.setItem('token', JSON.stringify(response.data.access));
+      setToken(response.data.access);
+      const loggedInUser = jwtDecode<TokenData>(response.data.access);
+      setUser(setUserObject(loggedInUser));
+      setIsServerError(false);
+      navigate('/dashboard');
+    } else {
       navigate('/register');
     }
   };

@@ -80,17 +80,35 @@ test('shows a warning if username field is empty on submit', async () => {
 
 test('shows a warning if password field is empty on submit', async () => {
   const user = setupTestUser();
-  const { getByText, queryByText, debug } = render(<LoginForm />);
+  const { getByText, queryByText } = render(<LoginForm />);
   const submitButton = getByText('Log In', { exact: true });
 
   await user.click(submitButton);
-  console.log(debug());
   const passwordError = queryByText(/invalid.*password/i);
 
   expect(passwordError).toBeVisible();
 });
 
-test.todo('shows a warning if login credentials are incorrect');
+test('shows a warning if login throws error', async () => {
+  const user = setupTestUser();
+  const { getByText, getByPlaceholderText, queryByText } = render(<LoginForm />);
+  const submitButton = getByText('Log In', { exact: true });
+  const usernameInput = getByPlaceholderText('username', { exact: false });
+  const passwordInput = getByPlaceholderText('password', { exact: false });
+  mockLogin.mockImplementation(() => new Promise((_, rej) => rej()));
+
+  await user.click(usernameInput);
+  await user.keyboard('username');
+
+  await user.click(passwordInput);
+  await user.keyboard('password');
+
+  await user.click(submitButton);
+
+  const loginError = queryByText(/invalid.*username.*password/i);
+  
+  expect(loginError).toBeVisible();
+});
 
 test('submit button is disabled while processing request', async () => {
   const user = setupTestUser();
