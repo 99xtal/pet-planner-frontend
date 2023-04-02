@@ -8,6 +8,10 @@
         gap: 16px;
     }
 
+    &__input {
+        @include text-input;
+    }
+
     &__buttons {
         display: flex;
         flex-direction: column;

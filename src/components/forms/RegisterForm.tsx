@@ -2,7 +2,6 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { RegistrationForm as APIRegistrationForm } from '../../api/auth/types';
 import { SubmitButton } from '../buttons';
-import { FormPasswordInput, FormTextInput } from '../input';
 
 import styles from './RegisterForm.module.scss';
 
@@ -36,29 +35,33 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   return (
     <form onSubmit={handleFormSubmit(onSubmit)}>
       <div className={styles.register__form}>
-        <FormTextInput<RegisterForm>
+        <input
+          aria-label='username'
+          type="text"
           placeholder='Username'
-          label='username'
-          register={register}
-          required
+          className={styles.register__input}
+          {...register('username', { required: true })}
         />
-        <FormTextInput<RegisterForm>
+        <input
+          aria-label='email'
+          type="text"
           placeholder='Email'
-          label='email'
-          register={register}
-          required
+          className={styles.register__input}
+          {...register('email', { required: true })}
         />
-        <FormPasswordInput<RegisterForm>
+        <input
+          aria-label='password'
+          type='password'
           placeholder='Password'
-          label='password'
-          register={register}
-          required
+          className={styles.register__input}
+          {...register('password', { required: true })}
         />
-        <FormPasswordInput<RegisterForm>
+        <input
+          aria-label='verify'
+          type='password'
           placeholder='Verify Password'
-          label='verify'
-          register={register}
-          required
+          className={styles.register__input}
+          {...register('verify', { required: true })}
         />
         <p style={{ fontSize: '12px' }}>
           NOTE: Make this an uncommon password with characters, numbers, and
