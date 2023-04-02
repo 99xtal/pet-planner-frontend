@@ -5,75 +5,73 @@ import { beforeEach, test, vi } from 'vitest';
 import { setupTestUser } from '../../test/utils';
 import RegisterForm from './RegisterForm';
 
-const mockRegister = vi.fn();
+const mockRegisterCallback = vi.fn();
 
 beforeEach(() => {
   vi.clearAllMocks();
 });
 
-test('form not submitted if username not set', async () => {
+const setupTest = () => {
   const user = setupTestUser();
-  const { getByText, getByPlaceholderText } = render(<RegisterForm handleSubmit={mockRegister}/>);
-  const submitButton = getByText('register', { exact: false });
-  const emailInput = getByPlaceholderText('email', { exact: false });
-  const passwordInput = getByPlaceholderText('password', { exact: false });
+  const { getByText, getByPlaceholderText, getByRole } = render(<RegisterForm handleSubmit={mockRegisterCallback}/>);
 
-  await user.click(emailInput);
+  return {
+    user,
+    component: {
+      submitButton: () => getByText('register', { exact: false }),
+      usernameInput: () => getByRole('textbox', { name: 'username' }),
+      emailInput: () => getByRole('textbox', { name: 'email' }),
+      passwordInput: () => getByPlaceholderText('password', { exact: false }),
+    }
+  };
+};
+
+test('form not submitted if username not set', async () => {
+  const { user, component: { emailInput, passwordInput, submitButton } } = setupTest();
+
+  await user.click(emailInput());
   await user.keyboard('test@email.com');
-  await user.click(passwordInput);
+  await user.click(passwordInput());
   await user.keyboard('password');
-  await user.click(submitButton);
+  await user.click(submitButton());
 
-  expect(mockRegister).toBeCalledTimes(0);
+  expect(mockRegisterCallback).toBeCalledTimes(0);
 });
 
 test('form not submitted if password not set', async () => {
-  const user = setupTestUser();
-  const { getByText, getByPlaceholderText } = render(<RegisterForm handleSubmit={mockRegister}/>);
-  const submitButton = getByText('register', { exact: false });
-  const usernameInput = getByPlaceholderText('username', { exact: false });
-  const emailInput = getByPlaceholderText('email', { exact: false });
-  
-  await user.click(usernameInput);
+  const { user, component: { usernameInput, emailInput, submitButton } } = setupTest();
+
+  await user.click(usernameInput());
   await user.keyboard('username');
-  await user.click(emailInput);
+  await user.click(emailInput());
   await user.keyboard('test@email.com');
-  await user.click(submitButton);
+  await user.click(submitButton());
   
-  expect(mockRegister).toBeCalledTimes(0);
+  expect(mockRegisterCallback).toBeCalledTimes(0);
 });
 
 test('form not submitted if email not set', async () => {
-  const user = setupTestUser();
-  const { getByText, getByPlaceholderText } = render(<RegisterForm handleSubmit={mockRegister}/>);
-  const submitButton = getByText('register', { exact: false });
-  const usernameInput = getByPlaceholderText('username', { exact: false });
-  const passwordInput = getByPlaceholderText('password', { exact: false });
+  const { user, component: { usernameInput, passwordInput, submitButton }} = setupTest();
 
-  await user.click(usernameInput);
+  await user.click(usernameInput());
   await user.keyboard('username');
-  await user.click(passwordInput);
+  await user.click(passwordInput());
   await user.keyboard('password');
-  await user.click(submitButton);
+  await user.click(submitButton());
     
-  expect(mockRegister).toBeCalledTimes(0);
+  expect(mockRegisterCallback).toBeCalledTimes(0);
 });
 
 test('form is submitted if all required fields are set', async () => {
-  const user = setupTestUser();
-  const { getByText, getByPlaceholderText } = render(<RegisterForm handleSubmit={mockRegister}/>);
-  const submitButton = getByText('register', { exact: false });
-  const usernameInput = getByPlaceholderText('username', { exact: false });
-  const passwordInput = getByPlaceholderText('password', { exact: false });
-  const emailInput = getByPlaceholderText('email', { exact: false });
+  const { user, component: { usernameInput, passwordInput, emailInput, submitButton }} = setupTest();
   
-  await user.click(usernameInput);
+  await user.click(usernameInput());
   await user.keyboard('username');
-  await user.click(passwordInput);
+  await user.click(passwordInput());
   await user.keyboard('password');
-  await user.click(emailInput);
+  await user.click(emailInput());
   await user.keyboard('test@email.com');
-  await user.click(submitButton);
+  await user.click(submitButton());
       
-  expect(mockRegister).toBeCalledTimes(1);
+  expect(mockRegisterCallback).toBeCalledTimes(1);
 });

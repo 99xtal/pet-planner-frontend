@@ -6,6 +6,31 @@ import { immediatelyRejectPromise, renderInMockAuthContext, setupTestUser, waitA
 
 const mockLogin = vi.fn();
 
+const setupTest = () => {
+  const user = setupTestUser();
+  const { getByText, getByRole, getByPlaceholderText, debug } = renderInMockAuthContext(<LoginForm />, {
+    user: null,
+    token: null,
+    loginUser: mockLogin,
+    logoutUser: vi.fn(),
+    registerUser: vi.fn(),
+    isServerError: false,
+  });
+
+  return {
+    user,
+    component: {
+      submitButton: () => getByText('Log In', { exact: true }),
+      usernameInput: () => getByRole('textbox', { name: 'username' }),
+      passwordInput: () => getByPlaceholderText('password', { exact: false }),
+      usernameError: () => getByText(/invalid.*username/ig),
+      passwordError: () => getByText(/invalid.*password/ig),
+      loginError: () => getByText(/incorrect.*username.*password/ig)
+    },
+    debug
+  };
+};
+
 beforeEach(() => {
   vi.clearAllMocks();
 });
@@ -102,28 +127,3 @@ test('submit button is disabled while processing request', async () => {
 
   expect(mockLogin).toBeCalledTimes(1);
 });
-
-const setupTest = () => {
-  const user = setupTestUser();
-  const { getByText, getByRole, getByPlaceholderText, debug } = renderInMockAuthContext(<LoginForm />, {
-    user: null,
-    token: null,
-    loginUser: mockLogin,
-    logoutUser: vi.fn(),
-    registerUser: vi.fn(),
-    isServerError: false,
-  });
-
-  return {
-    user,
-    component: {
-      submitButton: () => getByText('Log In', { exact: true }),
-      usernameInput: () => getByRole('textbox', { name: 'username' }),
-      passwordInput: () => getByPlaceholderText('password', { exact: false }),
-      usernameError: () => getByText(/invalid.*username/ig),
-      passwordError: () => getByText(/invalid.*password/ig),
-      loginError: () => getByText(/incorrect.*username.*password/ig)
-    },
-    debug
-  };
-};
