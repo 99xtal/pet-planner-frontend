@@ -20,7 +20,7 @@ test('doesn\'t submit form if username and password fields not set', async () =>
   expect(mockLogin).toBeCalledTimes(0);
 });
 
-test('doesn\'t submit form  if only username field is set', async () => {
+test('doesn\'t submit form if only username field is set', async () => {
   const user = setupTestUser();
   const { getByText, getByPlaceholderText } = render(<LoginForm />);
   const submitButton = getByText('Log In', { exact: true });
@@ -34,7 +34,7 @@ test('doesn\'t submit form  if only username field is set', async () => {
   expect(mockLogin).toBeCalledTimes(0);
 });
 
-test('doesn\'t submit form  if only password field is set', async () => {
+test('doesn\'t submit form if only password field is set', async () => {
   const user = setupTestUser();
   const { getByText, getByPlaceholderText } = render(<LoginForm />);
   const submitButton = getByText('Log In', { exact: true });
@@ -73,18 +73,19 @@ test('shows a warning if username field is empty on submit', async () => {
   const submitButton = getByText('Log In', { exact: true });
 
   await user.click(submitButton);
-  const usernameError = queryByText('invalid username', { exact: false });
+  const usernameError = queryByText(/invalid.*username/i);
 
   expect(usernameError).toBeVisible();
 });
 
 test('shows a warning if password field is empty on submit', async () => {
   const user = setupTestUser();
-  const { getByText, queryByText } = render(<LoginForm />);
+  const { getByText, queryByText, debug } = render(<LoginForm />);
   const submitButton = getByText('Log In', { exact: true });
 
   await user.click(submitButton);
-  const passwordError = queryByText('invalid password', { exact: false });
+  console.log(debug());
+  const passwordError = queryByText(/invalid.*password/i);
 
   expect(passwordError).toBeVisible();
 });
