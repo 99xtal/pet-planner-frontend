@@ -10,8 +10,7 @@ import styles from './LoginForm.module.scss';
 
 const LoginForm: React.FC = () => {
   const { loginUser, isServerError } = useContext(AuthContext);
-  const { register, handleSubmit } = useForm<LoginForm>();
-  
+  const { register, handleSubmit, formState: { errors } } = useForm<LoginForm>();  
 
   return (
     <form onSubmit={handleSubmit(loginUser)}>
@@ -22,12 +21,14 @@ const LoginForm: React.FC = () => {
           register={register}
           required
         />
+        {errors.username?.type === 'required' && <p>Invalid Username</p>}
         <FormPasswordInput<LoginForm>
           placeholder={'Password'}
           label={'password'}
           register={register}
           required
         />
+        {errors.password?.type === 'required' && <p>Invalid Password</p>}
         {isServerError ? (
           <p className="error">Login failed, incorrect credentials!</p>
         ) : null}
