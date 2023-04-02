@@ -5,11 +5,12 @@
     align-items: center;
     width: 100%;
     height: 100vh;
-    background: radial-gradient(#9bf268, #389602);
+    background: #f6f6f6ed;
 }
 
 .register {
     background-color: white;
+    padding: 32px 24px 24px 24px;
     display: flex; 
     flex-direction: column;
     align-items: center;
@@ -19,3 +20,9 @@
         color: #707070;
     }
 }
+
+@media only screen and (max-width: 500px) {
+    .register {
+        padding: 32px 8px 8px 8px;
+    }
+  }
