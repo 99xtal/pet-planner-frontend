@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { useForm, FieldErrors} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 
 import AuthContext from '../../context/AuthContext';
 import { SubmitButton } from '../buttons';
@@ -7,11 +7,7 @@ import { FormPasswordInput, FormTextInput } from '../input';
 import type { LoginForm } from '../../api/auth/types';
 
 import styles from './LoginForm.module.scss';
-
-const listMissingFields = (errors: FieldErrors<LoginForm>) => {
-  const entries = Object.entries(errors);
-  return entries.filter(([_, error]) => error?.type === 'required').map(([field]) => field);
-};
+import { listMissingFields } from '../../utils/forms';
 
 const LoginForm: React.FC = () => {
   const { loginUser } = useContext(AuthContext);
