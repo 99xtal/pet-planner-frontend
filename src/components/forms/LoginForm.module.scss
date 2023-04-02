@@ -6,6 +6,10 @@
     align-items: center;
     gap: 16px;
 
+    &__input {
+        @include text-input;
+    }
+
     &__buttonContainer {
         display: flex;
         flex-direction: column;
