@@ -18,6 +18,9 @@ export default defineConfig({
   test: {
     globals: true,
     environment: 'jsdom',
-    setupFiles: './test_setup.js'
+    setupFiles: './test_setup.js',
+    coverage: {
+      provider: 'c8'
+    }
   }
 });

@@ -1,8 +1,8 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
 import { RegistrationForm } from '../../api/auth/types';
-import useCustomForm from '../../hooks/useCustomForm';
 import { SubmitButton } from '../buttons';
-import { PasswordInput, TextInput } from '../input';
+import { FormPasswordInput, FormTextInput } from '../input';
 
 import styles from './RegisterForm.module.scss';
 
@@ -11,38 +11,28 @@ interface Props {
 }
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit: onSubmit }) => {
-  const defaultValues = {
-    username: '',
-    email: '',
-    password: '',
-    first_name: '',
-    last_name: '',
-  };
-  const { formData, handleInputChange, handleSubmit } = useCustomForm(
-    defaultValues,
-    onSubmit
-  );
+  const { register, handleSubmit } = useForm<RegistrationForm>();
       
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.register__form}>
-        <TextInput 
-          name="username"
+        <FormTextInput<RegistrationForm>
           placeholder='Username'
-          value={formData.username}
-          onChange={handleInputChange}
+          label='username'
+          register={register}
+          required
         />
-        <TextInput 
-          name="email"
+        <FormTextInput<RegistrationForm>
           placeholder='Email'
-          value={formData.email}
-          onChange={handleInputChange}
+          label='email'
+          register={register}
+          required
         />
-        <PasswordInput
-          placeholder="Password"
-          name="password"
-          value={formData.password}
-          onChange={handleInputChange}
+        <FormPasswordInput<RegistrationForm>
+          placeholder='Password'
+          label='password'
+          register={register}
+          required
         />
         <p style={{ fontSize: '12px' }}>
             NOTE: Make this an uncommon password with characters, numbers, and
