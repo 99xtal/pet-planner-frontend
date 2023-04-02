@@ -23,9 +23,9 @@ const setupTest = () => {
       submitButton: () => getByText('Log In', { exact: true }),
       usernameInput: () => getByRole('textbox', { name: 'username' }),
       passwordInput: () => getByPlaceholderText('password', { exact: false }),
-      usernameError: () => getByText(/invalid.*username/ig),
-      passwordError: () => getByText(/invalid.*password/ig),
-      loginError: () => getByText(/incorrect.*username.*password/ig)
+      usernameError: () => getByText(/invalid.*username/i),
+      passwordError: () => getByText(/invalid.*password/i),
+      loginError: () => getByText(/incorrect.*username.*password/i)
     },
     debug
   };

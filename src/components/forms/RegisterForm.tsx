@@ -13,14 +13,14 @@ interface RegisterForm {
   username: string;
   email: string;
   password: string;
-  verify: string
+  confirmPassword: string
 }
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
   const { register, handleSubmit: handleFormSubmit, formState: { isSubmitting } } = useForm<RegisterForm>();
   
   const onSubmit = async (formValues: RegisterForm) => {
-    if (formValues.password !== formValues.verify) {
+    if (formValues.password !== formValues.confirmPassword) {
       return;
     }
     await handleSubmit({
@@ -57,11 +57,11 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
           {...register('password', { required: true })}
         />
         <input
-          aria-label='verify'
+          aria-label='confirm-password'
           type='password'
-          placeholder='Verify Password'
+          placeholder='Confirm Password'
           className={styles.register__input}
-          {...register('verify', { required: true })}
+          {...register('confirmPassword', { required: true })}
         />
         <p style={{ fontSize: '12px' }}>
           NOTE: Make this an uncommon password with characters, numbers, and

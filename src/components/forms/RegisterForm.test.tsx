@@ -22,13 +22,13 @@ const setupTest = () => {
       usernameInput: () => getByRole('textbox', { name: 'username' }),
       emailInput: () => getByRole('textbox', { name: 'email' }),
       passwordInput: () => getByPlaceholderText('Password', { exact: true }),
-      secondPasswordInput: () => getByPlaceholderText('Verify Password', { exact: true }),
+      confirmPasswordInput: () => getByPlaceholderText('Confirm Password', { exact: true }),
     }
   };
 };
 
 test('only submits form if all required fields are set', async () => {
-  const { user, component: { usernameInput, emailInput, passwordInput, secondPasswordInput, submitButton } } = setupTest();
+  const { user, component: { usernameInput, emailInput, passwordInput, confirmPasswordInput, submitButton } } = setupTest();
 
   await user.click(usernameInput());
   await user.keyboard('username');
@@ -42,7 +42,7 @@ test('only submits form if all required fields are set', async () => {
   await user.keyboard('p@ssword1!');
   await user.click(submitButton());
 
-  await user.click(secondPasswordInput());
+  await user.click(confirmPasswordInput());
   await user.keyboard('p@ssword1!');
   await user.click(submitButton());
 
@@ -50,7 +50,7 @@ test('only submits form if all required fields are set', async () => {
 });
 
 test('disables form submission if passwords does not match', async () => {
-  const { user, component: { usernameInput, emailInput, passwordInput, secondPasswordInput, submitButton } } = setupTest();
+  const { user, component: { usernameInput, emailInput, passwordInput, confirmPasswordInput, submitButton } } = setupTest();
 
   await user.click(usernameInput());
   await user.keyboard('test_user');
@@ -61,7 +61,7 @@ test('disables form submission if passwords does not match', async () => {
   await user.click(passwordInput());
   await user.keyboard('s3cuR3p@$$word');
 
-  await user.click(secondPasswordInput());
+  await user.click(confirmPasswordInput());
   await user.keyboard('password');
 
   await user.click(submitButton());
@@ -70,7 +70,7 @@ test('disables form submission if passwords does not match', async () => {
 });
 
 test('disables submit button while processing request', async () => {
-  const { user, component: { usernameInput, passwordInput, emailInput, secondPasswordInput, submitButton }} = setupTest();
+  const { user, component: { usernameInput, passwordInput, emailInput, confirmPasswordInput, submitButton }} = setupTest();
   
   mockRegisterCallback.mockImplementation(() => waitAsync(1000));
 
@@ -83,7 +83,7 @@ test('disables submit button while processing request', async () => {
   await user.click(passwordInput());
   await user.keyboard('password');
 
-  await user.click(secondPasswordInput());
+  await user.click(confirmPasswordInput());
   await user.keyboard('password');
 
   await user.tripleClick(submitButton());
