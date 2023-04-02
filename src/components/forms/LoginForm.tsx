@@ -16,7 +16,7 @@ const listMissingFields = (errors: FieldErrors<LoginForm>) => {
 const LoginForm: React.FC = () => {
   const { loginUser } = useContext(AuthContext);
   const [error, setError] = useState(false);
-  const { register, handleSubmit, formState: { errors, isSubmitting, isSubmitSuccessful, isSubmitted } } = useForm<LoginForm>();  
+  const { register, handleSubmit, formState: { errors, isSubmitting } } = useForm<LoginForm>();  
 
   const onSubmit = async (formData: LoginForm) => {
     try {
@@ -28,25 +28,23 @@ const LoginForm: React.FC = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <div className={styles.form}>
-        <FormTextInput<LoginForm>
-          placeholder={'Username'}
-          label={'username'}
-          register={register}
-          required
-        />
-        <FormPasswordInput<LoginForm>
-          placeholder={'Password'}
-          label={'password'}
-          register={register}
-          required
-        />
-        {!!Object.keys(errors).length && <p>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
-        {error && <p className="error">Login failed. Invalid username or password.</p>}
-        <div className={styles.form__buttonContainer}>
-          <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
-        </div>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <FormTextInput<LoginForm>
+        placeholder={'Username'}
+        label={'username'}
+        register={register}
+        required
+      />
+      <FormPasswordInput<LoginForm>
+        placeholder={'Password'}
+        label={'password'}
+        register={register}
+        required
+      />
+      {!error && !!Object.keys(errors).length && <p className={styles.error}>{`Invalid ${listMissingFields(errors).join(' and ')}.`}</p>}
+      {error && <p className={styles.error}>Login failed. Invalid username or password.</p>}
+      <div className={styles.form__buttonContainer}>
+        <SubmitButton disabled={isSubmitting}>Log In</SubmitButton>
       </div>
     </form>
   );
