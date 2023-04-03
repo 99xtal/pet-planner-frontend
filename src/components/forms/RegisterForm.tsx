@@ -1,68 +1,71 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { RegistrationForm as APIRegistrationForm } from '../../api/auth/types';
+import { RegistrationForm } from '../../api/auth/types';
 import { SubmitButton } from '../buttons';
 
 import styles from './RegisterForm.module.scss';
 
 interface Props {
-    handleSubmit: (formValues: APIRegistrationForm) => Promise<void>;
+    handleSubmit: (formValues: RegistrationForm) => Promise<void>;
 }
 
-interface RegisterForm {
-  username: string;
-  email: string;
-  password: string;
-  confirmPassword: string
-}
+const validationSchema = {
+  username: { 
+    required: { value: true, message: 'Username is required' } 
+  },
+  email: {
+    required: { value: true, message: 'Email is required' },
+    pattern: { value: /^\w+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}$/, message: 'Invalid email'}
+  },
+  password: { 
+    required: { value: true, message: 'Password is required' },
+    minLength: { value: 8, message: 'Invalid Password: Too Short'}
+  }
+};
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
-  const { register, handleSubmit: handleFormSubmit, formState: { isSubmitting } } = useForm<RegisterForm>();
-  
-  const onSubmit = async (formValues: RegisterForm) => {
-    if (formValues.password !== formValues.confirmPassword) {
-      return;
-    }
-    await handleSubmit({
-      username: formValues.username,
-      password: formValues.password,
-      email: formValues.email,
-      first_name: '',
-      last_name: '',
-    });
-  };
+  const { register, handleSubmit: handleFormSubmit, formState: { errors, isSubmitting } } = useForm<RegistrationForm>();
 
   return (
-    <form onSubmit={handleFormSubmit(onSubmit)}>
+    <form onSubmit={handleFormSubmit(handleSubmit)}>
       <div className={styles.register__form}>
-        <input
-          aria-label='username'
-          type="text"
-          placeholder='Username'
-          className={styles.register__input}
-          {...register('username', { required: true })}
-        />
-        <input
-          aria-label='email'
-          type="text"
-          placeholder='Email'
-          className={styles.register__input}
-          {...register('email', { required: true })}
-        />
-        <input
-          aria-label='password'
-          type='password'
-          placeholder='Password'
-          className={styles.register__input}
-          {...register('password', { required: true })}
-        />
-        <input
-          aria-label='confirm-password'
-          type='password'
-          placeholder='Confirm Password'
-          className={styles.register__input}
-          {...register('confirmPassword', { required: true })}
-        />
+        <div className={styles.form}>
+          <div className={styles.input}>
+            <label className={styles.input__label} htmlFor="username">Username:</label>
+            <input
+              id="username"
+              aria-label='username'
+              type="text"
+              className={errors.username ? styles.input__box__error : styles.input__box}
+              {...register('username', validationSchema.username)}
+            />
+          </div>
+          <div className={styles.input}>
+            <label className={styles.input__label} htmlFor="email">Email:</label>
+            <input
+              id="email"
+              aria-label='email'
+              type="text"
+              className={errors.email ? styles.input__box__error : styles.input__box}
+              {...register('email', validationSchema.email)}
+            />
+          </div>
+          <div className={styles.input}>
+            <label className={styles.input__label} htmlFor="password">Password:</label>
+            <input
+              id="password"
+              aria-label='password'
+              type='password'
+              className={errors.password ? styles.input__box__error : styles.input__box}
+              {...register('password', validationSchema.password)}
+            />
+          </div>
+        </div>
+        <div>
+          {errors.username && <span>{errors.username.message}</span>}
+          {errors.email && <span>{errors.email.message}</span>}
+          {errors.password && <span>{errors.password.message}</span>}
+        </div>
         <p className={styles.register__text}>
           NOTE: Make this an uncommon password with characters, numbers, and
           special characters!
