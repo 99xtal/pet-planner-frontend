@@ -1,9 +1,10 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, Controller } from 'react-hook-form';
 import { RegistrationForm } from '../../api/auth/types';
 import { SubmitButton } from '../buttons';
 
 import styles from './RegisterForm.module.scss';
+import { PasswordInput, TextInput } from '../input';
 
 interface Props {
     handleSubmit: (formValues: RegistrationForm) => Promise<void>;
@@ -24,7 +25,7 @@ const validationSchema = {
 };
 
 const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
-  const { register, handleSubmit: handleFormSubmit, formState: { errors, isSubmitting } } = useForm<RegistrationForm>();
+  const { control, handleSubmit: handleFormSubmit, formState: { errors, isSubmitting } } = useForm<RegistrationForm>();
 
   return (
     <form onSubmit={handleFormSubmit(handleSubmit)}>
@@ -32,32 +33,29 @@ const RegisterForm: React.FC<Props> = ({ handleSubmit }) => {
         <div className={styles.form}>
           <div className={styles.input}>
             <label className={styles.input__label} htmlFor="username">Username:</label>
-            <input
-              id="username"
-              aria-label='username'
-              type="text"
-              className={errors.username ? styles.input__box__error : styles.input__box}
-              {...register('username', validationSchema.username)}
+            <Controller
+              name='username'
+              control={control}
+              rules={validationSchema.username} 
+              render={({ field }) => <TextInput aria-label='username' {...field}/>}
             />
           </div>
           <div className={styles.input}>
             <label className={styles.input__label} htmlFor="email">Email:</label>
-            <input
-              id="email"
-              aria-label='email'
-              type="text"
-              className={errors.email ? styles.input__box__error : styles.input__box}
-              {...register('email', validationSchema.email)}
+            <Controller
+              name='email'
+              control={control}
+              rules={validationSchema.email} 
+              render={({ field }) => <TextInput aria-label='email' {...field}/>}
             />
           </div>
           <div className={styles.input}>
             <label className={styles.input__label} htmlFor="password">Password:</label>
-            <input
-              id="password"
-              aria-label='password'
-              type='password'
-              className={errors.password ? styles.input__box__error : styles.input__box}
-              {...register('password', validationSchema.password)}
+            <Controller
+              name='password'
+              control={control}
+              rules={validationSchema.password} 
+              render={({ field }) => <PasswordInput aria-label='password' {...field}/>}
             />
           </div>
         </div>
