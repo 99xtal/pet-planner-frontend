@@ -8,7 +8,7 @@ interface Props extends React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLB
 
 const SubmitButton: React.FC<Props> = ({ loading, ...props}) => {
   if (loading) {
-    return <div className={styles.button}><img height={36} width={36} src={spinnerSvg} /></div>;
+    return <div className={styles.button}><img title='loading_dots' height={36} width={36} src={spinnerSvg} /></div>;
   }
   return <button {...props} className={styles.button} />;
 };
