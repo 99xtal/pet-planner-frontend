@@ -22,8 +22,7 @@ import {
   postPet,
   patchPet,
   deletePet,
-  getBreedsByCategory,
-  getPetCategories,
+  getBreeds,
 } from './pets';
 
 import {
@@ -57,8 +56,7 @@ export {
   postPet,
   patchPet,
   deletePet,
-  getBreedsByCategory,
-  getPetCategories,
+  getBreeds,
   getMedications,
   getMedicationsByPet,
   postMedication,
