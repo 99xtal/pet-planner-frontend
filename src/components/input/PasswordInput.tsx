@@ -1,8 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import visibleSvg from '../../assets/visibility.svg';
 import visibleOffSvg from '../../assets/visibility_off.svg';
 import styles from './PasswordInput.module.scss';
-import { useEffect } from 'react';
 
 const PasswordInput = (props: React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>) => {
   const [hidden, setHidden] = useState(true);
