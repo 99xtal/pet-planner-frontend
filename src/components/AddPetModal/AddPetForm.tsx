@@ -11,14 +11,23 @@ import { useNavigate } from 'react-router-dom';
 import PetsContext from '../../context/PetsContext';
 
 // Util Imports
-import { getBreedsByCategory, getPetCategories } from '../../api';
+import { getBreedsByCategory } from '../../api';
 import AuthContext from '../../context/AuthContext';
 import { Breed, Gender, PetCategory, PetForm } from '../../api/pets/types';
 
-const AddPetForm = () => {
-  const [categoryOptions, setCategoryOptions] = useState<PetCategory[]>([]);
-  const [breedOptions, setBreedOptions] = useState<Breed[]>([]);
+const petCategories: PetCategory[] = [
+  {
+    id: 1,
+    category: 'Cat'
+  },
+  {
+    id: 2,
+    category: 'Dog'
+  }
+];
 
+const AddPetForm = () => {
+  const [breedOptions, setBreedOptions] = useState<Breed[]>([]);
   const [name, setName] = useState<string>();
   const [categoryId, setCategoryId] = useState<number>();
   const [breedId, setBreedId] = useState<number>();
@@ -29,13 +38,7 @@ const AddPetForm = () => {
   const navigate = useNavigate();
   const { addPet } = useContext(PetsContext);
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    getPetCategories()
-      .then((res) => setCategoryOptions(res.data))
-      .catch((err) => console.log(err));
-  }, []);
-
+  
   useEffect(() => {
     if (categoryId) {
       getBreedsByCategory(categoryId).then((res) => setBreedOptions(res.data));
@@ -76,7 +79,7 @@ const AddPetForm = () => {
             <Col>
               <select onChange={(e) => setCategoryId(parseInt(e.target.value))}>
                 <option value={undefined}>---</option>
-                {categoryOptions.map((c) => {
+                {petCategories.map((c) => {
                   return (
                     <option key={c.id} value={c.id}>
                       {c.category}
