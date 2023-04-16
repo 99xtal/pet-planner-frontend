@@ -22,6 +22,10 @@ export function deletePet(petId: number) {
   return destroy(`/pets/${petId}/`);
 }
 
-export function getBreedsByCategory(categoryId: number) {
-  return get<Breed[]>(`/pets/breeds/?categoryId=${categoryId}`);
+export function getBreeds(categoryId?: number) {
+  const url = '/pets/breeds/';
+  if (categoryId) {
+    url.concat(`?categoryId=${categoryId}`);
+  }
+  return get<Breed[]>(url);
 }

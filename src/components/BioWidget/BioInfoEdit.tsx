@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 
 // Util Imports
-import { getBreedsByCategory, patchPet } from '../../api';
+import { getBreeds, patchPet } from '../../api';
 
 import type { Breed, Gender, Pet } from '../../api/pets/types';
 
@@ -21,7 +21,7 @@ const BioInfoEdit: React.FC<Props> = ({ pet, setEditMode, setNeedsUpdate }) => {
   const [birthday, setBirthday] = useState(pet.birthday);
 
   useEffect(() => {
-    getBreedsByCategory(pet.category.id)
+    getBreeds(pet.category.id)
       .then((res) => setBreedOptions(res.data))
       .catch((err) => console.log(err));
   }, []);

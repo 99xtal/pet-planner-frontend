@@ -1,28 +1,20 @@
-// General Imports
 import React, { useEffect, useState, useContext } from 'react';
-
-// Component Imports
 import { Container, Row, Col } from 'react-bootstrap';
-
-// Hook Imports
 import { useNavigate } from 'react-router-dom';
 
-// Context Imports
 import PetsContext from '../../context/PetsContext';
-
-// Util Imports
-import { getBreedsByCategory } from '../../api';
+import { getBreeds } from '../../api';
 import AuthContext from '../../context/AuthContext';
 import { Breed, Gender, PetCategory, PetForm } from '../../api/pets/types';
 
 const petCategories: PetCategory[] = [
   {
     id: 1,
-    category: 'Cat'
+    category: 'Dog'
   },
   {
     id: 2,
-    category: 'Dog'
+    category: 'Cat'
   }
 ];
 
@@ -40,10 +32,8 @@ const AddPetForm = () => {
   const { user } = useContext(AuthContext);
   
   useEffect(() => {
-    if (categoryId) {
-      getBreedsByCategory(categoryId).then((res) => setBreedOptions(res.data));
-    }
-  }, [categoryId]);
+    getBreeds().then((res) => setBreedOptions(res.data));
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -95,7 +85,7 @@ const AddPetForm = () => {
               <Col>
                 <select onChange={(e) => setBreedId(parseInt(e.target.value))}>
                   <option value={undefined}>---</option>
-                  {breedOptions.map((b) => {
+                  {breedOptions.filter(b => b.category.id === categoryId).map((b) => {
                     return (
                       <option key={b.id} value={b.id}>
                         {b.name}
