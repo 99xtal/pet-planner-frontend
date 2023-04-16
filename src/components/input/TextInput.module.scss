@@ -1,3 +1,4 @@
 .input {
+    @include light-rounded-border;
     @include text-input;
 }
